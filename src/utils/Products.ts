@@ -28,7 +28,6 @@ import stadium1 from "../assets/ProductImages/Stadiums/1.png";
 import stadium2 from "../assets/ProductImages/Stadiums/2.png";
 import stadium3 from "../assets/ProductImages/Stadiums/3.png";
 
-//! change to Image
 import customization1 from "../assets/ProductImages/Miscellaneous/Customize/1.png";
 
 const commonCustomizations: KeyValueStringPairs[] = [
@@ -38,11 +37,17 @@ const commonCustomizations: KeyValueStringPairs[] = [
 ];
 
 const Product1: Product = {
-  name: "3D Printed Replica of Your House",
-  price: 75.0,
-  bulkOptions: [{ quantity: 2, price: 45.0 }],
+  name: "Model House - Full House",
+  price: 175.0,
   shortDetails: [],
-  requiredCustomizations: commonCustomizations,
+  options: [
+    { option: "Extra Small Model (4in)", price: 175.0 },
+    { option: "Smaller Model (6in)", price: 200.0 },
+    { option: "Smaller Model (8in)", price: 250 },
+    { option: "Medium Model (10in)", price: 275.0 },
+    { option: "Large Mode (12in)", price: 350.0 },
+    { option: "Extra Large (15in+)", price: 425 },
+  ],
   details: [
     "Calling all HOME OWNERS, REALTORS, AND LOAN OFFICERS.This is the perfect opportunity to gift a 3D-printed version of a house just sold or bought. This unique gift will help you stand out from your competition and which makes you more likely to attract and retain customers.",
     "Model size varies. 6in maximum dimension - 16in maximum dimension in all directions. (If you would like something larger, please message us for a quote)",
@@ -68,11 +73,14 @@ const Product1: Product = {
 };
 
 const Product2: Product = {
-  name: "House - Front Facade",
+  name: "Model House - Front Facade",
   price: 25.0,
-  bulkOptions: [{ quantity: 2, price: 45.0 }],
   shortDetails: [],
-  requiredCustomizations: commonCustomizations,
+  options: [
+    { option: "House Only", price: 75.0 },
+    { option: "Personalization Only", price: 80.0 },
+    { option: "Key Holder", price: 85 },
+  ],
   details: [
     "This product is solely the front facade of your house. If you would like your full house printed please see our product named 3D Printed Your House - Full House!",
     "Calling all HOME OWNERS, REALTORS, AND LOAN OFFICERS. This is the perfect opportunity to gift a 3D-printed version of a house just sold or bought. This unique gift will help you stand out from your competition and which makes you more likely to attract and retain customers.",
@@ -142,6 +150,10 @@ const Product5: Product = {
   name: "Golden 1 Center",
   price: 135.0,
   shortDetails: [],
+  options: [
+    { option: "Stadium Only", price: 135.0 },
+    { option: "Personalizations*", price: 150.0 },
+  ],
   details: [
     "This well-detailed 3D printed model is the perfect gift, souvenir or collectible for every Sacramento Kings super fan. Looks fantastic on any desk, counter, dresser or stand. This stadium has a removable roof option to allow for a full view of the basketball court, along with a projection of the purple beam.",
     "The purple beam is lit up using purple LED fairy lights that are powered by 3 ea - AAA batteries (batteries are not included).",
@@ -157,4 +169,4 @@ const Product5: Product = {
   learnMoreLink: "/products/5",
 };
 
-export const products: Product[] = [Product1, Product2, Product3, Product4, Product5];
+export const products: Product[] = [Product1, Product2, Product3, Product5, Product4];

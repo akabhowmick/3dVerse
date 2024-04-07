@@ -1,34 +1,19 @@
-Customization Needed 
-  Customer Info => (20 minutes)
-    Email for contact and review forms 
-
-  Images: (30 minutes)
-    Hero section
-    each product 
-  
-  API (15 - 45 minutes)
-    email 
-    paypal 
+API (15 - 45 minutes)
+    email => Email for contact and review forms 
+    paypal => steal from previous 
 
 Index.html (2 minutes)
   Favicon  
 
 CSS (15 minutes)
     => main color scheme 
+    
 App.CSS
   --primary
   --secondary
   --font
   font-family
-
-Utils: (20 ~ 1 hour minutes)
-  Products => change the details 
-
-Home => (20 minutes)
-  styling changes needed 
-
-(15 minutes)
-Navbar, Footer => change the details 
+Check over general styles ~ 1 hour 
 
 
 

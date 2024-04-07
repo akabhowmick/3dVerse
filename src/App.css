@@ -1,15 +1,14 @@
 :root {
   /* branding colors */
-  --grad-1: aliceblue;
+  --grad-1: #f4f6f8;
   --grad-2: #9ee6ec;
-  --grad-3: #7dcbff;
-  --grad-4: #92aed4;
-  --primary: #0b3b9c;
-  --secondary: #f5791d;
+  --grad-3: #9fd3f6;
+  --grad-4: #7099d3;
+  --primary: #0d46b8;
+  --secondary: #f52f1d;
 
   /* support colors */
-  --green: #6dccb0;
-  --secondary: #7a7b78;
+  --background: #7a7b78;
   --dark: #323234;
   --light: #fff;
   --warning: #ffcc00;

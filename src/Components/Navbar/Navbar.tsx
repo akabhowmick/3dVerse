@@ -63,7 +63,7 @@ export const Navbar = () => {
   const logoHeaderLink = (
     <NavLink onClick={() => setShowNavbar(false)} to="/" id="logo-with-title">
       <img className="navbar-logo" src={navbarLogo} alt="tkd-main-logo" />
-      <h2>Your Business Name</h2>
+      <h2>Print3DVerse</h2>
     </NavLink>
   );
 

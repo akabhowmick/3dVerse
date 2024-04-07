@@ -16,6 +16,7 @@ export interface Product {
   name: string;
   price: number;
   bulkOptions?: ProductOptions[];
+  options?: ProductOptions[];
   requiredCustomizations?: KeyValueStringPairs[];
   shortDetails: string[];
   details: string[];
@@ -33,7 +34,7 @@ export interface faIcon {
 }
 
 interface ProductOptions {
-  quantity: number;
+  option: number | string;
   price: number;
 }
 
