@@ -1,14 +1,17 @@
-# Designs E-Commerce Website
+# # E-Commerce Website for Print3DVerse
 
 ## Description
 
 This is an e-commerce website for your Etsy business. Secure payment processing is facilitated through PayPal integration.
 
 ## Features
-- Completely customizable
-- Responsive interface in both web and mobile view 
-- Safe and secure payment interface 
-- Modern look and feel 
+
+- Browse and view a collection of 3D renders of houses and house fronts.
+- Add items to the shopping cart and proceed to checkout securely using PayPal.
+- Secure user authentication and account management powered by Firebase.
+- Responsive design for optimal viewing on various devices.
+- Integration with PayPal for secure and seamless payment processing.
+- Utilization of Material-UI (MUI) components for a modern and visually appealing interface.
 
 ## Technologies Used
 

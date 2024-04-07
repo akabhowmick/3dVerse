@@ -12,8 +12,8 @@ const commonCustomizations: KeyValueStringPairs[] = [
 ];
 
 const dummyProduct1: Product = {
-  name: "Product 1",
-  price: 25.0,
+  name: "3D Printed Replica of Your House",
+  price: 75.00,
   bulkOptions: [{ quantity: 2, price: 45.0 }],
   shortDetails: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."],
   requiredCustomizations: commonCustomizations,
@@ -106,90 +106,10 @@ const dummyProduct5: Product = {
   learnMoreLink: "/products/1",
 };
 
-const dummyProduct6: Product = {
-  name: "Product 1",
-  price: 25.0,
-  bulkOptions: [{ quantity: 2, price: 45.0 }],
-  shortDetails: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."],
-  requiredCustomizations: commonCustomizations,
-  details: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  ],
-  images: [dummyImage1, dummyImage2, dummyImage3],
-  desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  quantity: 1,
-  id: 1,
-  type: "Sports",
-  learnMoreLink: "/products/1",
-};
-
-const dummyProduct7: Product = {
-  name: "Product 1",
-  price: 25.0,
-  bulkOptions: [{ quantity: 2, price: 45.0 }],
-  shortDetails: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."],
-  requiredCustomizations: commonCustomizations,
-  details: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  ],
-  images: [dummyImage1, dummyImage2, dummyImage3],
-  desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  quantity: 1,
-  id: 1,
-  type: "Sports",
-  learnMoreLink: "/products/1",
-};
-
-const dummyProduct8: Product = {
-  name: "Product 1",
-  price: 25.0,
-  bulkOptions: [{ quantity: 2, price: 45.0 }],
-  shortDetails: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."],
-  requiredCustomizations: commonCustomizations,
-  details: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  ],
-  images: [dummyImage1, dummyImage2, dummyImage3],
-  desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  quantity: 1,
-  id: 1,
-  type: "Sports",
-  learnMoreLink: "/products/1",
-};
-
-const dummyProduct9: Product = {
-  name: "Product 1",
-  price: 25.0,
-  bulkOptions: [{ quantity: 2, price: 45.0 }],
-  shortDetails: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit."],
-  requiredCustomizations: commonCustomizations,
-  details: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  ],
-  images: [dummyImage1, dummyImage2, dummyImage3],
-  desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  quantity: 1,
-  id: 1,
-  type: "Sports",
-  learnMoreLink: "/products/1",
-};
-
 export const products: Product[] = [
   dummyProduct1,
   dummyProduct2,
   dummyProduct3,
   dummyProduct4,
   dummyProduct5,
-  dummyProduct6,
-  dummyProduct7,
-  dummyProduct8,
-  dummyProduct9,
 ];

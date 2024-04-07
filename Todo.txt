@@ -1,68 +1,39 @@
 Customization Needed 
-  Customer Info
+  Customer Info => (20 minutes)
     Email for contact and review forms 
     Phone Number*
     Social Media Links
 
-  Images: 
+  Images: (30 minutes)
     logo 
     Hero section
     each product 
-
-  CSS
-    => main color scheme 
   
-  API
+  API (15 - 45 minutes)
     email 
     paypal 
 
-  
-Index.html  
-  Favicon
-  Site Title 
-  Site Description
+Index.html (2 minutes)
+  Favicon  
 
-App.Tsx 
-  Context Providers => most likely we don't need to change 
-
+CSS (15 minutes)
+    => main color scheme 
 App.CSS
   --primary
   --secondary
   --font
   font-family
 
-Utils:
-  Social Media Links => change all
+Utils: (20 ~ 1 hour minutes)
   Products => change the details 
 
-Texts: 
-  heroText (footer and main page)
-  orderPlacement
-  orderProcessing
-  any special instructions 
-
-Links: 
-  depends on needs 
-
-Providers: 
-  mostly the same info 
-
-Home =>
+Home => (20 minutes)
   styling changes needed 
 
-404 page, Thank you page, Checkout, Contact Us, Cart, Image Carousels =>
-  no change 
-
+(15 minutes)
 Navbar, Footer => change the details 
 
-SingleProduct => update on product
 
-Need to buy the website url 
-Then we turn send it over to netlify 
-Make the website public and go from there 
-
-
-If you need backend then => set up supabase! 
 
 
 
