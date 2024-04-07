@@ -1,11 +1,8 @@
 Customization Needed 
   Customer Info => (20 minutes)
     Email for contact and review forms 
-    Phone Number*
-    Social Media Links
 
   Images: (30 minutes)
-    logo 
     Hero section
     each product 
   

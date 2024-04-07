@@ -52,27 +52,15 @@ export const initialUserValues = {
 
 export const reviewTexts = [
   {
-    name: "Name 1",
-    date: "Date 1",
-    review: "Lorem ipsum dolor sit amet, consectetur adip",
+    name: "Molly",
+    date: "Dec 28, 2023",
+    review: "Our order turned out amazing and our shipping was expedited by the store owner to get to us in time. Would definitely recommend - it is such a special keepsake for my mom!",
     id: 1,
   },
   {
-    name: "Name 2",
-    date: "Date 2",
-    review: "Lorem ipsum dolor sit amet, consectetur adip",
+    name: "Cheyenne",
+    date: "Mar 15, 2024",
+    review: "Great price and product.",
     id: 2,
-  },
-  {
-    name: "Name 3",
-    date: "Date 3",
-    review: "Lorem ipsum dolor sit amet, consectetur adip",
-    id: 3,
-  },
-  {
-    name: "Name 4",
-    date: "Date 4",
-    review: "Lorem ipsum dolor sit amet, consectetur adip",
-    id: 4,
   },
 ];

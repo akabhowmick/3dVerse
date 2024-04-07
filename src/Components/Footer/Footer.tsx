@@ -13,7 +13,7 @@ export const Footer = () => {
   const logoFooterLink = (
     <a href="/" id="logo-with-title">
       <img className="navbar-logo" src={navbarLogo} alt="tkd-main-logo" />
-      <h3>Your Business Name</h3>
+      <h3>Print3DVerse</h3>
     </a>
   );
   return (
