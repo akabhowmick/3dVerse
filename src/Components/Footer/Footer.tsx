@@ -4,7 +4,7 @@ import navbarLogo from "../../assets/Main/logo.png";
 
 import { KeyValueStringPairs } from "../../Types/interfaces";
 import { socialButtons } from "../../utils/SocialMediaLink";
-import { heroText } from "../../utils/HelpfulText";
+import { companyName, heroText } from "../../utils/HelpfulText";
 import { links } from "../../utils/NavbarAndFooterLinks";
 
 const footerSiteLinks: KeyValueStringPairs[] = [{ key: "Home", value: "/" }, ...links];
@@ -13,7 +13,7 @@ export const Footer = () => {
   const logoFooterLink = (
     <a href="/" id="logo-with-title">
       <img className="navbar-logo" src={navbarLogo} alt="tkd-main-logo" />
-      <h3>Print3DVerse</h3>
+      <h3>{companyName}</h3>
     </a>
   );
   return (

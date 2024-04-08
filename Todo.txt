@@ -5,22 +5,14 @@ API (15 - 45 minutes)
 Index.html (2 minutes)
   Favicon  
 
-CSS (15 minutes)
-    => main color scheme 
-
 App.CSS
-  --primary
-  --secondary
-  --font
-  font-family
 Check over general styles ~ 1 hour 
 
 => specifics
-
-  Duplicate and copy over the entire home page structure 
   Configure options so that it works; add the customizations as part of the email too 
   Add a fake review from QFP
 
+=> estimate 2 more hours of work ~ 5 hours total #yay 
 
 
 

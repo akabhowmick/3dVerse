@@ -11,6 +11,7 @@ import { links } from "../../utils/NavbarAndFooterLinks";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCartContext } from "../../providers/CartProvider";
+import { companyName } from "../../utils/HelpfulText";
 
 export const Navbar = () => {
   const { cartItems } = useCartContext();
@@ -63,7 +64,7 @@ export const Navbar = () => {
   const logoHeaderLink = (
     <NavLink onClick={() => setShowNavbar(false)} to="/" id="logo-with-title">
       <img className="navbar-logo" src={navbarLogo} alt="tkd-main-logo" />
-      <h2>Print3DVerse</h2>
+      <h2>{companyName}</h2>
     </NavLink>
   );
 

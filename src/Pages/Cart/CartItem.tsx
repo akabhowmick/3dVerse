@@ -7,31 +7,59 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
   const { removeFromCart, changeItemQuantity, changeItemCustomization } = useCartContext();
   const { images, price, name, id, quantity, requiredCustomizations } = cartItem;
 
-  const itemCustomizations = (
+  const itemCustomizations = requiredCustomizations && requiredCustomizations.length > 0 && (
     <div className="cart-customizations">
       <h3>Customizations</h3>
-      {requiredCustomizations &&
-        requiredCustomizations.length > 0 &&
-        requiredCustomizations?.map(({ key, value }) => {
-          return (
-            <div key={key}>
-              {
-                <div className="input-wrap">
-                  <label htmlFor={name}>{key}:</label>
-                  <input
-                    placeholder="Enter any values here"
-                    value={value}
-                    type="text"
-                    onChange={(e: { target: { value: string } }) => {
-                      changeItemCustomization(id, key, e.target.value);
-                    }}
-                    id={key}
-                  />
-                </div>
-              }
-            </div>
-          );
-        })}
+      {requiredCustomizations?.map(({ key, value }) => {
+        return (
+          <div key={key}>
+            {
+              <div className="input-wrap">
+                <label htmlFor={name}>{key}:</label>
+                <input
+                  placeholder="Enter any values here"
+                  value={value}
+                  type="text"
+                  onChange={(e: { target: { value: string } }) => {
+                    changeItemCustomization(id, key, e.target.value);
+                  }}
+                  id={key}
+                />
+              </div>
+            }
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  // Todo: 1. implement a select input for the options field, and the onClick method
+  // use options
+  // use setOption
+  // import a select
+  const itemOptions = requiredCustomizations && requiredCustomizations.length > 0 && (
+    <div className="cart-customizations">
+      <h3>Customizations</h3>
+      {requiredCustomizations?.map(({ key, value }) => {
+        return (
+          <div key={key}>
+            {
+              <div className="input-wrap">
+                <label htmlFor={name}>{key}:</label>
+                <input
+                  placeholder="Enter any values here"
+                  value={value}
+                  type="text"
+                  onChange={(e: { target: { value: string } }) => {
+                    changeItemCustomization(id, key, e.target.value);
+                  }}
+                  id={key}
+                />
+              </div>
+            }
+          </div>
+        );
+      })}
     </div>
   );
 
@@ -69,6 +97,7 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
             </div>
           </div>
           {itemCustomizations}
+          {itemOptions}
         </div>
       )}
     </div>
