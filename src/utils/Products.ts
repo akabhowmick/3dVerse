@@ -147,7 +147,7 @@ const Product4: Product = {
 };
 
 const Product5: Product = {
-  name: "Golden 1 Center",
+  name: "Golden 1 Stadium",
   price: 135.0,
   shortDetails: [],
   options: [

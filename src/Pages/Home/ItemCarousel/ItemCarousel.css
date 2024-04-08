@@ -1,0 +1,43 @@
+/* Word List transition */
+.scrolling-words-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 2rem 0;
+  color: black;
+}
+.scrolling-words-box {
+  height: 4rem;
+  overflow: hidden;
+  text-align: center;
+}
+.scrolling-words-box ul {
+  margin: 0 0.625rem;
+  padding: 0;
+  animation: scrollUp 5s infinite;
+}
+.scrolling-words-box ul li {
+  color: var(--secondary);
+  height: 4rem;
+  list-style: none;
+}
+@keyframes scrollUp {
+  15%,
+  25% {
+    transform: translateY(-20%);
+  }
+  40%,
+  50% {
+    transform: translateY(-40%);
+  }
+  65%,
+  75% {
+    transform: translateY(-60%);
+  }
+  90%,
+  100% {
+    transform: translateY(-80%);
+  }
+}

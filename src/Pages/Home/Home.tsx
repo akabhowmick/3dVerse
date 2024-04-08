@@ -2,7 +2,7 @@ import "./Home.css";
 import { products } from "../../utils/Products";
 import { SingleProduct } from "../../Components/SingleProduct/SingleProduct";
 import { HeroSection } from "./HeroSection";
-import { ReviewCarousel } from "./ReviewCarousels";
+import { ReviewCarousel } from "./ReviewCarousel/ReviewCarousels";
 
 export const Home = () => {
   const homeProductsList = (
@@ -14,7 +14,7 @@ export const Home = () => {
   );
 
   return (
-    <section className="card">
+    <section className="home-page">
       <HeroSection />
       <h2 className="page-header">View our featured products! </h2>
       {homeProductsList}

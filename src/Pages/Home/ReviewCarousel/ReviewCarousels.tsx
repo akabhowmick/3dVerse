@@ -1,7 +1,7 @@
-import "./Home.css";
-import logo from "../../assets/Main/logo.png";
+import "./ReviewCarousels.css";
+import logo from "../../../assets/Main/logo.png";
 import { useState } from "react";
-import { reviewTexts } from "../../utils/HelpfulText";
+import { reviewTexts } from "../../../utils/HelpfulText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
