@@ -94,6 +94,17 @@
   font-size: 1.5rem;
 }
 
+#product-options {
+  background: aliceblue;
+  padding: 5px;
+  color: black;
+  font-size: 1rem;
+}
+
+#product-options:focus-visible {
+  outline: none;
+}
+
 .quantity-icon.minus-icon {
   color: var(--danger);
 }
@@ -148,7 +159,7 @@ button:focus-visible {
   margin-bottom: 1rem;
 }
 
-.input-wrap input{
+.input-wrap input {
   background-color: var(--grad-1);
   border: none;
   border-bottom: 1px solid black;
@@ -156,7 +167,7 @@ button:focus-visible {
   color: black;
 }
 
-.input-wrap input:focus-visible{
+.input-wrap input:focus-visible {
   outline: none;
 }
 
