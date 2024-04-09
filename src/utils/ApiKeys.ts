@@ -8,8 +8,8 @@ export const imageUploadFormId = "https://submit-form.com/LIbYaPyzp";
 export const orderReviewFormId = "https://submit-form.com/IOpaHCZGC";
 export const publicUploadcareId = "880045851861900c5553";
 
-
 // Website Links
 
 export const uploadImagePage = "http://localhost:5173/upload-image";
 export const thankYouPage = "http://localhost:5173/thanks";
+export const homePage = "http://localhost:5173";

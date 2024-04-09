@@ -1,8 +1,8 @@
 App.CSS
   Check over general styles ~ 1 hour 
   Cart Styles 
-
-after contact go back home 
+  Contact Form Styles
+  
 
 
 

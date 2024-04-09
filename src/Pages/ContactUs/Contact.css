@@ -9,11 +9,9 @@
 
 .social-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  padding: 2rem;
-  width: 50%;
-  flex: 0.65;
+  align-items: center;
+  padding: 1rem;
 }
 
 .social-container h4,
@@ -28,7 +26,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
-  padding: 2rem;
 }
 
 .contact-links .icon {
