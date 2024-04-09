@@ -10,7 +10,9 @@ export const ThankYouPage = () => {
             You will soon hear back from us regarding your order, the timeline, and if we need
             anything from you.
           </p>
-          <button className="go-home">go home</button>
+          <a href="/">
+            <button className="go-home">Go Home</button>
+          </a>
         </div>
         <div className="footer-like">
           <p>

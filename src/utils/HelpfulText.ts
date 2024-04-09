@@ -54,17 +54,46 @@ export const reviewTexts = [
   {
     name: "Molly",
     date: "Dec 28, 2023",
-    review: "Our order turned out amazing and our shipping was expedited by the store owner to get to us in time. Would definitely recommend - it is such a special keepsake for my mom!",
-    id: 1,
+    review:
+      "#2 Our order turned out amazing and our shipping was expedited by the store owner to get to us in time. Would definitely recommend - it is such a special keepsake for my mom!",
+    id: 2,
   },
   {
     name: "Cheyenne",
     date: "Mar 15, 2024",
-    review: "Great price and product.",
-    id: 2,
+    review: "#1 Great price and product.",
+    id: 1,
+  },
+  {
+    name: "Alexa",
+    date: "Aug 25, 2022",
+    review:
+      "#5 Seller communicated very well throughout the entire process and made sure I gave the ok to everything before making it. Turned out just the way I imagined! There was a little bit of product build up at the end of the design, but other than that, I absolutely love it. Can't wait to give it to my boyfriend for his birthday!",
+    id: 5,
+  },
+  {
+    name: "Eddie",
+    date: "Sep 2, 2022",
+    review:
+      "#6 This is awesome to show off my cards on the page! The detail is amazing! Glad to have found such a great source!",
+    id: 6,
+  },
+  {
+    name: "Jaclyn",
+    date: "Nov 13, 2023",
+    review:
+      "#3 Couldn't be happier! I was worried that my idea wouldn't fit, but they were able to work with me to get exactly what I wanted. Thank you for being patient and working hard to make this perfect",
+    id: 3,
+  },
+  {
+    name: "Tyler",
+    date: "Dec 8, 2023",
+    review:
+      "#4 The communication and overall customer service experience was outstanding. Christian was incredibly accommodating in helping me with an issue and went above and beyond to get it resolved. Great product very happy. Thank you",
+    id: 4,
   },
 ];
 
-
 export const companyName = "Print3Dverse";
-export const companyTagline = "Transcend ideas and 2D designs into personalized 3D quality products!";
+export const companyTagline =
+  "Transcend ideas and 2D designs into personalized 3D quality products!";

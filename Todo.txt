@@ -1,19 +1,8 @@
-API (15 - 45 minutes)
-    email => Email for contact and review forms 
-    paypal => steal from previous 
-
-Index.html (2 minutes)
-  Favicon  
-
 App.CSS
-Check over general styles ~ 1 hour 
+  Check over general styles ~ 1 hour 
+  Cart Styles 
 
-=> specifics
-  Configure options so that it works; add the customizations as part of the email too 
-  Add a fake review from QFP
-
-=> estimate 2 more hours of work ~ 5 hours total #yay 
-
+after contact go back home 
 
 
 

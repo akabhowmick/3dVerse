@@ -30,7 +30,7 @@
   display: flex;
   gap: 15px;
   justify-content: center;
-  font-size: 1.75rem;
+  font-size: 1.35rem;
   margin-bottom: 1rem;
   align-items: center;
 }
@@ -67,7 +67,7 @@
 
 .cart-text-details-container,
 .cart-bottom h4 {
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   font-weight: 500;
 }
 
@@ -91,7 +91,7 @@
 }
 
 .quantity-icon {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 
 .quantity-icon.minus-icon {
@@ -119,7 +119,7 @@ button {
   border-radius: 8px;
   border: 1px solid black;
   padding: 0.6rem 1.2rem;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;

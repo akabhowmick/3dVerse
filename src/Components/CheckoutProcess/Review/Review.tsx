@@ -43,12 +43,18 @@ export default function Review() {
   });
 
   const productToString = (product: Product) => {
-    let result = `Product Name: ${product.name}\n`;
-    result += `Quantity: ${product.quantity}\n`;
+    let result = `{Product Name: ${product.name}};  {Quantity: ${product.quantity}}`;
     if (product.requiredCustomizations) {
-      result += "Required Customizations:\n";
+      result += "Required Customizations:";
       product.requiredCustomizations.forEach((customization) => {
-        result += `${customization.key}: ${customization.value}\n`;
+        result += `{${customization.key}: ${customization.value}}`;
+      });
+    }
+    if (product.options) {
+      product.options.forEach((option) => {
+        if (option.price === product.price) {
+          result += `{Model Type: ${option.option}}`;
+        }
       });
     }
     return result;
