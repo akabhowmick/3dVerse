@@ -30,6 +30,15 @@ import stadium3 from "../assets/ProductImages/Stadiums/3.png";
 
 import customization1 from "../assets/ProductImages/Miscellaneous/Customize/1.png";
 
+export const heroImages: string[] = [
+  houseFull7,
+  houseFull6,
+  houseFull8,
+  houseFront8,
+  cardHolder2,
+  stadium1,
+];
+
 const commonCustomizations: KeyValueStringPairs[] = [
   { key: "Color of Holder", value: "" },
   { key: "Color of Letterings", value: "" },

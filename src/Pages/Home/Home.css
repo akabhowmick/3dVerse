@@ -13,6 +13,7 @@
 .hero .row {
   display: grid;
   grid-template-columns: 2fr 1fr;
+  margin: 1rem 0;
 }
 
 .home-page .page-header {
