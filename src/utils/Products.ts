@@ -83,7 +83,7 @@ const Product1: Product = {
 
 const Product2: Product = {
   name: "Model House - Front Facade",
-  price: 25.0,
+  price: 75.0,
   shortDetails: [],
   options: [
     { option: "House Only", price: 75.0 },
