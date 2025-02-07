@@ -31,7 +31,7 @@ export const SingleProduct = ({
 
   const cardClassName = displayType === "card" ? "product-card" : "product-banner";
 
-  const detailsToDisplay = [...shortDetails, ...details].map((detail, index) => {
+  const detailsToDisplay = displayType !== "card" && [...shortDetails, ...details].map((detail, index) => {
     return (
       <Typography
         variant="body2"
@@ -90,6 +90,8 @@ export const SingleProduct = ({
       <img src={images[0]} className="product-image" alt={`product image for ${name}`} />
     );
 
+  console.log("hello,", displayType !== "card")
+
   return (
     <div className={cardClassName}>
       <div className="card">
@@ -104,7 +106,6 @@ export const SingleProduct = ({
                 <h5 className="original-price">
                   Original Price:${(price * (1 + randomFakeSale / 100)).toFixed(2)}
                 </h5>
-                <h4>{randomFakeSale.toFixed()}% OFF</h4>
               </div>
             </div>
           </div>

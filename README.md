@@ -21,27 +21,19 @@ This is an e-commerce website for your Etsy business. Secure payment processing 
 - React Router Dom (navigation)
 - PayPal integration (payment processing)
 
-
-
-remove 
-  stadium 
-  custom listing
-
-model house 
+Replica House 
   remove personalization
   Add your personalization (optional)
   Enter the personalization you would like added to the bottom of the house. 25-character limit.
-
 
 navbar
   misc.
   custom listing - remove
   put in keychains 
-  model houses - replica houses (all) 
 
   logo square 
 
-  model houses 15in+ 
+  Replica Houses 15in+ 
 
   card holder 
     color: black or white only 

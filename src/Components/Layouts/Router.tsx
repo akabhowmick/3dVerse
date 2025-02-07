@@ -25,7 +25,7 @@ export const router = createBrowserRouter(
       />
       <Route
         path="model-houses"
-        element={<ProductPage pageHeader="Model Houses" pageContent="Model-House" />}
+        element={<ProductPage pageHeader="Replica Houses" pageContent="Model-House" />}
       />
       <Route path="/products/:productId" element={<ProductDescriptionPage />} />
       <Route path="/cart" element={<CartPage />} />

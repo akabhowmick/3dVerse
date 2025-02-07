@@ -67,9 +67,6 @@ body {
   padding: 2rem;
 }
 
-.page-header {
-  text-decoration: underline;
-}
 
 .page-subheader {
   color: var(--dark);

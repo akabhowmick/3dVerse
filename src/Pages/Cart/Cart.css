@@ -78,10 +78,6 @@
   gap: 10px;
 }
 
-.product-name {
-  text-decoration: underline;
-}
-
 .single-item-quantity-container {
   display: flex;
   align-items: center;

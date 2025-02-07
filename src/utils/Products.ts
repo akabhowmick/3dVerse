@@ -24,11 +24,6 @@ import cardHolder3 from "../assets/ProductImages/Miscellaneous/CardHolder/acc3.p
 import cardHolder4 from "../assets/ProductImages/Miscellaneous/CardHolder/acc4.png";
 import cardHolder5 from "../assets/ProductImages/Miscellaneous/CardHolder/acc5.png";
 
-import stadium1 from "../assets/ProductImages/Stadiums/1.png";
-import stadium2 from "../assets/ProductImages/Stadiums/2.png";
-import stadium3 from "../assets/ProductImages/Stadiums/3.png";
-
-import customization1 from "../assets/ProductImages/Miscellaneous/Customize/1.png";
 
 export const heroImages: string[] = [
   houseFull7,
@@ -36,7 +31,6 @@ export const heroImages: string[] = [
   houseFull8,
   houseFront8,
   cardHolder2,
-  stadium1,
 ];
 
 const commonCustomizations: KeyValueStringPairs[] = [
@@ -46,7 +40,7 @@ const commonCustomizations: KeyValueStringPairs[] = [
 ];
 
 const Product1: Product = {
-  name: "Model House - Full House",
+  name: "Replica House - Full House",
   price: 175.0,
   shortDetails: [],
   options: [
@@ -55,7 +49,6 @@ const Product1: Product = {
     { option: "Smaller Model (8in)", price: 250 },
     { option: "Medium Model (10in)", price: 275.0 },
     { option: "Large Mode (12in)", price: 350.0 },
-    { option: "Extra Large (15in+)", price: 425 },
   ],
   details: [
     "Calling all HOME OWNERS, REALTORS, AND LOAN OFFICERS.This is the perfect opportunity to gift a 3D-printed version of a house just sold or bought. This unique gift will help you stand out from your competition and which makes you more likely to attract and retain customers.",
@@ -82,7 +75,7 @@ const Product1: Product = {
 };
 
 const Product2: Product = {
-  name: "Model House - Front Facade",
+  name: "Replica House - Front Facade",
   price: 75.0,
   shortDetails: [],
   options: [
@@ -136,46 +129,4 @@ const Product3: Product = {
   learnMoreLink: "/products/3",
 };
 
-const Product4: Product = {
-  name: "Custom Listing",
-  price: 1,
-  shortDetails: [],
-  details: [
-    "This is a listing for custom orders only. Choosing this option will be set between buyer and seller for details.",
-    "Once we agree on your request you will receive the design via email within 24 hours.",
-    "Please DO NOT purchase unless your request was already approved by me, thank you.",
-    "This is a digital file, NO printed materials will be mailed or shipped to your address.Refunds cannot be provided after the delivery of digital images due to the nature of the product.",
-    "This printable is for PERSONAL USE ONLY. Under no circumstances can these files be resold, altered, or given away. By purchasing this listing you agree to our Terms of Use.",
-  ],
-  images: [customization1],
-  desc: "Custom Listing, Per Quote Sent by Us",
-  quantity: 1,
-  id: 4,
-  type: "Miscellaneous",
-  learnMoreLink: "/products/4",
-};
-
-const Product5: Product = {
-  name: "Golden 1 Stadium",
-  price: 135.0,
-  shortDetails: [],
-  options: [
-    { option: "Stadium Only", price: 135.0 },
-    { option: "Personalizations*", price: 150.0 },
-  ],
-  details: [
-    "This well-detailed 3D printed model is the perfect gift, souvenir or collectible for every Sacramento Kings super fan. Looks fantastic on any desk, counter, dresser or stand. This stadium has a removable roof option to allow for a full view of the basketball court, along with a projection of the purple beam.",
-    "The purple beam is lit up using purple LED fairy lights that are powered by 3 ea - AAA batteries (batteries are not included).",
-    "**Custom/personalized labels are available for $15. Message me if interested and I will create a custom order.**",
-    "Measurements: 6in x 6in x 3in (Beam projects 5in, making the total height 8in tall)",
-    "Please keep in mind that every 3D-printed part is unique. The photos give a good representation of what to expect.",
-  ],
-  images: [stadium1, stadium2, stadium3],
-  desc: "Golden 1 Center - Sacramento Kings 3D Printed Replica Stadium - Light The Beam Customization!",
-  quantity: 1,
-  id: 5,
-  type: "Stadiums",
-  learnMoreLink: "/products/5",
-};
-
-export const products: Product[] = [Product1, Product2, Product3, Product5, Product4];
+export const products: Product[] = [Product1, Product2, Product3];
