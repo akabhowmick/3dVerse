@@ -26,25 +26,14 @@ Replica House
   Add your personalization (optional)
   Enter the personalization you would like added to the bottom of the house. 25-character limit.
 
-navbar
-  misc.
-  custom listing - remove
+
   put in keychains 
-
-  logo square 
-
-  Replica Houses 15in+ 
-
   card holder 
     color: black or white only 
     no underlines 
     all titles black
 
-  make it smaller and lower 
-    You can buy custom:
-    and include the hand city image
 
-Transcend ideas and 2D designs into personalized 3D quality products! => 
 
 
 

@@ -24,6 +24,11 @@ import cardHolder3 from "../assets/ProductImages/Miscellaneous/CardHolder/acc3.p
 import cardHolder4 from "../assets/ProductImages/Miscellaneous/CardHolder/acc4.png";
 import cardHolder5 from "../assets/ProductImages/Miscellaneous/CardHolder/acc5.png";
 
+import video from "../assets/Main/Hero/home-video.mp4"
+import poster from "../assets/Main/Hero/home-bg.jpg"
+export const videoPath = video;
+export const posterPath = poster;
+
 
 export const heroImages: string[] = [
   houseFull7,
@@ -80,7 +85,6 @@ const Product2: Product = {
   shortDetails: [],
   options: [
     { option: "House Only", price: 75.0 },
-    { option: "Personalization Only", price: 80.0 },
     { option: "Key Holder", price: 85 },
   ],
   details: [

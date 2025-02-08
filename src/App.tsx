@@ -9,6 +9,7 @@ import { UserProvider } from "./providers/UserProvider";
 import { Footer } from "./Components/Footer/Footer";
 // import { Cart } from "./Pages/Cart/Cart";
 import { router } from "./Components/Layouts/Router";
+import FloatingCartButton from "./Pages/Cart/FloatingCart";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <UserProvider>
         <CartProvider>
           <RouterProvider router={router} />
+          <FloatingCartButton />
           <Footer />
         </CartProvider>
       </UserProvider>

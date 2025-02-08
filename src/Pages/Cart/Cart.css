@@ -189,3 +189,27 @@ button:focus-visible {
     padding: 0;
   }
 }
+
+.floating-cart-btn {
+  position: fixed;
+  z-index: 10000;
+  bottom: 20px;
+  right: 20px;
+  width: 100px;
+  height: 30px;
+  background-color: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  transition: transform 0.2s ease-in-out, background-color 0.3s;
+}
+
+.floating-cart-btn:hover {
+  transform: scale(1.1);
+}

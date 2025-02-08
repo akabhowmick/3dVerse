@@ -15,8 +15,7 @@ export const SingleProduct = ({
   displayType: string;
 }) => {
   const { images, details, shortDetails, name, id, price, learnMoreLink } = product;
-  //! resets every single time 
-  const randomFakeSale = Math.random() * 10 + 15;
+
   const { addToCart, cartItems, removeFromCart } = useCartContext();
 
   const [seeFullDetails, setSeeFullDetails] = useState(false);
@@ -31,18 +30,20 @@ export const SingleProduct = ({
 
   const cardClassName = displayType === "card" ? "product-card" : "product-banner";
 
-  const detailsToDisplay = displayType !== "card" && [...shortDetails, ...details].map((detail, index) => {
-    return (
-      <Typography
-        variant="body2"
-        color={"black"}
-        key={index}
-        style={{ padding: "0.25rem 0", lineHeight: "1.5" }}
-      >
-        {detail}
-      </Typography>
-    );
-  });
+  const detailsToDisplay =
+    displayType !== "card" &&
+    [...shortDetails, ...details].map((detail, index) => {
+      return (
+        <Typography
+          variant="body2"
+          color={"black"}
+          key={index}
+          style={{ padding: "0.25rem 0", lineHeight: "1.5" }}
+        >
+          {detail}
+        </Typography>
+      );
+    });
 
   const fullDetails =
     displayType !== "card" &&
@@ -90,7 +91,7 @@ export const SingleProduct = ({
       <img src={images[0]} className="product-image" alt={`product image for ${name}`} />
     );
 
-  console.log("hello,", displayType !== "card")
+  console.log("hello,", displayType !== "card");
 
   return (
     <div className={cardClassName}>
@@ -101,12 +102,7 @@ export const SingleProduct = ({
           <div className="product-info-header">
             <h3 className="product-name">{name}</h3>
             <div className="product-info-price">
-              <h4 className="discount-price">Limited Time Price: ${price}</h4>
-              <div className="discount-container">
-                <h5 className="original-price">
-                  Original Price:${(price * (1 + randomFakeSale / 100)).toFixed(2)}
-                </h5>
-              </div>
+              <h4 className="discount-price">Limited Time Price: ${price}+</h4>
             </div>
           </div>
 

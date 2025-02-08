@@ -14,7 +14,7 @@ export const Home = () => {
   );
 
   return (
-    <section className="home-page">
+    <section className="card">
       <HeroSection />
       <h2 className="page-header">View our featured products! </h2>
       {homeProductsList}

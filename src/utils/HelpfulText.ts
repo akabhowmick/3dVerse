@@ -96,4 +96,4 @@ export const reviewTexts = [
 
 export const companyName = "Print3Dverse";
 export const companyTagline =
-  "Transcend ideas and 2D designs into personalized 3D quality products!";
+  "Bringing innovation to life with advanced 3D printing";

@@ -1,22 +1,33 @@
-import "./Home.css";
-import { ImageCarousel } from "../../Components/ImageCarousels/ImageCarousel";
 import { companyTagline } from "../../utils/HelpfulText";
-import { ItemCarousel } from "./ItemCarousel/ItemCarousel";
-import { heroImages } from "../../utils/Products";
+import { posterPath, videoPath } from "../../utils/Products";
+import "./Home.css";
 
 export const HeroSection = () => {
-
   return (
     <div className="hero">
-      <div className="container">
+      <video
+        className="hero-video"
+        autoPlay
+        muted
+        loop
+        id="hero-video"
+        playsInline
+        poster={posterPath} 
+      >
+        <source src={videoPath} type="video/mp4" />
+      </video>
+
+      <div
+        className="container"
+        style={{
+          backgroundImage: "url(src/assets/Main/background.jpg)", 
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="row">
-          <div className="hero__lead">
-            <h2>{companyTagline}</h2>
-            <ItemCarousel />
-            <button className="btn btn-primary">All Products</button>
-          </div>
-          <div className="hero__image">
-            <ImageCarousel images={heroImages} />
+          <div className="col-md-6 order-2 hero__lead">
+            <h1>{companyTagline}</h1>
           </div>
         </div>
       </div>
