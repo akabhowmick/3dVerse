@@ -28,20 +28,16 @@ export const ContactForm = () => {
   });
 
   const productOptions = [
-    "Funko Pop Stand",
-    "City Skyline",
+    "Replica House - Full",
+    "Replica House - Front Facade",
     "Key Chains",
-    "Card Stand",
-    "Game Card Holder",
-    "Game Display Holder",
-    "Horizontal Six Card Stand",
-    "Six Card Stand",
-    "Three Card Stand",
+    "Business Card Holder",
+    "Custom",
   ];
 
   const selectClasses = (
     <div className="contact-form-div">
-      <label htmlFor="design_of_interest">Class Of Interest</label>
+      <label htmlFor="design_of_interest">Design of Interest</label>
       <select className="contact-form-input" id="design_of_interest" name="design_of_interest">
         {productOptions.map((className) => {
           return <option key={className} value={className} label={className}></option>;
@@ -55,10 +51,11 @@ export const ContactForm = () => {
   });
 
   return (
-    <form action={contactFormId}>
+    <form action={contactFormId} method="POST">
       <div className="contact__form-container">
         <input type="text" name="_honey" style={{ display: "none" }} />
-        <input type="hidden" name="_redirect" value={homePage} />
+        <input type="hidden" name="_next" value={homePage} />
+        <input type="hidden" name="_cc" value="akabhowmick" />
         {contactFormInputs}
         {selectClasses}
         <div className="submit-btn-container">

@@ -3,13 +3,12 @@ export const paypalClientId =
   "AXqOomrS73dZYPvV-fElIHCQITsnzIRe0DNmMZKhmIC6nod2TPfhJV9HGnD4iE4O0M4UL3_jAJzgL8gs";
 
 // Email form
-export const contactFormId = "https://submit-form.com/guR79V1dk";
-export const imageUploadFormId = "https://submit-form.com/LIbYaPyzp";
-export const orderReviewFormId = "https://submit-form.com/IOpaHCZGC";
-export const publicUploadcareId = "880045851861900c5553";
+const companyEmail = "print3dverse@gmail.com";
+export const contactFormId = `https://formsubmit.co/${companyEmail}`; 
+export const imageUploadFormId = `https://formsubmit.co/${companyEmail}`; 
+export const orderReviewFormId = `https://formsubmit.co/${companyEmail}`;
 
 // Website Links
-
-export const uploadImagePage = "http://localhost:5173/upload-image";
-export const thankYouPage = "http://localhost:5173/thanks";
-export const homePage = "http://localhost:5173";
+export const uploadImagePage = "https://print3dverse.com/upload-image";
+export const thankYouPage = "https://print3dverse.com/thanks";
+export const homePage = "https://print3dverse.com/";

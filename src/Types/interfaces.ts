@@ -12,12 +12,19 @@ export interface User {
   zipCode: string;
 }
 
+export interface customerChoice {
+  name: string;
+  value: string;
+}
+
+
 export interface Product {
   name: string;
   price: number;
   bulkOptions?: ProductOptions[];
   options?: ProductOptions[];
   requiredCustomizations?: KeyValueStringPairs[];
+  customerChoices?: customerChoice[]
   shortDetails: string[];
   details: string[];
   images: string[];

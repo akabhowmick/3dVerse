@@ -108,7 +108,7 @@ export default function Review() {
       </Grid>
       <Grid item xs={12}>
         <form action={orderReviewFormId}>
-          <input type="hidden" name="_redirect" value={uploadImagePage} />
+          <input type="hidden" name="_next" value={uploadImagePage} />
           {FormSubmitIoInputs}
           {cartItems.map((product) => {
             return (

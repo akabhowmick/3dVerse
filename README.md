@@ -21,17 +21,14 @@ This is an e-commerce website for your Etsy business. Secure payment processing 
 - React Router Dom (navigation)
 - PayPal integration (payment processing)
 
-Replica House 
-  remove personalization
-  Add your personalization (optional)
-  Enter the personalization you would like added to the bottom of the house. 25-character limit.
-
-
   put in keychains 
+
   card holder 
     color: black or white only 
-    no underlines 
-    all titles black
+ 
+ -single card holder
+ - review 
+ 
 
 
 

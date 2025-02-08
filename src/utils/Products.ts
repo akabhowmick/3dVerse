@@ -22,7 +22,14 @@ import cardHolder1 from "../assets/ProductImages/Miscellaneous/CardHolder/acc1.p
 import cardHolder2 from "../assets/ProductImages/Miscellaneous/CardHolder/acc2.png";
 import cardHolder3 from "../assets/ProductImages/Miscellaneous/CardHolder/acc3.png";
 import cardHolder4 from "../assets/ProductImages/Miscellaneous/CardHolder/acc4.png";
-import cardHolder5 from "../assets/ProductImages/Miscellaneous/CardHolder/acc5.png";
+
+import k1 from "../assets/ProductImages/Miscellaneous/Keychains/k1.png";
+import k2 from "../assets/ProductImages/Miscellaneous/Keychains/k2.png";
+import k3 from "../assets/ProductImages/Miscellaneous/Keychains/k3.png";
+import k4 from "../assets/ProductImages/Miscellaneous/Keychains/k4.png";
+import k5 from "../assets/ProductImages/Miscellaneous/Keychains/k5.png";
+import k6 from "../assets/ProductImages/Miscellaneous/Keychains/k6.png";
+
 
 import video from "../assets/Main/Hero/home-video.mp4"
 import poster from "../assets/Main/Hero/home-bg.jpg"
@@ -125,7 +132,7 @@ const Product3: Product = {
     "Lead time for custom orders is around 7-10 days for manufacturing!",
     "Plastic has natural imperfections",
   ],
-  images: [cardHolder1, cardHolder2, cardHolder3, cardHolder4, cardHolder5],
+  images: [cardHolder1, cardHolder2, cardHolder3, cardHolder4],
   desc: "Personalize your Business card holder.",
   quantity: 1,
   id: 3,
@@ -133,4 +140,41 @@ const Product3: Product = {
   learnMoreLink: "/products/3",
 };
 
-export const products: Product[] = [Product1, Product2, Product3];
+const keyChain: Product = {
+  name: "Unique Custom Signature Keychain - With your Logo",
+  price: 10.0,
+  bulkOptions: [
+    { option: 10, price: 10.0 },
+    { option: 25, price: 20.0 },
+    { option: 50, price: 40.0 },
+    { option: 100, price: 75.0 },
+    { option: 150, price: 125.0 },
+    { option: 200, price: 150.0 },
+    { option: 500, price: 250.0 },
+  ],
+  shortDetails: [
+    "Custom Keychains are small, circular accessories made from a durable piece that is commonly used to hold keys.",
+    "Unique Backpack Keychain is a popular item due to its simplicity and versatility, and Aesthetic Safety Keychain can be used for personal use or given to your friends.",
+  ],
+  requiredCustomizations: commonCustomizations,
+  details: [
+    "Custom Keychains with a message, date, name or coordinate for a gift that is both sweet and practical.",
+    "Personalize Keychain, it is sure to be a special charm they will treasure for many moments to come. Double-sided engravings are also available for double the sweet sentiments.",
+    "Send these out as giveaways to your subscribers/customers to show off and advertise your brand. It's like a walking advertisement! Or just gain style points walking around with your logo on your keychain or backpack! Our design team will work with you to come up with the perfect unique design that you want to show off!",
+    "This Custom Keychains is designed exactly how you want it!",
+    "Material: PLA (Polylactic acid)",
+    "Size: Typically 1.5in. x 1.5in. (varies on customization)",
+    "After placing your order:",
+    "- Send us your logo and we will send you a mock-up of how the keychains will come out.",
+    "- You comment or approve the rendering",
+    "- We go into production and ship out ASAP!",
+  ],
+  images: [k1, k2, k3, k4, k5, k6],
+  desc: "Your Personalized Keychain",
+  quantity: 1,
+  id: 4,
+  type: "Miscellaneous",
+  learnMoreLink: "/products/4",
+};
+
+export const products: Product[] = [Product1, Product2, Product3, keyChain];
