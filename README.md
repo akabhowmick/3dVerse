@@ -20,14 +20,9 @@ This is an e-commerce website for your Etsy business. Secure payment processing 
 - MUI (product and checkout sections styling)
 - React Router Dom (navigation)
 - PayPal integration (payment processing)
-
-  put in keychains 
-
-  card holder 
-    color: black or white only 
  
- - single card holder
- - review 
+ - contact form not working as expected
+ - reviews on mobile
  
 
 
