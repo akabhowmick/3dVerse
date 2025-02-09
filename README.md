@@ -21,9 +21,6 @@ This is an e-commerce website for your Etsy business. Secure payment processing 
 - React Router Dom (navigation)
 - PayPal integration (payment processing)
  
- - contact form not working as expected
- - reviews on mobile
- 
 
 
 

@@ -55,7 +55,7 @@ export const ContactForm = () => {
       <div className="contact__form-container">
         <input type="text" name="_honey" style={{ display: "none" }} />
         <input type="hidden" name="_next" value={homePage} />
-        <input type="hidden" name="_cc" value="akabhowmick" />
+        <input type="hidden" name="_subject" value="Inquiry for Print3DVerse!" />
         {contactFormInputs}
         {selectClasses}
         <div className="submit-btn-container">

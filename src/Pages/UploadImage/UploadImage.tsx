@@ -53,7 +53,6 @@ export const UploadImageForm = () => {
       <div className="contact__form-container">
         <input type="hidden" name="_next" value={thankYouPage} />
         <input type="text" name="_honey" style={{ display: "none" }} />
-        <input type="hidden" name="_cc" value="akabhowmick@gmail.com" />
         <input
           type="hidden"
           name="_subject"
