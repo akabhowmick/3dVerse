@@ -26,7 +26,7 @@ This is an e-commerce website for your Etsy business. Secure payment processing 
   card holder 
     color: black or white only 
  
- -single card holder
+ - single card holder
  - review 
  
 

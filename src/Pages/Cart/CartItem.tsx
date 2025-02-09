@@ -4,41 +4,45 @@ import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { Product } from "../../Types/interfaces";
 
 export const CartItem = ({ cartItem }: { cartItem: Product }) => {
-  const { removeFromCart, changeItemQuantity, changeItemCustomization, changeItemOption } =
-    useCartContext();
-  const { images, price, name, id, quantity, requiredCustomizations, options } = cartItem;
+  const {
+    removeFromCart,
+    changeItemQuantity,
+    changeItemCustomization,
+    changeItemOption,
+    updateItemCustomization,
+  } = useCartContext();
+  const { images, price, name, id, quantity, requiredCustomizations, options, bulkOptions } =
+    cartItem;
 
-  const itemCustomizations = requiredCustomizations && requiredCustomizations.length > 0 && (
+  const itemCustomizations = requiredCustomizations && (
     <div className="cart-customizations">
       <h3>Customizations</h3>
-      {requiredCustomizations?.map(({ key, value }) => {
-        return (
-          <div key={key}>
-            {
-              <div className="input-wrap">
-                <label htmlFor={name}>{key}:</label>
-                <input
-                  placeholder="Enter any values here"
-                  value={value}
-                  type="text"
-                  onChange={(e: { target: { value: string } }) => {
-                    changeItemCustomization(id, key, e.target.value);
-                  }}
-                  id={key}
-                />
-              </div>
-            }
-          </div>
-        );
-      })}
+      {requiredCustomizations &&
+        requiredCustomizations.length > 0 &&
+        requiredCustomizations?.map(({ key, value }) => {
+          return (
+            <div key={key}>
+              {
+                <div className="input-wrap">
+                  <label htmlFor={key}>{key}:</label>
+                  <input
+                    placeholder="Enter any values here"
+                    value={value}
+                    type="text"
+                    onChange={(e: { target: { value: string } }) => {
+                      changeItemCustomization(id, key, e.target.value);
+                    }}
+                    id={key}
+                  />
+                </div>
+              }
+            </div>
+          );
+        })}
     </div>
   );
 
-  // Todo: 1. implement a select input for the options field, and the onClick method
-  // use options
-  // use setOption
-  // import a select
-  const itemOptions = options && options.length > 0 && (
+  const itemOptions = options && (
     <div className="cart-customizations">
       <h4>Model Type</h4>
       <select
@@ -46,7 +50,10 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
         id="product-options"
         onChange={(event) => {
           const selectedValue = event.target.value;
-          changeItemOption(id, selectedValue);
+          updateItemCustomization(id, [
+            { name: `Model Type- ${event.target.name} `, value: selectedValue },
+          ]),
+            changeItemOption(id, selectedValue);
         }}
       >
         {options.map(({ option, price }) => {
@@ -56,6 +63,32 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
             </option>
           );
         })}
+      </select>
+    </div>
+  );
+
+  // {/* Bulk Options Selection */}
+  const itemBulkOptions = bulkOptions && bulkOptions.length > 0 && (
+    <div>
+      <h4>Bulk Options</h4>
+      <select
+        name="bulk-options"
+        id="bulk-options"
+        onChange={(event) => {
+          updateItemCustomization(id, [
+            {
+              name: `Bulk Option - ${event.target.selectedOptions[0].id}`,
+              value: event.target.value,
+            },
+          ]),
+            changeItemOption(id, event.target.value);
+        }}
+      >
+        {bulkOptions.map(({ option, price }) => (
+          <option id={`Pack of ${option}`} key={option} value={price}>
+            {option} Pack - ${price}
+          </option>
+        ))}
       </select>
     </div>
   );
@@ -86,6 +119,7 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
               />
             </div>
             {itemOptions}
+            {itemBulkOptions}
             <div className="product-price">Unit Price: ${price.toFixed(2)}</div>
             <div className="product-price">
               <span className="text-black">
@@ -95,7 +129,6 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
             </div>
           </div>
           {itemCustomizations}
-          
         </div>
       )}
     </div>
