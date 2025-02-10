@@ -1,22 +1,30 @@
 import { KeyValueStringPairs, Product } from "../Types/interfaces";
 
-import houseFull1 from "../assets/ProductImages/House/House-Full/1.jpg";
+import houseFull1 from "../assets/ProductImages/House/House-Full/1.png";
 import houseFull2 from "../assets/ProductImages/House/House-Full/2.png";
-import houseFull3 from "../assets/ProductImages/House/House-Full/3.jpg";
+import houseFull3 from "../assets/ProductImages/House/House-Full/3.png";
 import houseFull4 from "../assets/ProductImages/House/House-Full/4.jpg";
 import houseFull5 from "../assets/ProductImages/House/House-Full/5.jpg";
 import houseFull6 from "../assets/ProductImages/House/House-Full/6.png";
 import houseFull7 from "../assets/ProductImages/House/House-Full/7.png";
 import houseFull8 from "../assets/ProductImages/House/House-Full/8.png";
+import houseFull9 from "../assets/ProductImages/House/House-Full/9.png";
+import houseFull10 from "../assets/ProductImages/House/House-Full/10.png";
+import houseFull11 from "../assets/ProductImages/House/House-Full/11.png";
+import houseFull12 from "../assets/ProductImages/House/House-Full/12.png";
+import houseFull13 from "../assets/ProductImages/House/House-Full/13.png";
+import houseFull14 from "../assets/ProductImages/House/House-Full/14.png";
 
-import houseFront1 from "../assets/ProductImages/House/House-Front/1.jpg";
-import houseFront2 from "../assets/ProductImages/House/House-Front/2.jpg";
-import houseFront3 from "../assets/ProductImages/House/House-Front/3.jpg";
-import houseFront4 from "../assets/ProductImages/House/House-Front/4.jpg";
-import houseFront5 from "../assets/ProductImages/House/House-Front/5.jpg";
-import houseFront6 from "../assets/ProductImages/House/House-Front/6.jpg";
-import houseFront7 from "../assets/ProductImages/House/House-Front/7.png";
-import houseFront8 from "../assets/ProductImages/House/House-Front/8.png";
+
+
+import houseFront1 from "../assets/ProductImages/House/House-Front/1.png";
+import houseFront2 from "../assets/ProductImages/House/House-Front/2.png";
+import houseFront3 from "../assets/ProductImages/House/House-Front/3.png";
+import houseFront4 from "../assets/ProductImages/House/House-Front/4.png";
+import houseFront5 from "../assets/ProductImages/House/House-Front/5.png";
+import houseFront6 from "../assets/ProductImages/House/House-Front/6.png";
+import houseFront7 from "../assets/ProductImages/House/House-Full/4.jpg";
+import houseFront8 from "../assets/ProductImages/House/House-Full/5.jpg";
 
 import cardHolder1 from "../assets/ProductImages/Miscellaneous/CardHolder/acc1.png";
 import cardHolder2 from "../assets/ProductImages/Miscellaneous/CardHolder/acc2.png";
@@ -70,14 +78,20 @@ const Product1: Product = {
     "The printed houses are in color. However, colors are limited. We will send you the renderings of the house with the exact tone of colors that will be used. You can approve the colors at this step in the process.",
   ],
   images: [
+    houseFull12,
     houseFull1,
-    houseFull2,
     houseFull3,
     houseFull4,
     houseFull5,
     houseFull6,
     houseFull7,
     houseFull8,
+    houseFull9,
+    houseFull10,
+    houseFull11,
+    houseFull2,
+    houseFull13,
+    houseFull14,
   ],
   desc: "3D Printed Replica of Your House - Full House! Customized and Personalized Models, New Home, Personal Gift, Real Estate Agent",
   quantity: 1,
