@@ -43,7 +43,8 @@
 .hero__lead h1 {
   font-size: 3rem;
   margin: 2rem 0;
-  font-family: "Poppins", serif;
+  font-family: "Ledger", serif;
+  text-transform: uppercase;
   font-weight: 800;
   color: white;
   text-align: center;
