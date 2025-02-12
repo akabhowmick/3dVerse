@@ -1,7 +1,6 @@
 import "./SingleProduct.css";
 import Typography from "@mui/material/Typography";
 import { useCartContext } from "../../providers/CartProvider";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Product } from "../../Types/interfaces";
 import { fullDetailedDetails } from "../../utils/HelpfulText";
@@ -82,13 +81,13 @@ export const SingleProduct = ({
 
   const redirectButton =
     displayType === "card" ? (
-      <Link id="redirect-btn" to={learnMoreLink}>
+      <a id="redirect-btn" href={learnMoreLink}>
         <button>Learn More!</button>
-      </Link>
+      </a>
     ) : (
-      <Link id="redirect-btn" to="/">
+      <a id="redirect-btn" href="/">
         <button>Back To Home!</button>
-      </Link>
+      </a>
     );
 
   const cartBtn = (
@@ -103,7 +102,9 @@ export const SingleProduct = ({
         <ImageCarousel images={images} />
       </div>
     ) : (
-      <img src={images[0]} className="product-image" alt={`product image for ${name}`} />
+      <a href={learnMoreLink}>
+        <img src={images[0]} className="product-image" alt={`product image for ${name}`} />
+      </a>
     );
 
   return (
