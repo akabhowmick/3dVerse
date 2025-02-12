@@ -81,11 +81,11 @@ export const SingleProduct = ({
 
   const redirectButton =
     displayType === "card" ? (
-      <a id="redirect-btn" href={learnMoreLink}>
+      <a id="redirect-btn" href={learnMoreLink} target="_top">
         <button>Learn More!</button>
       </a>
     ) : (
-      <a id="redirect-btn" href="/">
+      <a id="redirect-btn" href="/" target="_top">
         <button>Back To Home!</button>
       </a>
     );
@@ -102,7 +102,7 @@ export const SingleProduct = ({
         <ImageCarousel images={images} />
       </div>
     ) : (
-      <a href={learnMoreLink}>
+      <a href={learnMoreLink} target="_top">
         <img src={images[0]} className="product-image" alt={`product image for ${name}`} />
       </a>
     );
