@@ -26,8 +26,8 @@ export const HeroSection = () => {
         }}
       >
         <div className="row">
-          <div className="col-md-6 order-2 hero__lead">
-            <h1>{companyTagline}</h1>
+          <div className="col-md-6 order-2 hero__lead text-xl">
+            <h2>{companyTagline}</h2>
           </div>
         </div>
       </div>
