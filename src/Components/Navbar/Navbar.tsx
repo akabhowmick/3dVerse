@@ -2,8 +2,6 @@ import "./Navbar.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 
-import { NavUnlisted } from "./NavbarStyles";
-import "./Navbar.css";
 import { useEffect, useRef, useState } from "react";
 
 import navbarLogo from "../../assets/Main/logo.png";
@@ -120,7 +118,7 @@ export const Navbar = () => {
       </div>
       <header className="nav-bar">
         <nav>
-          <NavUnlisted
+          <div
             aria-label="Larger viewport navigation menu with links"
             className="main-navbar-ul"
           >
@@ -144,7 +142,7 @@ export const Navbar = () => {
               </div>
             )}
             {logoHeaderLink}
-          </NavUnlisted>
+          </div>
         </nav>
       </header>
       <main id="main-content" tabIndex={-1}>
