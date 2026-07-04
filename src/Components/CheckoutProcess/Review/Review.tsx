@@ -114,7 +114,14 @@ export default function Review() {
       <Grid item xs={12}>
         <form action={orderReviewFormId} method="POST" onSubmit={handleSubmit}>
           <input type="hidden" name="_cc" value={user?.email || ""} />
-          <input type="text" name="_honey" style={{ display: "none" }} />
+          <input
+            type="text"
+            name="_honey"
+            style={{ display: "none" }}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
           {FormSubmitIoInputs}
           {(cartItems || []).map((product) => (
             <input
