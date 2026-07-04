@@ -12,7 +12,13 @@ const footerSiteLinks: KeyValueStringPairs[] = [{ key: "Home", value: "/" }, ...
 export const Footer = () => {
   const logoFooterLink = (
     <a href="/" id="logo-with-title">
-      <img className="navbar-logo" src={navbarLogo} alt="tkd-main-logo" />
+      <img
+        className="navbar-logo"
+        src={navbarLogo}
+        alt="Print3DVerse home"
+        width={474}
+        height={435}
+      />
       <h3>{companyName}</h3>
     </a>
   );

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-export const NavUnlisted = styled.ul`
+export const NavUnlisted = styled.div`
   display: flex;
   align-items: center;
   background-color: var(--grad-1);

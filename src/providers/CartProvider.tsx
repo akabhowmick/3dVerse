@@ -1,7 +1,71 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect, createContext, useContext, ReactNode } from "react";
-import { customerChoice, Product } from "../Types/interfaces";
+import { customerChoice, KeyValueStringPairs, Product } from "../Types/interfaces";
 import { products } from "../utils/Products";
+
+const isValidRequiredCustomizations = (value: unknown): value is KeyValueStringPairs[] =>
+  Array.isArray(value) &&
+  value.every(
+    (entry) =>
+      entry &&
+      typeof entry === "object" &&
+      typeof (entry as KeyValueStringPairs).key === "string" &&
+      typeof (entry as KeyValueStringPairs).value === "string"
+  );
+
+const isValidCustomerChoices = (value: unknown): value is customerChoice[] =>
+  Array.isArray(value) &&
+  value.every(
+    (entry) =>
+      entry &&
+      typeof entry === "object" &&
+      typeof (entry as customerChoice).name === "string" &&
+      typeof (entry as customerChoice).value === "string"
+  );
+
+// Rebuilds a cart item from trusted catalog data, taking only id/quantity/
+// customization choices from localStorage. This is what prevents a tampered
+// price (or name/images) in localStorage from ever reaching the cart.
+const rebuildTrustedCartItem = (stored: unknown, catalog: Product[]): Product | null => {
+  if (!stored || typeof stored !== "object") return null;
+  const { id, quantity } = stored as { id?: unknown; quantity?: unknown };
+  if (typeof id !== "number" || typeof quantity !== "number" || quantity < 1) return null;
+
+  const catalogProduct = catalog.find((product) => product.id === id);
+  if (!catalogProduct) return null;
+
+  const storedItem = stored as Partial<Product>;
+  const customerChoices = isValidCustomerChoices(storedItem.customerChoices)
+    ? storedItem.customerChoices
+    : undefined;
+  const requiredCustomizations = isValidRequiredCustomizations(storedItem.requiredCustomizations)
+    ? storedItem.requiredCustomizations
+    : catalogProduct.requiredCustomizations;
+
+  let price = catalogProduct.price;
+  customerChoices?.forEach((choice) => {
+    const selectedBulkOption = catalogProduct.bulkOptions?.find(
+      (opt) => opt.option.toString() === choice.value
+    );
+    const selectedOption = catalogProduct.options?.find(
+      (opt) => opt.option.toString() === choice.value
+    );
+    if (selectedBulkOption) {
+      price = selectedBulkOption.price;
+    } else if (selectedOption) {
+      price = selectedOption.price;
+    }
+  });
+
+  return {
+    ...catalogProduct,
+    id,
+    quantity,
+    price,
+    customerChoices,
+    requiredCustomizations,
+  };
+};
 
 interface CartContextType {
   cartItems: Product[];
@@ -16,6 +80,7 @@ interface CartContextType {
   changeItemOption: (id: number, value: string) => void;
   updateItemCustomization: (id: number, updatedChoices: customerChoice[]) => void;
   clearCart: () => void;
+  announcement: string;
 }
 
 const CartContext = createContext({} as CartContextType);
@@ -24,10 +89,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
   const [total, setTotal] = useState(0);
   const [finalTotal, setFinalTotal] = useState(0);
+  const [announcement, setAnnouncement] = useState("");
   const shippingPrice = 5;
   const taxRate = 0.0875;
-
-  const CLEAR_CART_TIMEOUT = 20 * 60 * 1000; // 20 minutes in milliseconds
 
   useEffect(() => {
     let cartTotal = 0;
@@ -42,47 +106,37 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const maybeCart = localStorage.getItem("3dPrintVerseCart");
-    if (maybeCart) {
-      setCartItems(JSON.parse(maybeCart));
+    if (!maybeCart) return;
+
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(maybeCart);
+    } catch {
+      localStorage.removeItem("3dPrintVerseCart");
+      return;
     }
 
-    // Check for the last update timestamp
-    const lastUpdated = localStorage.getItem("3dPrintVerseCartLastUpdated");
-    if (lastUpdated) {
-      const lastUpdatedTime = Number(lastUpdated);
-      const currentTime = Date.now();
-      const timeDiff = currentTime - lastUpdatedTime;
-
-      // If more than 20 minutes have passed since the last update, clear the cart
-      if (timeDiff > CLEAR_CART_TIMEOUT) {
-        clearCart();
-      }
+    if (!Array.isArray(parsed)) {
+      localStorage.removeItem("3dPrintVerseCart");
+      return;
     }
 
-    // Optionally set an interval to check every minute
-    const interval = setInterval(() => {
-      const lastUpdated = localStorage.getItem("3dPrintVerseCartLastUpdated");
-      if (lastUpdated) {
-        const lastUpdatedTime = Number(lastUpdated);
-        const currentTime = Date.now();
-        const timeDiff = currentTime - lastUpdatedTime;
+    const rebuiltItems = parsed
+      .map((item) => rebuildTrustedCartItem(item, products))
+      .filter((item): item is Product => item !== null);
 
-        if (timeDiff > CLEAR_CART_TIMEOUT) {
-          clearCart();
-        }
-      }
-    }, 60 * 1000); // Every minute
+    setCartItems(rebuiltItems);
 
-    return () => {
-      clearInterval(interval);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (rebuiltItems.length !== parsed.length) {
+      // Some stored entries were invalid or tampered with -- re-persist only
+      // the cleaned, trusted subset instead of leaving the corrupted data.
+      updateCartInLocalStorage(rebuiltItems);
+    }
   }, []);
 
   const clearCart = () => {
     setCartItems([]);
     localStorage.removeItem("3dPrintVerseCart");
-    localStorage.removeItem("3dPrintVerseCartLastUpdated");
   };
 
   const setCart = (newCart: Product[]) => {
@@ -92,11 +146,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const updateCartInLocalStorage = (cartArrayItems: Product[]) => {
     localStorage.setItem("3dPrintVerseCart", JSON.stringify(cartArrayItems));
-    localStorage.setItem("3dPrintVerseCartLastUpdated", Date.now().toString());
 
     if (cartArrayItems.length === 0) {
       localStorage.removeItem("3dPrintVerseCart");
-      localStorage.removeItem("3dPrintVerseCartLastUpdated");
     }
   };
 
@@ -106,6 +158,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (!cartItems.find((product) => product.id === id) && newProduct) {
       const newCart = [...cartItems, newProduct];
       setCart(newCart);
+      setAnnouncement(`Added ${newProduct.name} to cart`);
     }
   };
 
@@ -118,23 +171,31 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       }
       return item;
     });
+    const removedName = cartItems.find((item) => item.id === id)?.name;
     const newCart = updatedCartItems.filter((item) => item.id !== id);
     setCart(newCart);
+    setAnnouncement(`Removed ${removedName || "item"} from cart`);
   };
 
   const changeItemQuantity = (id: number, changeType: string) => {
     const changeAmount = changeType === "addOne" ? 1 : -1;
+    let announcementMessage = "";
     const updatedCartItems: Product[] = cartItems.map((item) => {
       if (item.id === id) {
         const updatedQuantity = item.quantity + changeAmount;
+        const finalQuantity = updatedQuantity > 0 ? updatedQuantity : item.quantity;
+        announcementMessage = `${changeType === "addOne" ? "Increased" : "Decreased"} quantity of ${item.name} to ${finalQuantity}`;
         return {
           ...item,
-          quantity: updatedQuantity > 0 ? updatedQuantity : item.quantity,
+          quantity: finalQuantity,
         };
       }
       return item;
     });
     setCart(updatedCartItems);
+    if (announcementMessage) {
+      setAnnouncement(announcementMessage);
+    }
   };
 
   const changeItemCustomization = (id: number, customizationName: string, value: string) => {
@@ -212,6 +273,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         finalTotal,
         updateItemCustomization,
         clearCart,
+        announcement,
       }}
     >
       {children}

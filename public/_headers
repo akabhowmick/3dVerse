@@ -1,0 +1,13 @@
+# script-src includes 'unsafe-inline': PayPal's JS SDK (loaded on the Payment
+# step) injects its own inline <script> for internal setup, and without
+# 'unsafe-inline' that inline script is blocked (confirmed via a local CSP
+# smoke test -- the PayPal button iframes still rendered, but this is the one
+# directive that had to be loosened to stop the violation entirely). No other
+# directive needed loosening after testing the PayPal checkout, the contact
+# form, and the home page's Google Fonts against this policy.
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.paypal.com https://www.paypalobjects.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.paypalobjects.com https://ucarecdn.com; frame-src https://www.paypal.com https://www.sandbox.paypal.com; connect-src 'self' https://www.paypal.com https://api.paypal.com https://formsubmit.co https://upload.uploadcare.com; form-action 'self' https://formsubmit.co; base-uri 'self'; object-src 'none'

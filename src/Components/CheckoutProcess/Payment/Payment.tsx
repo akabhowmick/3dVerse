@@ -3,7 +3,7 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import ButtonWrapper from "./ButtonWrapper.js";
 import { useCartContext } from "../../../providers/CartProvider.js";
 import { Button } from "@mui/material";
-import { paypalClientId } from "../../../utils/ApiKeys.js";
+import { paypalClientId } from "../../../utils/config";
 import "../Checkout/Checkout.css";
 import Swal from "sweetalert2";
 

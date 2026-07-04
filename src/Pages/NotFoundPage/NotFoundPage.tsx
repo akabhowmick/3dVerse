@@ -2,7 +2,7 @@ import "./NotFoundPage.css";
 
 export const NotFoundPage = () => {
   return (
-    <main className="bl_page404">
+    <div className="bl_page404">
       <h1>Error 404. The page does not exist</h1>
       <p>
         Sorry! The page you are looking for can not be found. Perhaps the page you requested was
@@ -12,7 +12,8 @@ export const NotFoundPage = () => {
       <div className="bl_page404__wrapper">
         <img
           src="https://github.com/BlackStar1991/Pictures-for-sharing-/blob/master/404/bigBoom/cloud_warmcasino.png?raw=true"
-          alt="not-found-page.png"
+          alt="Page not found illustration"
+          loading="lazy"
         />
         <div className="bl_page404__el1"></div>
         <div className="bl_page404__el2"></div>
@@ -21,6 +22,6 @@ export const NotFoundPage = () => {
       <a className="bl_page404__link" href="/">
         go home
       </a>
-    </main>
+    </div>
   );
 };

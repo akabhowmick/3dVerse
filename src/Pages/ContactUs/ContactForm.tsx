@@ -1,16 +1,27 @@
-import { contactFormId, homePage } from "../../utils/ApiKeys";
+import { contactFormId, homePage } from "../../utils/config";
 import { socialButtons } from "../../utils/SocialMediaLink";
 import "./Contact.css";
 
 export const ContactForm = () => {
-  const contactFormInput = [
-    { name: "Name", label: "from_name" },
-    { name: "Email", label: "reply_to" },
-    { name: "Phone Number", label: "phone_number" },
-    { name: "Message", label: "message" },
+  const contactFormInput: {
+    name: string;
+    label: string;
+    type: string;
+    autoComplete: string;
+    inputMode?: "email" | "tel";
+  }[] = [
+    { name: "Name", label: "from_name", type: "text", autoComplete: "name" },
+    { name: "Email", label: "reply_to", type: "email", autoComplete: "email", inputMode: "email" },
+    {
+      name: "Phone Number",
+      label: "phone_number",
+      type: "tel",
+      autoComplete: "tel",
+      inputMode: "tel",
+    },
   ];
 
-  const contactFormInputs = contactFormInput.map(({ name, label }) => {
+  const contactFormInputs = contactFormInput.map(({ name, label, type, autoComplete, inputMode }) => {
     return (
       <div key={name} className="contact-form-div">
         <label htmlFor={label}>{name}</label>
@@ -18,14 +29,28 @@ export const ContactForm = () => {
           className="contact-form-input"
           id={label}
           name={label}
-          type="text"
-          autoComplete="off"
+          type={type}
+          autoComplete={autoComplete}
+          inputMode={inputMode}
           placeholder={`Your ${name}`}
           required
         />
       </div>
     );
   });
+
+  const messageField = (
+    <div className="contact-message-div">
+      <label htmlFor="message">Message</label>
+      <textarea
+        className="contact-form-input"
+        id="message"
+        name="message"
+        placeholder="Your Message"
+        required
+      />
+    </div>
+  );
 
   const productOptions = [
     "Replica House - Full",
@@ -40,7 +65,11 @@ export const ContactForm = () => {
       <label htmlFor="design_of_interest">Design of Interest</label>
       <select className="contact-form-input" id="design_of_interest" name="design_of_interest">
         {productOptions.map((className) => {
-          return <option key={className} value={className} label={className}></option>;
+          return (
+            <option key={className} value={className}>
+              {className}
+            </option>
+          );
         })}
       </select>
     </div>
@@ -53,10 +82,18 @@ export const ContactForm = () => {
   return (
     <form action={contactFormId} method="POST">
       <div className="contact__form-container">
-        <input type="text" name="_honey" style={{ display: "none" }} />
+        <input
+          type="text"
+          name="_honey"
+          style={{ display: "none" }}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+        />
         <input type="hidden" name="_next" value={homePage} />
         <input type="hidden" name="_subject" value="Inquiry for Print3DVerse!" />
         {contactFormInputs}
+        {messageField}
         {selectClasses}
         <div className="submit-btn-container">
           <button id="contact-submit-btn" type="submit" className="btn btn-primary">

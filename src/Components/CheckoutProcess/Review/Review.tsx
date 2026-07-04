@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { useCartContext } from "../../../providers/CartProvider";
 import { useUserContext } from "../../../providers/UserProvider";
 import { Product } from "../../../Types/interfaces";
-import { orderReviewFormId, uploadImagePage } from "../../../utils/ApiKeys";
+import { orderReviewFormId, uploadImagePage } from "../../../utils/config";
 
 export default function Review() {
   const { cartItems, finalTotal, clearCart } = useCartContext();
@@ -72,6 +72,7 @@ export default function Review() {
             <img
               src={cartItem.images?.[0] || ""}
               alt={cartItem.name || "Product image"}
+              loading="lazy"
               style={{
                 maxWidth: "60px",
                 margin: "0.5rem",
@@ -113,7 +114,14 @@ export default function Review() {
       <Grid item xs={12}>
         <form action={orderReviewFormId} method="POST" onSubmit={handleSubmit}>
           <input type="hidden" name="_cc" value={user?.email || ""} />
-          <input type="text" name="_honey" style={{ display: "none" }} />
+          <input
+            type="text"
+            name="_honey"
+            style={{ display: "none" }}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
           {FormSubmitIoInputs}
           {(cartItems || []).map((product) => (
             <input
