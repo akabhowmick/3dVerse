@@ -16,6 +16,7 @@
 }
 .empty-cart-container {
   padding: 1rem;
+  min-width: 0;
 }
 
 .cart-display-empty-products {
