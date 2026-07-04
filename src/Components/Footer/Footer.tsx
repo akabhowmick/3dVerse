@@ -1,6 +1,6 @@
 import "./Footer.css";
 
-import navbarLogo from "../../assets/Main/logo.png";
+import navbarLogo from "../../assets/Main/logo.webp";
 
 import { KeyValueStringPairs } from "../../Types/interfaces";
 import { socialButtons } from "../../utils/SocialMediaLink";

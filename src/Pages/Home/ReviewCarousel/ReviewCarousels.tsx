@@ -1,5 +1,5 @@
 import "./ReviewCarousels.css";
-import logo from "../../../assets/Main/logo.png";
+import logo from "../../../assets/Main/logo.webp";
 import { useState } from "react";
 import { reviewTexts } from "../../../utils/HelpfulText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

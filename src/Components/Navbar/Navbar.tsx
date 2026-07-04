@@ -4,7 +4,7 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 import { useEffect, useRef, useState } from "react";
 
-import navbarLogo from "../../assets/Main/logo.png";
+import navbarLogo from "../../assets/Main/logo.webp";
 import { links } from "../../utils/NavbarAndFooterLinks";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
