@@ -1,6 +1,6 @@
 import "./Navbar.css";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 import { NavUnlisted } from "./NavbarStyles";
 import "./Navbar.css";
@@ -17,6 +17,8 @@ export const Navbar = () => {
   const { cartItems } = useCartContext();
   const [showNavbar, setShowNavbar] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const { pathname } = useLocation();
+  const isInitialMount = useRef(true);
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -33,6 +35,14 @@ export const Navbar = () => {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [showNavbar]);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    document.getElementById("main-content")?.focus();
+  }, [pathname]);
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -95,6 +105,9 @@ export const Navbar = () => {
 
   return (
     <div className="root-layout">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <header className="nav-bar">
         <nav>
           <NavUnlisted
@@ -124,7 +137,7 @@ export const Navbar = () => {
           </NavUnlisted>
         </nav>
       </header>
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
     </div>

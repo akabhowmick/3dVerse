@@ -25,6 +25,20 @@
   border-radius: 5px;
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  background: var(--light, #fff);
+  color: var(--dark, #323234);
+  padding: 0.75rem 1rem;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

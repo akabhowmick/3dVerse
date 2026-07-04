@@ -2,7 +2,7 @@ import "./NotFoundPage.css";
 
 export const NotFoundPage = () => {
   return (
-    <main className="bl_page404">
+    <div className="bl_page404">
       <h1>Error 404. The page does not exist</h1>
       <p>
         Sorry! The page you are looking for can not be found. Perhaps the page you requested was
@@ -22,6 +22,6 @@ export const NotFoundPage = () => {
       <a className="bl_page404__link" href="/">
         go home
       </a>
-    </main>
+    </div>
   );
 };
