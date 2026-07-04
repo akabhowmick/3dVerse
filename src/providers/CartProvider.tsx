@@ -1,7 +1,71 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect, createContext, useContext, ReactNode } from "react";
-import { customerChoice, Product } from "../Types/interfaces";
+import { customerChoice, KeyValueStringPairs, Product } from "../Types/interfaces";
 import { products } from "../utils/Products";
+
+const isValidRequiredCustomizations = (value: unknown): value is KeyValueStringPairs[] =>
+  Array.isArray(value) &&
+  value.every(
+    (entry) =>
+      entry &&
+      typeof entry === "object" &&
+      typeof (entry as KeyValueStringPairs).key === "string" &&
+      typeof (entry as KeyValueStringPairs).value === "string"
+  );
+
+const isValidCustomerChoices = (value: unknown): value is customerChoice[] =>
+  Array.isArray(value) &&
+  value.every(
+    (entry) =>
+      entry &&
+      typeof entry === "object" &&
+      typeof (entry as customerChoice).name === "string" &&
+      typeof (entry as customerChoice).value === "string"
+  );
+
+// Rebuilds a cart item from trusted catalog data, taking only id/quantity/
+// customization choices from localStorage. This is what prevents a tampered
+// price (or name/images) in localStorage from ever reaching the cart.
+const rebuildTrustedCartItem = (stored: unknown, catalog: Product[]): Product | null => {
+  if (!stored || typeof stored !== "object") return null;
+  const { id, quantity } = stored as { id?: unknown; quantity?: unknown };
+  if (typeof id !== "number" || typeof quantity !== "number" || quantity < 1) return null;
+
+  const catalogProduct = catalog.find((product) => product.id === id);
+  if (!catalogProduct) return null;
+
+  const storedItem = stored as Partial<Product>;
+  const customerChoices = isValidCustomerChoices(storedItem.customerChoices)
+    ? storedItem.customerChoices
+    : undefined;
+  const requiredCustomizations = isValidRequiredCustomizations(storedItem.requiredCustomizations)
+    ? storedItem.requiredCustomizations
+    : catalogProduct.requiredCustomizations;
+
+  let price = catalogProduct.price;
+  customerChoices?.forEach((choice) => {
+    const selectedBulkOption = catalogProduct.bulkOptions?.find(
+      (opt) => opt.option.toString() === choice.value
+    );
+    const selectedOption = catalogProduct.options?.find(
+      (opt) => opt.option.toString() === choice.value
+    );
+    if (selectedBulkOption) {
+      price = selectedBulkOption.price;
+    } else if (selectedOption) {
+      price = selectedOption.price;
+    }
+  });
+
+  return {
+    ...catalogProduct,
+    id,
+    quantity,
+    price,
+    customerChoices,
+    requiredCustomizations,
+  };
+};
 
 interface CartContextType {
   cartItems: Product[];
@@ -42,8 +106,31 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const maybeCart = localStorage.getItem("3dPrintVerseCart");
-    if (maybeCart) {
-      setCartItems(JSON.parse(maybeCart));
+    if (!maybeCart) return;
+
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(maybeCart);
+    } catch {
+      localStorage.removeItem("3dPrintVerseCart");
+      return;
+    }
+
+    if (!Array.isArray(parsed)) {
+      localStorage.removeItem("3dPrintVerseCart");
+      return;
+    }
+
+    const rebuiltItems = parsed
+      .map((item) => rebuildTrustedCartItem(item, products))
+      .filter((item): item is Product => item !== null);
+
+    setCartItems(rebuiltItems);
+
+    if (rebuiltItems.length !== parsed.length) {
+      // Some stored entries were invalid or tampered with -- re-persist only
+      // the cleaned, trusted subset instead of leaving the corrupted data.
+      updateCartInLocalStorage(rebuiltItems);
     }
   }, []);
 
