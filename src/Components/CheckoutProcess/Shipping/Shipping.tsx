@@ -37,6 +37,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   fullWidth
                   variant="standard"
                   required
+                  autoComplete="given-name"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -48,6 +49,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   fullWidth
                   variant="standard"
                   required
+                  autoComplete="family-name"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -59,6 +61,9 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   fullWidth
                   variant="standard"
                   required
+                  type="email"
+                  autoComplete="email"
+                  inputProps={{ inputMode: "email" }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -70,6 +75,9 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   fullWidth
                   variant="standard"
                   required
+                  type="tel"
+                  autoComplete="tel"
+                  inputProps={{ inputMode: "tel" }}
                 />
               </Grid>
               <hr />
@@ -85,6 +93,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   fullWidth
                   variant="standard"
                   required
+                  autoComplete="address-line1"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -96,6 +105,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   fullWidth
                   variant="standard"
                   required
+                  autoComplete="address-level2"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -107,6 +117,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   fullWidth
                   variant="standard"
                   required
+                  autoComplete="address-level1"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -118,6 +129,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   fullWidth
                   variant="standard"
                   required
+                  autoComplete="country-name"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -129,6 +141,8 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   fullWidth
                   variant="standard"
                   required
+                  autoComplete="postal-code"
+                  inputProps={{ inputMode: "numeric" }}
                 />
               </Grid>
 
