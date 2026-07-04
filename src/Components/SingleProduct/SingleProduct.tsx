@@ -99,7 +99,7 @@ export const SingleProduct = ({
   const productImage =
     displayType !== "card" ? (
       <div className="image-container product-image">
-        <ImageCarousel images={images} />
+        <ImageCarousel images={images} alt={name} />
       </div>
     ) : (
       <a href={learnMoreLink} target="_top">

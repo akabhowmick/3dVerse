@@ -24,7 +24,11 @@ export const ReviewCarousel = () => {
 
   const reviewBoxItems = reviewTexts.map((review) => {
     return (
-      <div key={review.id} className={getClassesForCarouselItem(review.id)}>
+      <div
+        key={review.id}
+        className={getClassesForCarouselItem(review.id)}
+        aria-hidden={review.id !== currentReviewIndex}
+      >
         <div className="review-author">
           <div className="avatar">
             <img src={logo} alt="" width={46} height={46} loading="lazy" />

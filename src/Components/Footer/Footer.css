@@ -30,6 +30,10 @@
   margin: 0;
 }
 
+.footer .about a {
+  color: #ffffff;
+}
+
 .footer .about span {
   display: block;
   color: #ffffff;

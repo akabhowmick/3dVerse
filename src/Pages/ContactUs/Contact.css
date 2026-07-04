@@ -54,6 +54,7 @@
 #contact-submit-btn {
   border: none;
   background-color: var(--primary);
+  color: #ffffff;
   text-align: center;
 }
 
