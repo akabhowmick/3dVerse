@@ -4,7 +4,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 import { NavUnlisted } from "./NavbarStyles";
 import "./Navbar.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import navbarLogo from "../../assets/Main/logo.png";
 import { links } from "../../utils/NavbarAndFooterLinks";
@@ -16,10 +16,23 @@ import { companyName } from "../../utils/HelpfulText";
 export const Navbar = () => {
   const { cartItems } = useCartContext();
   const [showNavbar, setShowNavbar] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
   };
+
+  useEffect(() => {
+    if (!showNavbar) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShowNavbar(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [showNavbar]);
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -84,12 +97,20 @@ export const Navbar = () => {
           >
             <ul className="main-regular-links">{navLinkItems}</ul>
 
-            <div className="menu-icon" onClick={handleShowNavbar}>
-              <MenuIcon />
-            </div>
+            <button
+              type="button"
+              className="menu-icon"
+              onClick={handleShowNavbar}
+              aria-expanded={showNavbar}
+              aria-controls="mobile-nav-menu"
+              aria-label={showNavbar ? "Close navigation menu" : "Open navigation menu"}
+              ref={menuButtonRef}
+            >
+              <MenuIcon aria-hidden="true" />
+            </button>
             <ul className="cart-small-screen">{CartLink}</ul>
             {showNavbar && (
-              <div className="nav-elements">
+              <div className="nav-elements" id="mobile-nav-menu">
                 <ul>{navLinkItems}</ul>
               </div>
             )}
