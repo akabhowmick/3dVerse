@@ -19,16 +19,16 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
 
   return (
     <Grid container>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Container maxWidth="md">
           <Box component="form" onSubmit={(e) => handleNextClick(e)} className="shipping-form">
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>
                   Your details
                 </Typography>
               </Grid>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <TextField
                   name="firstName"
                   label="First Name"
@@ -40,7 +40,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   autoComplete="given-name"
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <TextField
                   name="lastName"
                   label="Last Name"
@@ -52,7 +52,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   autoComplete="family-name"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   name="email"
                   label="Email"
@@ -63,10 +63,10 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   required
                   type="email"
                   autoComplete="email"
-                  inputProps={{ inputMode: "email" }}
+                  slotProps={{ htmlInput: { inputMode: "email" } }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   name="phone"
                   label="Phone"
@@ -77,14 +77,14 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   required
                   type="tel"
                   autoComplete="tel"
-                  inputProps={{ inputMode: "tel" }}
+                  slotProps={{ htmlInput: { inputMode: "tel" } }}
                 />
               </Grid>
               <hr />
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>Address</Typography>
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   name="addressLine1"
                   label="Address Line 1"
@@ -96,7 +96,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   autoComplete="address-line1"
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <TextField
                   name="city"
                   label="City"
@@ -108,7 +108,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   autoComplete="address-level2"
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <TextField
                   name="state"
                   label="State"
@@ -120,7 +120,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   autoComplete="address-level1"
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <TextField
                   name="country"
                   label="Country"
@@ -132,7 +132,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   autoComplete="country-name"
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <TextField
                   name="zipCode"
                   label="Zip Code"
@@ -142,11 +142,11 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   variant="standard"
                   required
                   autoComplete="postal-code"
-                  inputProps={{ inputMode: "numeric" }}
+                  slotProps={{ htmlInput: { inputMode: "numeric" } }}
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Button fullWidth type="submit" variant="contained" color="primary">
                   Next
                 </Button>
