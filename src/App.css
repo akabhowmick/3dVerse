@@ -6,6 +6,8 @@
   --grad-4: #7099d3;
   --primary: #0d46b8;
   --secondary: #c30707e6;
+  --logo-blue: var(--primary);
+  --logo-orange: #ff6b1a;
 
   /* support colors */
   --background: #414141;
