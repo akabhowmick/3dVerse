@@ -103,7 +103,12 @@ export const SingleProduct = ({
       </div>
     ) : (
       <a href={learnMoreLink} target="_top">
-        <img src={images[0]} className="product-image" alt={`product image for ${name}`} />
+        <img
+          src={images[0]}
+          className="product-image"
+          alt={`product image for ${name}`}
+          loading="lazy"
+        />
       </a>
     );
 

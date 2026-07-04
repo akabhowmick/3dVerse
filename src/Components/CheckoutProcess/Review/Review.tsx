@@ -72,6 +72,7 @@ export default function Review() {
             <img
               src={cartItem.images?.[0] || ""}
               alt={cartItem.name || "Product image"}
+              loading="lazy"
               style={{
                 maxWidth: "60px",
                 margin: "0.5rem",

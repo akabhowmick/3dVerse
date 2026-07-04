@@ -27,7 +27,7 @@ export const ReviewCarousel = () => {
       <div key={review.id} className={getClassesForCarouselItem(review.id)}>
         <div className="review-author">
           <div className="avatar">
-            <img src={logo} alt="queens-finest-logo" />
+            <img src={logo} alt="" width={46} height={46} loading="lazy" />
           </div>
           <div className="details">
             <h3 className="name">{review.name}</h3>

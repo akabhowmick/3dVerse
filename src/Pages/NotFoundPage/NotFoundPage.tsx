@@ -12,7 +12,8 @@ export const NotFoundPage = () => {
       <div className="bl_page404__wrapper">
         <img
           src="https://github.com/BlackStar1991/Pictures-for-sharing-/blob/master/404/bigBoom/cloud_warmcasino.png?raw=true"
-          alt="not-found-page.png"
+          alt="Page not found illustration"
+          loading="lazy"
         />
         <div className="bl_page404__el1"></div>
         <div className="bl_page404__el2"></div>
