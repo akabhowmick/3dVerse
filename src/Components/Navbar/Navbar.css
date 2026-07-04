@@ -1,6 +1,7 @@
 .navbar-logo {
   width: 50px;
   height: auto;
+  aspect-ratio: 474 / 435;
   margin: 5px;
 }
 .nav-elements {
@@ -9,6 +10,20 @@
 
 .main-regular-links {
   display: flex;
+}
+
+.main-navbar-ul {
+  display: flex;
+  align-items: center;
+  background-color: var(--grad-1);
+  margin: 0 0 -5px;
+  padding: 1rem;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.main-navbar-ul .active {
+  border-bottom: 2px solid black;
 }
 
 .main-navbar-ul a {

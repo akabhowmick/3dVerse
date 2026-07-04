@@ -12,7 +12,9 @@ export const HeroSection = () => {
         loop
         id="hero-video"
         playsInline
-        poster={posterPath} 
+        preload="metadata"
+        poster={posterPath}
+        aria-hidden="true"
       >
         <source src={videoPath} type="video/mp4" />
       </video>

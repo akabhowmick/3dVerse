@@ -52,8 +52,8 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
           const selectedValue = event.target.value;
           updateItemCustomization(id, [
             { name: `Model Type- ${event.target.name} `, value: selectedValue },
-          ]),
-            changeItemOption(id, selectedValue);
+          ]);
+          changeItemOption(id, selectedValue);
         }}
       >
         {options.map(({ option, price }) => {
@@ -80,8 +80,8 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
               name: `Bulk Option - ${event.target.selectedOptions[0].id}`,
               value: event.target.value,
             },
-          ]),
-            changeItemOption(id, event.target.value);
+          ]);
+          changeItemOption(id, event.target.value);
         }}
       >
         {bulkOptions.map(({ option, price }) => (
