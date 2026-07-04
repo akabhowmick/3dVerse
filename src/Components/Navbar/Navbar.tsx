@@ -21,44 +21,50 @@ export const Navbar = () => {
     setShowNavbar(!showNavbar);
   };
 
+  const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
   const CartLink = (
-    <NavLink
-      to="/cart"
-      className={({ isActive, isPending, isTransitioning }) =>
-        [
-          isPending ? "pending" : "",
-          isActive ? "active" : "",
-          isTransitioning ? "transitioning" : "",
-        ].join(" ")
-      }
-    >
-      <li id="cart-btn">
-        <FontAwesomeIcon icon={faCartShopping} />
-        <span>Cart</span> ({cartItems.reduce((acc, item) => acc + item.quantity, 0)})
-      </li>
-    </NavLink>
+    <li id="cart-btn">
+      <NavLink
+        to="/cart"
+        className={({ isActive, isPending, isTransitioning }) =>
+          [
+            isPending ? "pending" : "",
+            isActive ? "active" : "",
+            isTransitioning ? "transitioning" : "",
+          ].join(" ")
+        }
+      >
+        <FontAwesomeIcon icon={faCartShopping} aria-hidden="true" />
+        <span className="cart-label">Cart</span> <span aria-hidden="true">({cartCount})</span>
+        <span className="visually-hidden">
+          , {cartCount} item{cartCount === 1 ? "" : "s"} in cart
+        </span>
+      </NavLink>
+    </li>
   );
 
-  const linksWithNavLink = (
-    <div className="navbar-links-container">
+  const navLinkItems = (
+    <>
       {links.map((link, index) => (
-        <NavLink
-          onClick={() => setShowNavbar(false)}
-          key={index}
-          to={link.value}
-          className={({ isActive, isPending, isTransitioning }) =>
-            [
-              isPending ? "pending" : "",
-              isActive ? "active" : "",
-              isTransitioning ? "transitioning" : "",
-            ].join(" ")
-          }
-        >
-          <li>{link.key}</li>
-        </NavLink>
+        <li key={index}>
+          <NavLink
+            onClick={() => setShowNavbar(false)}
+            to={link.value}
+            className={({ isActive, isPending, isTransitioning }) =>
+              [
+                isPending ? "pending" : "",
+                isActive ? "active" : "",
+                isTransitioning ? "transitioning" : "",
+              ].join(" ")
+            }
+          >
+            {link.key}
+          </NavLink>
+        </li>
       ))}
       {CartLink}
-    </div>
+    </>
   );
 
   const logoHeaderLink = (
@@ -76,15 +82,15 @@ export const Navbar = () => {
             aria-label="Larger viewport navigation menu with links"
             className="main-navbar-ul"
           >
-            <ul className="main-regular-links">{linksWithNavLink}</ul>
+            <ul className="main-regular-links">{navLinkItems}</ul>
 
             <div className="menu-icon" onClick={handleShowNavbar}>
               <MenuIcon />
             </div>
-            <div className="cart-small-screen">{CartLink}</div>
+            <ul className="cart-small-screen">{CartLink}</ul>
             {showNavbar && (
               <div className="nav-elements">
-                <ul>{linksWithNavLink}</ul>
+                <ul>{navLinkItems}</ul>
               </div>
             )}
             {logoHeaderLink}
