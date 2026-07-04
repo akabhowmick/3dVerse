@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { useCartContext } from "../../../providers/CartProvider";
 import { useUserContext } from "../../../providers/UserProvider";
 import { Product } from "../../../Types/interfaces";
-import { orderReviewFormId, uploadImagePage } from "../../../utils/ApiKeys";
+import { orderReviewFormId, uploadImagePage } from "../../../utils/config";
 
 export default function Review() {
   const { cartItems, finalTotal, clearCart } = useCartContext();

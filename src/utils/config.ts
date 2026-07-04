@@ -1,6 +1,5 @@
 // Paypal information
-export const paypalClientId =
-  "AXqOomrS73dZYPvV-fElIHCQITsnzIRe0DNmMZKhmIC6nod2TPfhJV9HGnD4iE4O0M4UL3_jAJzgL8gs";
+export const paypalClientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
 
 // Email form
 const companyEmail = "print3dverse@gmail.com";

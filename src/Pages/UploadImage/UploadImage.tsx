@@ -1,5 +1,5 @@
 import "./UploadImage.css";
-import { imageUploadFormId, thankYouPage } from "../../utils/ApiKeys";
+import { imageUploadFormId, thankYouPage } from "../../utils/config";
 import { useEffect } from "react";
 import { useCartContext } from "../../providers/CartProvider";
 

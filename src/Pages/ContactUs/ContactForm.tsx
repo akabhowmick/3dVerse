@@ -1,4 +1,4 @@
-import { contactFormId, homePage } from "../../utils/ApiKeys";
+import { contactFormId, homePage } from "../../utils/config";
 import { socialButtons } from "../../utils/SocialMediaLink";
 import "./Contact.css";
 
