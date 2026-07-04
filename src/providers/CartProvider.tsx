@@ -29,8 +29,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const shippingPrice = 5;
   const taxRate = 0.0875;
 
-  const CLEAR_CART_TIMEOUT = 20 * 60 * 1000; // 20 minutes in milliseconds
-
   useEffect(() => {
     let cartTotal = 0;
     cartItems.forEach((item) => {
@@ -47,44 +45,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (maybeCart) {
       setCartItems(JSON.parse(maybeCart));
     }
-
-    // Check for the last update timestamp
-    const lastUpdated = localStorage.getItem("3dPrintVerseCartLastUpdated");
-    if (lastUpdated) {
-      const lastUpdatedTime = Number(lastUpdated);
-      const currentTime = Date.now();
-      const timeDiff = currentTime - lastUpdatedTime;
-
-      // If more than 20 minutes have passed since the last update, clear the cart
-      if (timeDiff > CLEAR_CART_TIMEOUT) {
-        clearCart();
-      }
-    }
-
-    // Optionally set an interval to check every minute
-    const interval = setInterval(() => {
-      const lastUpdated = localStorage.getItem("3dPrintVerseCartLastUpdated");
-      if (lastUpdated) {
-        const lastUpdatedTime = Number(lastUpdated);
-        const currentTime = Date.now();
-        const timeDiff = currentTime - lastUpdatedTime;
-
-        if (timeDiff > CLEAR_CART_TIMEOUT) {
-          clearCart();
-        }
-      }
-    }, 60 * 1000); // Every minute
-
-    return () => {
-      clearInterval(interval);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const clearCart = () => {
     setCartItems([]);
     localStorage.removeItem("3dPrintVerseCart");
-    localStorage.removeItem("3dPrintVerseCartLastUpdated");
   };
 
   const setCart = (newCart: Product[]) => {
@@ -94,11 +59,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const updateCartInLocalStorage = (cartArrayItems: Product[]) => {
     localStorage.setItem("3dPrintVerseCart", JSON.stringify(cartArrayItems));
-    localStorage.setItem("3dPrintVerseCartLastUpdated", Date.now().toString());
 
     if (cartArrayItems.length === 0) {
       localStorage.removeItem("3dPrintVerseCart");
-      localStorage.removeItem("3dPrintVerseCartLastUpdated");
     }
   };
 
