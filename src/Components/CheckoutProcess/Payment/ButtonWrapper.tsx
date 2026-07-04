@@ -25,6 +25,9 @@ const ButtonWrapper = ({
         currency: currency,
       },
     });
+    // options and dispatch are intentionally omitted: including options would
+    // create an infinite loop, since dispatch("resetOptions") replaces options.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency, showSpinner]);
 
   return (
