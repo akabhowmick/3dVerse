@@ -60,12 +60,22 @@ export const ReviewCarousel = () => {
         <h2 className="header-md">Trusted by Clients</h2>
         <div className="review-carousel">{reviewBoxItems}</div>
         <div className="slide-ctrl-container">
-          <div className="review-buttons" onClick={() => handleBtnUpdate(-1)}>
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </div>
-          <div className="review-buttons" onClick={() => handleBtnUpdate(1)}>
-            <FontAwesomeIcon icon={faArrowRight} />
-          </div>
+          <button
+            type="button"
+            className="review-buttons"
+            onClick={() => handleBtnUpdate(-1)}
+            aria-label="Previous review"
+          >
+            <FontAwesomeIcon icon={faArrowLeft} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="review-buttons"
+            onClick={() => handleBtnUpdate(1)}
+            aria-label="Next review"
+          >
+            <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
+          </button>
         </div>
       </section>
     </div>

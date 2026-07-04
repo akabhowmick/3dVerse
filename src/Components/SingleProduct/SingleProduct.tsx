@@ -106,7 +106,7 @@ export const SingleProduct = ({
         <img
           src={images[0]}
           className="product-image"
-          alt={`product image for ${name}`}
+          alt={name}
           loading="lazy"
         />
       </a>

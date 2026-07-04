@@ -71,6 +71,12 @@ export const Navbar = () => {
     <>
       {links.map((link, index) => (
         <li key={index}>
+          {/* NavLink renders a real <a href> at runtime (native keyboard
+              support already verified); jsx-a11y's click-events-have-key-events
+              and no-static-element-interactions only recognize a literal
+              `href` prop name, not react-router's `to`, so they false-positive
+              here. */}
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
           <NavLink
             onClick={() => setShowNavbar(false)}
             to={link.value}
@@ -91,6 +97,7 @@ export const Navbar = () => {
   );
 
   const logoHeaderLink = (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- see comment above navLinkItems
     <NavLink onClick={() => setShowNavbar(false)} to="/" id="logo-with-title">
       <img
         className="navbar-logo"
