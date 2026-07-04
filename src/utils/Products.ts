@@ -40,7 +40,7 @@ import k6 from "../assets/ProductImages/Miscellaneous/Keychains/k6.webp";
 
 
 import video from "../assets/Main/Hero/home-video.mp4"
-import poster from "../assets/Main/Hero/home-bg.jpg"
+import poster from "../assets/Main/Hero/home-bg.webp"
 export const videoPath = video;
 export const posterPath = poster;
 
