@@ -43,15 +43,6 @@ import poster from "../assets/Main/Hero/home-bg.webp"
 export const videoPath = "/videos/home-video.mp4";
 export const posterPath = poster;
 
-
-export const heroImages: string[] = [
-  houseFull7,
-  houseFull6,
-  houseFull8,
-  houseFront8,
-  cardHolder2,
-];
-
 const commonCustomizations: KeyValueStringPairs[] = [
   { key: "Color of Holder", value: "" },
   { key: "Color of Letterings", value: "" },
