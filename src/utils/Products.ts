@@ -1,42 +1,42 @@
 import { KeyValueStringPairs, Product } from "../Types/interfaces";
 
-import houseFull1 from "../assets/ProductImages/House/House-Full/1.png";
-import houseFull2 from "../assets/ProductImages/House/House-Full/2.png";
-import houseFull3 from "../assets/ProductImages/House/House-Full/3.png";
-import houseFull4 from "../assets/ProductImages/House/House-Full/4.jpg";
-import houseFull5 from "../assets/ProductImages/House/House-Full/5.jpg";
-import houseFull6 from "../assets/ProductImages/House/House-Full/6.png";
-import houseFull7 from "../assets/ProductImages/House/House-Full/7.png";
-import houseFull8 from "../assets/ProductImages/House/House-Full/8.png";
-import houseFull9 from "../assets/ProductImages/House/House-Full/9.png";
-import houseFull10 from "../assets/ProductImages/House/House-Full/10.png";
-import houseFull11 from "../assets/ProductImages/House/House-Full/11.png";
-import houseFull12 from "../assets/ProductImages/House/House-Full/12.png";
-import houseFull13 from "../assets/ProductImages/House/House-Full/13.png";
-import houseFull14 from "../assets/ProductImages/House/House-Full/14.png";
+import houseFull1 from "../assets/ProductImages/House/House-Full/1.webp";
+import houseFull2 from "../assets/ProductImages/House/House-Full/2.webp";
+import houseFull3 from "../assets/ProductImages/House/House-Full/3.webp";
+import houseFull4 from "../assets/ProductImages/House/House-Full/4.webp";
+import houseFull5 from "../assets/ProductImages/House/House-Full/5.webp";
+import houseFull6 from "../assets/ProductImages/House/House-Full/6.webp";
+import houseFull7 from "../assets/ProductImages/House/House-Full/7.webp";
+import houseFull8 from "../assets/ProductImages/House/House-Full/8.webp";
+import houseFull9 from "../assets/ProductImages/House/House-Full/9.webp";
+import houseFull10 from "../assets/ProductImages/House/House-Full/10.webp";
+import houseFull11 from "../assets/ProductImages/House/House-Full/11.webp";
+import houseFull12 from "../assets/ProductImages/House/House-Full/12.webp";
+import houseFull13 from "../assets/ProductImages/House/House-Full/13.webp";
+import houseFull14 from "../assets/ProductImages/House/House-Full/14.webp";
 
 
 
-import houseFront1 from "../assets/ProductImages/House/House-Front/1.png";
-import houseFront2 from "../assets/ProductImages/House/House-Front/2.png";
-import houseFront3 from "../assets/ProductImages/House/House-Front/3.png";
-import houseFront4 from "../assets/ProductImages/House/House-Front/4.png";
-import houseFront5 from "../assets/ProductImages/House/House-Front/5.png";
-import houseFront6 from "../assets/ProductImages/House/House-Front/6.png";
-import houseFront7 from "../assets/ProductImages/House/House-Full/4.jpg";
-import houseFront8 from "../assets/ProductImages/House/House-Full/5.jpg";
+import houseFront1 from "../assets/ProductImages/House/House-Front/1.webp";
+import houseFront2 from "../assets/ProductImages/House/House-Front/2.webp";
+import houseFront3 from "../assets/ProductImages/House/House-Front/3.webp";
+import houseFront4 from "../assets/ProductImages/House/House-Front/4.webp";
+import houseFront5 from "../assets/ProductImages/House/House-Front/5.webp";
+import houseFront6 from "../assets/ProductImages/House/House-Front/6.webp";
+import houseFront7 from "../assets/ProductImages/House/House-Full/4.webp";
+import houseFront8 from "../assets/ProductImages/House/House-Full/5.webp";
 
-import cardHolder1 from "../assets/ProductImages/Miscellaneous/CardHolder/acc1.png";
-import cardHolder2 from "../assets/ProductImages/Miscellaneous/CardHolder/acc2.png";
-import cardHolder3 from "../assets/ProductImages/Miscellaneous/CardHolder/acc3.png";
-import cardHolder4 from "../assets/ProductImages/Miscellaneous/CardHolder/acc4.png";
+import cardHolder1 from "../assets/ProductImages/Miscellaneous/CardHolder/acc1.webp";
+import cardHolder2 from "../assets/ProductImages/Miscellaneous/CardHolder/acc2.webp";
+import cardHolder3 from "../assets/ProductImages/Miscellaneous/CardHolder/acc3.webp";
+import cardHolder4 from "../assets/ProductImages/Miscellaneous/CardHolder/acc4.webp";
 
-import k1 from "../assets/ProductImages/Miscellaneous/Keychains/k1.png";
-import k2 from "../assets/ProductImages/Miscellaneous/Keychains/k2.png";
-import k3 from "../assets/ProductImages/Miscellaneous/Keychains/k3.png";
-import k4 from "../assets/ProductImages/Miscellaneous/Keychains/k4.png";
-import k5 from "../assets/ProductImages/Miscellaneous/Keychains/k5.png";
-import k6 from "../assets/ProductImages/Miscellaneous/Keychains/k6.png";
+import k1 from "../assets/ProductImages/Miscellaneous/Keychains/k1.webp";
+import k2 from "../assets/ProductImages/Miscellaneous/Keychains/k2.webp";
+import k3 from "../assets/ProductImages/Miscellaneous/Keychains/k3.webp";
+import k4 from "../assets/ProductImages/Miscellaneous/Keychains/k4.webp";
+import k5 from "../assets/ProductImages/Miscellaneous/Keychains/k5.webp";
+import k6 from "../assets/ProductImages/Miscellaneous/Keychains/k6.webp";
 
 
 import video from "../assets/Main/Hero/home-video.mp4"
