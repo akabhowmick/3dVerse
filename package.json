@@ -14,6 +14,12 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
+  "overrides": {
+    "react-image-gallery": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
+  },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
