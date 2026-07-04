@@ -16,6 +16,7 @@ interface CartContextType {
   changeItemOption: (id: number, value: string) => void;
   updateItemCustomization: (id: number, updatedChoices: customerChoice[]) => void;
   clearCart: () => void;
+  announcement: string;
 }
 
 const CartContext = createContext({} as CartContextType);
@@ -24,6 +25,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
   const [total, setTotal] = useState(0);
   const [finalTotal, setFinalTotal] = useState(0);
+  const [announcement, setAnnouncement] = useState("");
   const shippingPrice = 5;
   const taxRate = 0.0875;
 
@@ -106,6 +108,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (!cartItems.find((product) => product.id === id) && newProduct) {
       const newCart = [...cartItems, newProduct];
       setCart(newCart);
+      setAnnouncement(`Added ${newProduct.name} to cart`);
     }
   };
 
@@ -118,23 +121,31 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       }
       return item;
     });
+    const removedName = cartItems.find((item) => item.id === id)?.name;
     const newCart = updatedCartItems.filter((item) => item.id !== id);
     setCart(newCart);
+    setAnnouncement(`Removed ${removedName || "item"} from cart`);
   };
 
   const changeItemQuantity = (id: number, changeType: string) => {
     const changeAmount = changeType === "addOne" ? 1 : -1;
+    let announcementMessage = "";
     const updatedCartItems: Product[] = cartItems.map((item) => {
       if (item.id === id) {
         const updatedQuantity = item.quantity + changeAmount;
+        const finalQuantity = updatedQuantity > 0 ? updatedQuantity : item.quantity;
+        announcementMessage = `${changeType === "addOne" ? "Increased" : "Decreased"} quantity of ${item.name} to ${finalQuantity}`;
         return {
           ...item,
-          quantity: updatedQuantity > 0 ? updatedQuantity : item.quantity,
+          quantity: finalQuantity,
         };
       }
       return item;
     });
     setCart(updatedCartItems);
+    if (announcementMessage) {
+      setAnnouncement(announcementMessage);
+    }
   };
 
   const changeItemCustomization = (id: number, customizationName: string, value: string) => {
@@ -212,6 +223,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         finalTotal,
         updateItemCustomization,
         clearCart,
+        announcement,
       }}
     >
       {children}

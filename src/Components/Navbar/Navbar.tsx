@@ -14,7 +14,7 @@ import { useCartContext } from "../../providers/CartProvider";
 import { companyName } from "../../utils/HelpfulText";
 
 export const Navbar = () => {
-  const { cartItems } = useCartContext();
+  const { cartItems, announcement } = useCartContext();
   const [showNavbar, setShowNavbar] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const { pathname } = useLocation();
@@ -108,6 +108,9 @@ export const Navbar = () => {
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
+      <div aria-live="polite" className="visually-hidden">
+        {announcement}
+      </div>
       <header className="nav-bar">
         <nav>
           <NavUnlisted
