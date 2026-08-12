@@ -1,4 +1,5 @@
 import { KeyValueStringPairs, Product } from "../Types/interfaces";
+import { productCatalog } from "../../shared/pricing";
 
 import houseFull1 from "../assets/ProductImages/House/House-Full/1.webp";
 import houseFull2 from "../assets/ProductImages/House/House-Full/2.webp";
@@ -43,6 +44,36 @@ import poster from "../assets/Main/Hero/home-bg.webp"
 export const videoPath = "/videos/home-video.mp4";
 export const posterPath = poster;
 
+// Prices come from the shared pricing catalog (the same source the Netlify
+// Functions use) so there is exactly one place order money is defined.
+const catalogEntryFor = (productId: string) => {
+  const entry = productCatalog.find((product) => product.productId === productId);
+  if (!entry) throw new Error(`Missing shared catalog entry for product ${productId}`);
+  return entry;
+};
+
+const basePriceFor = (productId: string) => catalogEntryFor(productId).variants[0].unitPriceCents / 100;
+
+const optionsFor = (productId: string) => {
+  const entry = catalogEntryFor(productId);
+  if (entry.variantKind !== "option") return undefined;
+  return entry.variants.map((variant) => ({
+    option: variant.label as string,
+    price: variant.unitPriceCents / 100,
+    skuId: variant.skuId,
+  }));
+};
+
+const bulkOptionsFor = (productId: string) => {
+  const entry = catalogEntryFor(productId);
+  if (entry.variantKind !== "bulk") return undefined;
+  return entry.variants.map((variant) => ({
+    option: variant.label as number,
+    price: variant.unitPriceCents / 100,
+    skuId: variant.skuId,
+  }));
+};
+
 const commonCustomizations: KeyValueStringPairs[] = [
   { key: "Color of Holder", value: "" },
   { key: "Color of Letterings", value: "" },
@@ -51,15 +82,9 @@ const commonCustomizations: KeyValueStringPairs[] = [
 
 const Product1: Product = {
   name: "Replica House - Full House",
-  price: 175.0,
+  price: basePriceFor("1"),
   shortDetails: [],
-  options: [
-    { option: "Extra Small Model (4in)", price: 175.0 },
-    { option: "Smaller Model (6in)", price: 200.0 },
-    { option: "Smaller Model (8in)", price: 250 },
-    { option: "Medium Model (10in)", price: 275.0 },
-    { option: "Large Mode (12in)", price: 350.0 },
-  ],
+  options: optionsFor("1"),
   details: [
     "Calling all HOME OWNERS, REALTORS, AND LOAN OFFICERS.This is the perfect opportunity to gift a 3D-printed version of a house just sold or bought. This unique gift will help you stand out from your competition and which makes you more likely to attract and retain customers.",
     "Model size varies. 6in maximum dimension - 16in maximum dimension in all directions. (If you would like something larger, please message us for a quote)",
@@ -92,12 +117,9 @@ const Product1: Product = {
 
 const Product2: Product = {
   name: "Replica House - Front Facade",
-  price: 75.0,
+  price: basePriceFor("2"),
   shortDetails: [],
-  options: [
-    { option: "House Only", price: 75.0 },
-    { option: "Key Holder", price: 85 },
-  ],
+  options: optionsFor("2"),
   details: [
     "This product is solely the front facade of your house. If you would like your full house printed please see our product named 3D Printed Your House - Full House!",
     "Calling all HOME OWNERS, REALTORS, AND LOAN OFFICERS. This is the perfect opportunity to gift a 3D-printed version of a house just sold or bought. This unique gift will help you stand out from your competition and which makes you more likely to attract and retain customers.",
@@ -124,7 +146,7 @@ const Product2: Product = {
 
 const Product3: Product = {
   name: "Business Card Holder",
-  price: 15.0,
+  price: basePriceFor("3"),
   shortDetails: ["Business Card Holder, Personalized Business Cards Holder Custom Logo"],
   requiredCustomizations: commonCustomizations,
   details: [
@@ -146,16 +168,8 @@ const Product3: Product = {
 
 const keyChain: Product = {
   name: "Unique Custom Signature Keychain - With your Logo",
-  price: 10.0,
-  bulkOptions: [
-    { option: 10, price: 10.0 },
-    { option: 25, price: 20.0 },
-    { option: 50, price: 40.0 },
-    { option: 100, price: 75.0 },
-    { option: 150, price: 125.0 },
-    { option: 200, price: 150.0 },
-    { option: 500, price: 250.0 },
-  ],
+  price: basePriceFor("4"),
+  bulkOptions: bulkOptionsFor("4"),
   shortDetails: [
     "Custom Keychains are small, circular accessories made from a durable piece that is commonly used to hold keys.",
     "Unique Backpack Keychain is a popular item due to its simplicity and versatility, and Aesthetic Safety Keychain can be used for personal use or given to your friends.",
