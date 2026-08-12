@@ -4,12 +4,12 @@ import { useCartContext } from "../../providers/CartProvider";
 import "./Cart.css";
 
 export const CartBottom = ({ cartSuggestions }: { cartSuggestions: Product[] }) => {
-  const { total, finalTotal } = useCartContext();
+  const { total, tax, shipping, finalTotal } = useCartContext();
 
   const cartTotalDetails: KeyValueStringPairs[] = [
     { key: "Cart Subtotal: $", value: total.toFixed(2) },
-    { key: "Shipping Cost: $", value: (5).toFixed(2) },
-    { key: "Tax: $", value: (total * 0.0875).toFixed(2) },
+    { key: "Shipping Cost: $", value: shipping.toFixed(2) },
+    { key: "Tax: $", value: tax.toFixed(2) },
     { key: "Total Cost: $", value: finalTotal.toFixed(2) },
   ];
 

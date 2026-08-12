@@ -1,7 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useState, useEffect, createContext, useContext, ReactNode } from "react";
+import { useState, useEffect, useMemo, createContext, useContext, ReactNode } from "react";
 import { customerChoice, KeyValueStringPairs, Product } from "../Types/interfaces";
 import { products } from "../utils/Products";
+import {
+  calculateOrderTotal,
+  defaultSkuIdForProduct,
+  getCatalogItem,
+  productIdForSkuId,
+} from "../../shared/pricing";
 
 const isValidRequiredCustomizations = (value: unknown): value is KeyValueStringPairs[] =>
   Array.isArray(value) &&
@@ -24,15 +30,21 @@ const isValidCustomerChoices = (value: unknown): value is customerChoice[] =>
   );
 
 // Rebuilds a cart item from trusted catalog data, taking only id/quantity/
-// customization choices from localStorage. This is what prevents a tampered
-// price (or name/images) in localStorage from ever reaching the cart.
+// skuId/customization choices from localStorage. This is what prevents a
+// tampered price (or name/images) in localStorage from ever reaching the
+// cart -- price is always looked up from the shared catalog by skuId, never
+// read from the stored blob directly.
 const rebuildTrustedCartItem = (stored: unknown, catalog: Product[]): Product | null => {
   if (!stored || typeof stored !== "object") return null;
-  const { id, quantity } = stored as { id?: unknown; quantity?: unknown };
+  const { id, quantity, skuId } = stored as { id?: unknown; quantity?: unknown; skuId?: unknown };
   if (typeof id !== "number" || typeof quantity !== "number" || quantity < 1) return null;
+  if (typeof skuId !== "string") return null;
 
   const catalogProduct = catalog.find((product) => product.id === id);
   if (!catalogProduct) return null;
+
+  const skuEntry = getCatalogItem(skuId);
+  if (!skuEntry || productIdForSkuId(skuId) !== String(id)) return null;
 
   const storedItem = stored as Partial<Product>;
   const customerChoices = isValidCustomerChoices(storedItem.customerChoices)
@@ -42,26 +54,12 @@ const rebuildTrustedCartItem = (stored: unknown, catalog: Product[]): Product | 
     ? storedItem.requiredCustomizations
     : catalogProduct.requiredCustomizations;
 
-  let price = catalogProduct.price;
-  customerChoices?.forEach((choice) => {
-    const selectedBulkOption = catalogProduct.bulkOptions?.find(
-      (opt) => opt.option.toString() === choice.value
-    );
-    const selectedOption = catalogProduct.options?.find(
-      (opt) => opt.option.toString() === choice.value
-    );
-    if (selectedBulkOption) {
-      price = selectedBulkOption.price;
-    } else if (selectedOption) {
-      price = selectedOption.price;
-    }
-  });
-
   return {
     ...catalogProduct,
     id,
     quantity,
-    price,
+    skuId,
+    price: skuEntry.unitPriceCents / 100,
     customerChoices,
     requiredCustomizations,
   };
@@ -70,15 +68,15 @@ const rebuildTrustedCartItem = (stored: unknown, catalog: Product[]): Product | 
 interface CartContextType {
   cartItems: Product[];
   total: number;
-  setTotal: React.Dispatch<React.SetStateAction<number>>;
+  tax: number;
+  shipping: number;
   addToCart: (id: number) => void;
   removeFromCart: (id: number) => void;
   changeItemQuantity: (id: number, changeType: string) => void;
   changeItemCustomization: (id: number, customizationName: string, value: string) => void;
   setCart: (newCart: Product[]) => void;
   finalTotal: number;
-  changeItemOption: (id: number, value: string) => void;
-  updateItemCustomization: (id: number, updatedChoices: customerChoice[]) => void;
+  changeItemVariant: (id: number, skuId: string, choiceLabel: string) => void;
   clearCart: () => void;
   announcement: string;
 }
@@ -87,22 +85,28 @@ const CartContext = createContext({} as CartContextType);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
-  const [total, setTotal] = useState(0);
-  const [finalTotal, setFinalTotal] = useState(0);
   const [announcement, setAnnouncement] = useState("");
-  const shippingPrice = 5;
-  const taxRate = 0.0875;
 
-  useEffect(() => {
-    let cartTotal = 0;
-    cartItems.forEach((item) => {
-      cartTotal += item.price * item.quantity;
-    });
-    setTotal(cartTotal);
-    const finalTotalWithTaxAndShipping =
-      Math.round((cartTotal * (1 + taxRate) + shippingPrice) * 100) / 100;
-    setFinalTotal(finalTotalWithTaxAndShipping);
+  // The one place the frontend computes order totals -- same shared function
+  // the Netlify Functions use, so display totals can never drift from what
+  // the server will actually charge. Not itself the source of truth for
+  // charging: the server always recomputes independently from the cart's
+  // skuIds/quantities rather than trusting any number sent by the client.
+  const orderTotal = useMemo(() => {
+    const items = cartItems
+      .filter((item): item is Product & { skuId: string } => typeof item.skuId === "string")
+      .map((item) => ({ id: item.skuId, quantity: item.quantity }));
+    try {
+      return calculateOrderTotal(items);
+    } catch {
+      return calculateOrderTotal([]);
+    }
   }, [cartItems]);
+
+  const total = orderTotal.subtotalCents / 100;
+  const tax = orderTotal.taxCents / 100;
+  const shipping = orderTotal.shippingCents / 100;
+  const finalTotal = orderTotal.totalCents / 100;
 
   useEffect(() => {
     const maybeCart = localStorage.getItem("3dPrintVerseCart");
@@ -154,12 +158,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const addToCart = (id: number) => {
     const product = products.find((product) => product.id === id);
-    const newProduct = JSON.parse(JSON.stringify(product));
-    if (!cartItems.find((product) => product.id === id) && newProduct) {
-      const newCart = [...cartItems, newProduct];
-      setCart(newCart);
-      setAnnouncement(`Added ${newProduct.name} to cart`);
-    }
+    if (!product || cartItems.find((item) => item.id === id)) return;
+
+    const skuId = defaultSkuIdForProduct(String(id));
+    const skuEntry = skuId ? getCatalogItem(skuId) : undefined;
+    const newProduct: Product = {
+      ...JSON.parse(JSON.stringify(product)),
+      skuId,
+      price: skuEntry ? skuEntry.unitPriceCents / 100 : product.price,
+    };
+    const newCart = [...cartItems, newProduct];
+    setCart(newCart);
+    setAnnouncement(`Added ${newProduct.name} to cart`);
   };
 
   const removeFromCart = (id: number) => {
@@ -218,43 +228,25 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCart(updatedCartItems);
   };
 
-  const changeItemOption = (id: number, value: string) => {
+  // Changing a product's size/style/bulk-pack selection changes which SKU
+  // (and therefore which price) the cart line represents. price here is only
+  // ever set from the shared catalog's lookup for that skuId, never from
+  // anything the caller passes in directly -- this is what the create-order
+  // function will independently recompute and charge.
+  const changeItemVariant = (id: number, skuId: string, choiceLabel: string) => {
+    const skuEntry = getCatalogItem(skuId);
+    if (!skuEntry) return;
     const updatedCartItems: Product[] = cartItems.map((item) => {
       if (item.id === id) {
-        item.price = parseInt(value, 10);
+        return {
+          ...item,
+          skuId,
+          price: skuEntry.unitPriceCents / 100,
+          customerChoices: [{ name: "Selected Option", value: choiceLabel }],
+        };
       }
       return item;
     });
-    setCart(updatedCartItems);
-  };
-
-  const updateItemCustomization = (id: number, updatedChoices: customerChoice[]) => {
-    const updatedCartItems: Product[] = cartItems.map((item) => {
-      if (item.id === id) {
-        item.customerChoices = updatedChoices;
-
-        let newPrice = item.price;
-
-        updatedChoices.forEach((choice) => {
-          const selectedBulkOption = item.bulkOptions?.find(
-            (opt) => opt.option.toString() === choice.value
-          );
-          const selectedOption = item.options?.find(
-            (opt) => opt.option.toString() === choice.value
-          );
-
-          if (selectedBulkOption) {
-            newPrice = selectedBulkOption.price;
-          } else if (selectedOption) {
-            newPrice = selectedOption.price;
-          }
-        });
-
-        item.price = newPrice;
-      }
-      return item;
-    });
-
     setCart(updatedCartItems);
   };
 
@@ -263,15 +255,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       value={{
         cartItems,
         total,
-        setTotal,
+        tax,
+        shipping,
         addToCart,
         removeFromCart,
         changeItemQuantity,
         changeItemCustomization,
         setCart,
-        changeItemOption,
+        changeItemVariant,
         finalTotal,
-        updateItemCustomization,
         clearCart,
         announcement,
       }}
