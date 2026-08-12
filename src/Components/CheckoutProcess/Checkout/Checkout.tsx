@@ -10,20 +10,26 @@ import Typography from "@mui/material/Typography";
 import { Shipping } from "../Shipping/Shipping";
 import { Payment } from "../Payment/Payment";
 import Review from "../Review/Review";
+import type { CaptureSummary } from "../../../../shared/pricing";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  // The confirmation email and the order-summary screen must reflect what
+  // the server actually captured, not cart state -- this is set once from
+  // the capture function's response and never from anything computed
+  // client-side.
+  const [orderSummary, setOrderSummary] = React.useState<CaptureSummary | null>(null);
 
   function getStepContent(step: number) {
     switch (step) {
       case 0:
         return <Shipping handleNext={handleNext} />;
       case 1:
-        return <Payment handleNext={handleNext} />;
+        return <Payment handleNext={handleNext} onCaptureSuccess={setOrderSummary} />;
       case 2:
-        return <Review />;
+        return <Review orderSummary={orderSummary} />;
       default:
         throw new Error("Unknown step");
     }

@@ -10,10 +10,19 @@ import { useCartContext } from "../../../providers/CartProvider";
 import { useUserContext } from "../../../providers/UserProvider";
 import { Product } from "../../../Types/interfaces";
 import { orderReviewFormId, uploadImagePage } from "../../../utils/config";
+import { centsToDollarString, type CaptureSummary } from "../../../../shared/pricing";
 
-export default function Review() {
-  const { cartItems, finalTotal, clearCart } = useCartContext();
+export default function Review({ orderSummary }: { orderSummary: CaptureSummary | null }) {
+  const { cartItems, clearCart } = useCartContext();
   const { user, order } = useUserContext();
+
+  // The confirmation email and the totals shown here come from the capture
+  // function's authoritative response, never from cart state -- cartItems is
+  // only used below for cosmetic details (images, descriptions) that don't
+  // affect money.
+  const totalDisplay = orderSummary ? centsToDollarString(orderSummary.totalCents) : "0.00";
+  const lineItemFor = (skuId: string | undefined) =>
+    orderSummary?.items.find((line) => line.id === skuId);
 
   const addresses = [
     user?.addressLine1 || "",
@@ -30,7 +39,7 @@ export default function Review() {
     { name: "Phone-Number", value: user?.phone || "" },
     { name: "Order-Number", value: order },
     { name: "Shipping-Address", value: addresses.join(", ") },
-    { name: "Total-Cost", value: "$" + finalTotal.toFixed(2) },
+    { name: "Total-Cost", value: "$" + totalDisplay },
     { name: "_next", value: uploadImagePage },
   ];
 
@@ -68,27 +77,33 @@ export default function Review() {
         Order summary
       </Typography>
       <List disablePadding>
-        {(cartItems || []).map((cartItem) => (
-          <ListItem key={cartItem.name} sx={{ py: 1, px: 0 }}>
-            <img
-              src={cartItem.images?.[0] || ""}
-              alt={cartItem.name || "Product image"}
-              loading="lazy"
-              style={{
-                maxWidth: "60px",
-                margin: "0.5rem",
-                borderRadius: "10px",
-              }}
-            />
-            <ListItemText primary={cartItem.name} secondary={cartItem.desc} />
-            <Typography variant="body2">${cartItem.price.toFixed(2)}</Typography>
-          </ListItem>
-        ))}
+        {(cartItems || []).map((cartItem) => {
+          const lineItem = lineItemFor(cartItem.skuId);
+          const priceDisplay = lineItem
+            ? centsToDollarString(lineItem.unitPriceCents)
+            : cartItem.price.toFixed(2);
+          return (
+            <ListItem key={cartItem.name} sx={{ py: 1, px: 0 }}>
+              <img
+                src={cartItem.images?.[0] || ""}
+                alt={cartItem.name || "Product image"}
+                loading="lazy"
+                style={{
+                  maxWidth: "60px",
+                  margin: "0.5rem",
+                  borderRadius: "10px",
+                }}
+              />
+              <ListItemText primary={cartItem.name} secondary={cartItem.desc} />
+              <Typography variant="body2">${priceDisplay}</Typography>
+            </ListItem>
+          );
+        })}
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total (including shipping and taxes)" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            ${finalTotal.toFixed(2)}
+            ${totalDisplay}
           </Typography>
         </ListItem>
       </List>
