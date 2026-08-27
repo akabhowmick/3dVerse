@@ -11,16 +11,17 @@
 }
 
 .reviews .review-title {
-  font-size: 4rem;
-  font-weight: 600;
-  color: black;
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 500;
+  color: var(--ink);
 }
 
 .reviews .header-md {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   font-weight: 400;
   margin: 0;
-  color: black;
+  color: var(--muted);
 }
 
 .review-preview {
@@ -49,13 +50,14 @@
 }
 
 .review-carousel .review-item {
-  background: white;
-  color: var(--dark);
+  background: var(--surface);
+  color: var(--ink);
   max-width: 50%;
   width: 100%;
   padding: 2.5rem;
-  border-radius: 24px;
-  box-shadow: 0 22px 34px rgba(22, 28, 45, 0.19);
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 34px rgba(20, 22, 26, 0.08);
   transition: all 0.3s ease-in-out;
   position: absolute;
   opacity: 0;
@@ -69,22 +71,42 @@
   margin-bottom: 2rem;
 }
 
+/* The prev/next "peek" cards used to fade real text to opacity: 0.35,
+   which fails contrast (this was the deferred Phase 1 bug). They now stay
+   fully opaque and render as a solid --muted-toned duplicate instead --
+   a plain --base backdrop with every text node explicitly recolored to
+   --muted, which still clears 4.5:1 against both --base and --surface. No
+   real text node is ever below full contrast, faded or not. */
+.review-item.prev,
+.review-item.next {
+  z-index: 5;
+  opacity: 1;
+  background: var(--base);
+  border-color: var(--line);
+  box-shadow: none;
+}
+
 .review-item.prev {
   transform: translateX(-75%);
-  z-index: 5;
-  opacity: 0.35;
 }
 
 .review-item.next {
   transform: translateX(75%);
-  z-index: 5;
-  opacity: 0.35;
+}
+
+.review-item.prev .review-text,
+.review-item.next .review-text,
+.review-item.prev .details .name,
+.review-item.next .details .name,
+.review-item.prev .details .date,
+.review-item.next .details .date {
+  color: var(--muted);
 }
 
 .review-item .review-text {
   text-align: left;
   font-size: 1.35rem;
-  color: var(--primary);
+  color: var(--ink);
 }
 
 .review-author {
@@ -105,14 +127,16 @@
 }
 
 .details .name {
-  font-size: 2rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.4rem;
   line-height: 1.5;
-  color: var(--secondary);
+  color: var(--ink);
 }
 
 .details .date {
-  color: var(--secondary);
-  font-size: 1.25rem;
+  color: var(--muted);
+  font-size: 1rem;
 }
 
 .slide-ctrl-container {
@@ -124,21 +148,25 @@
 }
 
 .slide-ctrl-container .review-buttons {
-  color: var(--dark);
+  color: var(--ink);
   font-size: 1.5rem;
   background: none;
   border: none;
-  padding: 0;
+  padding: 0.5rem;
   cursor: pointer;
+  border-radius: 6px;
+}
+
+.slide-ctrl-container .review-buttons:hover {
+  color: var(--accent);
 }
 
 @media (max-width: 37.5em) {
-  
   .reviews .review-title {
     font-size: 2rem;
   }
   .reviews .header-md {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
   .review-carousel,
   .product-carousel {
