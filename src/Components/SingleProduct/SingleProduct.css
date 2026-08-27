@@ -212,9 +212,10 @@
 
 
 .product-banner {
-  margin: 3rem;
-  padding: 1rem;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  max-width: 1400px;
+  box-shadow: none;
 }
 
 .product-card {
@@ -222,15 +223,25 @@
   flex-direction: column;
 }
 
+/* Desktop: gallery left, sticky info column right so the buy box never
+   scrolls out of view. */
 .product-banner .card {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 3rem;
+  align-items: start;
 }
 
 .product-banner .image-container,
 .product-banner .product-info-container {
-  width: 50%;
+  width: 100%;
   padding: 1rem;
+}
+
+.product-banner .product-info-container {
+  position: sticky;
+  top: 1.5rem;
+  align-self: start;
 }
 
 /* react-image-gallery's own bullet buttons default to ~8px, below the
@@ -250,6 +261,7 @@
    object-fit avoids that regardless of each photo's own aspect ratio. */
 .product-banner .image-container .image-gallery-slide {
   aspect-ratio: 1 / 1;
+  background-color: #ece7de;
 }
 .product-banner .image-container .image-gallery-slide .image-gallery-image {
   height: 100%;
@@ -262,16 +274,22 @@
 }
 
 .product-banner .product-info-buttons button {
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .product-banner .product-info-header {
-  color: black;
+  color: var(--ink);
 }
 
+/* The page's one large typographic moment -- distinctly larger than the
+   rest of the type scale. */
 .product-banner .product-info-header h3 {
-  font-size: 2rem;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.75rem;
+  line-height: 1.1;
+  text-transform: none;
+  color: var(--ink);
 }
 
 .product-banner .product-info-price {
@@ -279,12 +297,14 @@
   gap: 10px;
   align-items: flex-start;
   flex-direction: column;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .product-banner .product-info-price h4 {
-  font-size: 1.75rem;
-  color: var(--secondary);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--muted);
 }
 
 .discount-container {
@@ -299,8 +319,123 @@
 }
 
 .product-banner .product-info-details {
-  color: black;
-  font-size: 1.25rem;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+/* Variant selector: tactile buttons, never a native select. Selected
+   state is carried by the check icon + aria-pressed + border together,
+   not by color alone. */
+.variant-selector {
+  margin: 1.25rem 0;
+}
+
+.variant-selector-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.variant-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.variant-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.55rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.variant-btn:hover {
+  border-color: var(--accent);
+}
+
+.variant-btn.selected {
+  border-color: var(--accent);
+  border-width: 2px;
+  padding: calc(0.55rem - 1px) calc(0.9rem - 1px);
+  background-color: #eef0fc;
+  font-weight: 600;
+}
+
+.variant-btn-check {
+  display: inline-flex;
+  width: 0.9rem;
+  color: var(--accent);
+}
+
+.variant-btn-price {
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+
+.variant-btn.selected .variant-btn-price {
+  color: var(--accent);
+}
+
+/* Buy box: sits near the top of the sticky column so it's reachable on
+   mobile without scrolling past the specs/details below it. */
+.pdp-buy-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+}
+
+.pdp-buy-box #card-cart-btn {
+  width: 100%;
+}
+
+.made-to-order-note {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Specs: a two-column definition list in the mono/data typeface, thin
+   line dividers, generous line height. No bullet lists. */
+.specs-list {
+  margin: 1.5rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.specs-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+  line-height: 1.8;
+}
+
+.specs-row dt {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0;
+}
+
+.specs-row dd {
+  font-family: var(--font-mono);
+  color: var(--ink);
+  margin: 0;
 }
 
 .product-banner .all-product-info-buttons {
@@ -317,6 +452,18 @@
 
 .product-banner .product-info-buttons button {
   margin: 1rem 0;
+}
+
+/* Item details: full copy shown unconditionally on desktop/tablet; on
+   mobile it's collapsed behind the Show more/less toggle instead. Pure
+   CSS breakpoint switch -- no JS viewport check. */
+.details-always {
+  display: block;
+}
+
+.toggle-details-btn,
+.details-container {
+  display: none;
 }
 
 .product-card {
@@ -467,14 +614,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-}
-
-.carousels-buttons button:nth-child(1) {
-  background-color: var(--secondary);
-}
-
-.carousels-buttons button:nth-child(2) {
-  background-color: var(--primary);
+  margin-top: 0.5rem;
 }
 
 .full-details {
@@ -495,7 +635,7 @@
   }
 
   .product-banner .product-info-header h3 {
-    font-size: 1.25rem;
+    font-size: 2rem;
   }
 
   .product-banner .product-info-header .discount-container {
@@ -529,6 +669,8 @@
 }
 
 @media only screen and (max-width: 56.25em) {
+  /* Single column on mobile/tablet: the sticky right column becomes a
+     normal stacked block, gallery first. */
   .product-banner .card {
     display: flex;
     flex-direction: column;
@@ -537,6 +679,8 @@
   .product-banner .image-container,
   .product-banner .product-info-container {
     width: 100%;
+    position: static;
+    top: auto;
   }
 
   .toggle-details-btn {
@@ -549,5 +693,15 @@
     margin: 1rem 0;
     text-decoration: underline;
     padding: 0;
+  }
+
+  /* Swap which "full details" rendering is visible: unconditional on
+     desktop, behind the toggle button here. */
+  .details-always {
+    display: none;
+  }
+
+  .details-container {
+    display: block;
   }
 }

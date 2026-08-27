@@ -17,8 +17,12 @@ const Carousel = ({ cartSuggestedItems }: { cartSuggestedItems: Product[] }) => 
     <div>
       <SingleProduct product={cartSuggestedItems[index]} displayType="card" />
       <div className="carousels-buttons">
-        <button onClick={handlePrev}>Prev</button>
-        <button onClick={handleNext}>Next</button>
+        <button className="btn-secondary" onClick={handlePrev}>
+          Prev
+        </button>
+        <button className="btn-secondary" onClick={handleNext}>
+          Next
+        </button>
       </div>
     </div>
   );

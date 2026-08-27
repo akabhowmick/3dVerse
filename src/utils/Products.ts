@@ -85,6 +85,11 @@ const Product1: Product = {
   price: basePriceFor("1"),
   shortDetails: [],
   options: optionsFor("1"),
+  specs: [
+    { key: "Style", value: "Full house replica" },
+    { key: "Size range", value: "6in - 16in (max dimension)" },
+    { key: "Finish", value: "Full color print" },
+  ],
   details: [
     "Calling all HOME OWNERS, REALTORS, AND LOAN OFFICERS.This is the perfect opportunity to gift a 3D-printed version of a house just sold or bought. This unique gift will help you stand out from your competition and which makes you more likely to attract and retain customers.",
     "Model size varies. 6in maximum dimension - 16in maximum dimension in all directions. (If you would like something larger, please message us for a quote)",
@@ -120,6 +125,11 @@ const Product2: Product = {
   price: basePriceFor("2"),
   shortDetails: [],
   options: optionsFor("2"),
+  specs: [
+    { key: "Style", value: "Front facade only" },
+    { key: "Size", value: "Up to 10in (max dimension)" },
+    { key: "Finish", value: "Full color print" },
+  ],
   details: [
     "This product is solely the front facade of your house. If you would like your full house printed please see our product named 3D Printed Your House - Full House!",
     "Calling all HOME OWNERS, REALTORS, AND LOAN OFFICERS. This is the perfect opportunity to gift a 3D-printed version of a house just sold or bought. This unique gift will help you stand out from your competition and which makes you more likely to attract and retain customers.",
@@ -149,6 +159,12 @@ const Product3: Product = {
   price: basePriceFor("3"),
   shortDetails: ["Business Card Holder, Personalized Business Cards Holder Custom Logo"],
   requiredCustomizations: commonCustomizations,
+  specs: [
+    { key: "Material", value: "PLA" },
+    { key: "Dimensions", value: "4in x 5in x 2in" },
+    { key: "Capacity", value: "~25 business cards" },
+    { key: "Lead time", value: "7-10 business days" },
+  ],
   details: [
     "Customizing is simple!",
     "1. Please specify in the personalization section which Primary Color (base) you would like!",
@@ -175,6 +191,11 @@ const keyChain: Product = {
     "Unique Backpack Keychain is a popular item due to its simplicity and versatility, and Aesthetic Safety Keychain can be used for personal use or given to your friends.",
   ],
   requiredCustomizations: commonCustomizations,
+  specs: [
+    { key: "Material", value: "PLA (Polylactic acid)" },
+    { key: "Size", value: "1.5in x 1.5in (varies by customization)" },
+    { key: "Engraving", value: "Double-sided available" },
+  ],
   details: [
     "Custom Keychains with a message, date, name or coordinate for a gift that is both sweet and practical.",
     "Personalize Keychain, it is sure to be a special charm they will treasure for many moments to come. Double-sided engravings are also available for double the sweet sentiments.",

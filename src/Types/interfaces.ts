@@ -25,6 +25,10 @@ export interface Product {
   options?: ProductOptions[];
   requiredCustomizations?: KeyValueStringPairs[];
   customerChoices?: customerChoice[]
+  // Display-only spec sheet for the PDP's two-column definition list.
+  // Values are drawn from this product's own `details` copy, never
+  // invented, so nothing here should be treated as pricing-authoritative.
+  specs?: KeyValueStringPairs[];
   shortDetails: string[];
   details: string[];
   images: string[];
