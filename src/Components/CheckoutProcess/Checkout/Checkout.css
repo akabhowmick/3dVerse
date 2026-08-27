@@ -2,12 +2,23 @@
   max-width: 85%;
 }
 
-.paypal-buttons, #order-number {
+.paypal-buttons,
+#order-number {
   text-align: center;
 }
 
-#order-number{
+#order-number {
   padding: 1rem;
+}
+
+.payment-info {
+  margin: 1.5rem 0;
+}
+
+.payment-estimated-total {
+  font-family: var(--font-mono);
+  color: var(--ink);
+  font-size: 1.15rem;
 }
 
 @media screen and (max-width: 37.5em) {
@@ -16,26 +27,14 @@
     gap: 10px;
   }
 
-  .css-j5w0w9-MuiStepConnector-root {
+  /* MUI's own stable class (not the hashed emotion one, which changes
+     across builds) -- the connector lines have nothing to connect once
+     the stepper wraps onto multiple lines at this width. */
+  #check-out-stepper .MuiStepConnector-root {
     display: none;
   }
+
   #checkout-container {
     max-width: 100%;
-  }
-}
-
-@media (max-width: 900px) {
-  .css-126nd9x-MuiPaper-root {
-    margin-top: 5rem;
-    margin-bottom: 2rem;
-    padding: 12px;
-  }
-}
-
-@media (min-width: 900px) {
-  .css-126nd9x-MuiPaper-root {
-    margin-top: 6rem;
-    margin-bottom: 2rem;
-    padding: 24px;
   }
 }

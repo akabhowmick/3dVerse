@@ -19,7 +19,7 @@ export const NotFoundPage = () => {
         <div className="bl_page404__el2"></div>
         <div className="bl_page404__el3"></div>
       </div>
-      <a className="bl_page404__link" href="/">
+      <a className="btn-primary bl_page404__link" href="/">
         go home
       </a>
     </div>

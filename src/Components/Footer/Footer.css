@@ -1,8 +1,8 @@
 .footer {
-  background-color: #414141;
+  background-color: var(--ink);
   text-align: left;
-  font-family: sans-serif;
-  font-weight: bold;
+  font-family: var(--font-body);
+  font-weight: 500;
   font-size: 1rem;
   padding: 3rem;
   margin-top: 3rem;
@@ -57,7 +57,6 @@
   text-align: center;
 }
 
-/* ? could change based on the social colors */
 .footer #social-links a svg:hover {
   color: var(--info);
 }
@@ -65,12 +64,8 @@
 .footer h3 {
   color: #ffffff;
   font-size: 36px;
-  font-weight: normal;
+  font-weight: 500;
   margin: 0;
-}
-
-.footer h2 span {
-  color: #0099ff;
 }
 
 .footer .menu {
@@ -92,11 +87,11 @@
 }
 
 .footer .menu li a:hover {
-  color: #0099ff;
+  color: var(--info);
 }
 
 .footer .name {
-  color: #0099ff;
+  color: var(--info);
   font-size: 14px;
   font-weight: normal;
   margin: 0;
@@ -126,7 +121,7 @@
   }
   .footer #social-links a,
   .menu li a {
-    border-bottom: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--info);
   }
   .footer-left #social-links {
     display: flex;

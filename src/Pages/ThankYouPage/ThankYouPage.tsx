@@ -11,7 +11,7 @@ export const ThankYouPage = () => {
             anything from you.
           </p>
           <a href="/">
-            <button className="go-home">Go Home</button>
+            <button className="btn-primary go-home">Go Home</button>
           </a>
         </div>
         <div className="footer-like">

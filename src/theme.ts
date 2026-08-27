@@ -21,6 +21,7 @@ const theme = createTheme({
       primary: "#14161a", // --ink
       secondary: "#6b7075", // --muted
     },
+    divider: "#e3e3de", // --line
   },
   typography: {
     fontFamily: '"Inter", system-ui, Avenir, Helvetica, Arial, sans-serif', // --font-body

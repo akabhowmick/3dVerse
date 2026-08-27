@@ -1,15 +1,10 @@
 * {
   box-sizing: border-box;
-  /* outline:1px solid ;*/
 }
 body {
-  background: #ffffff;
-  background: linear-gradient(to bottom, #ffffff 0%, #e1e8ed 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e1e8ed',GradientType=0 );
+  background: var(--base);
   height: 100%;
   margin: 0;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 .wrapper-1 {
@@ -23,46 +18,39 @@ body {
   text-align: center;
 }
 h1 {
-  font-family: "Kaushan Script", cursive;
-  font-size: 4.5em;
-  letter-spacing: 3px;
-  color: #5892ff;
+  font-size: 3rem;
+  letter-spacing: 0;
+  color: var(--ink);
   margin: 0;
   margin-bottom: 20px;
 }
 .wrapper-2 p {
   margin: 0;
-  font-size: 1.3em;
-  color: #aaa;
-  font-family: "Source Sans Pro", sans-serif;
-  letter-spacing: 1px;
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-family: var(--font-body);
+  letter-spacing: 0.2px;
 }
+/* Layout only -- color/background/border come from .btn-primary. */
 .go-home {
-  color: #fff;
-  background: #5892ff;
-  border: none;
-  padding: 10px 50px;
   margin: 30px 0 20px;
-  border-radius: 30px;
-  text-transform: capitalize;
-  box-shadow: 0 10px 16px 1px rgba(174, 199, 251, 1);
 }
 .footer-like {
   margin-top: auto;
-  background: #d7e6fe;
+  background-color: var(--surface);
+  border-top: 1px solid var(--line);
   padding: 6px;
   text-align: center;
 }
 .footer-like p {
   margin: 0;
   padding: 4px;
-  color: #5892ff;
-  font-family: "Source Sans Pro", sans-serif;
-  letter-spacing: 1px;
+  color: var(--muted);
+  font-family: var(--font-body);
 }
 .footer-like p a {
   text-decoration: none;
-  color: #5892ff;
+  color: var(--accent);
   font-weight: 600;
 }
 
@@ -76,6 +64,7 @@ h1 {
     max-width: 620px;
     margin: 0 auto;
     margin-top: 50px;
-    box-shadow: 4px 8px 40px 8px rgba(88, 146, 255, 0.2);
+    box-shadow: 0 8px 40px rgba(20, 22, 26, 0.08);
+    background-color: var(--surface);
   }
 }
