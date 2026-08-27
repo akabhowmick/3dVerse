@@ -15,7 +15,8 @@
 .main-navbar-ul {
   display: flex;
   align-items: center;
-  background-color: var(--grad-1);
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--line);
   margin: 0 0 -5px;
   padding: 1rem;
   flex-direction: row-reverse;
@@ -23,15 +24,17 @@
 }
 
 .main-navbar-ul .active {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--accent);
 }
 
 .main-navbar-ul a {
   text-decoration: none;
 }
 
-.main-navbar-ul li a {
-  color: var(--secondary);
+.main-navbar-ul li a,
+.main-navbar-ul li .cart-trigger {
+  color: var(--ink);
+  font-family: var(--font-body);
   font-size: 1rem;
   position: relative;
   list-style: none;
@@ -40,13 +43,30 @@
   border-radius: 5px;
 }
 
+.main-navbar-ul li a:hover,
+.main-navbar-ul li .cart-trigger:hover {
+  color: var(--accent);
+}
+
+/* The cart trigger is a <button> (it opens the drawer instead of
+   navigating), so it needs its own reset to match the link styling
+   above. */
+.main-navbar-ul li .cart-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .skip-link {
   position: absolute;
   left: -9999px;
   top: 0;
   z-index: 1000;
-  background: var(--light, #fff);
-  color: var(--dark, #323234);
+  background: var(--surface);
+  color: var(--ink);
   padding: 0.75rem 1rem;
 }
 
@@ -72,7 +92,7 @@
 }
 
 #logo-with-title h2 {
-  color: var(--dark);
+  color: var(--ink);
 }
 
 .menu-icon {
@@ -81,6 +101,7 @@
   border: none;
   padding: 0;
   cursor: pointer;
+  color: var(--ink);
 }
 
 .cart-small-screen {
@@ -105,7 +126,7 @@
   .menu-icon {
     display: block;
     font-size: 1rem;
-    color: black;
+    color: var(--ink);
   }
 
   .main-navbar-ul {
@@ -119,7 +140,7 @@
   .nav-elements {
     right: 0;
     top: 70px;
-    background-color: var(--grad-1);
+    background-color: var(--surface);
     height: calc(100vh - 60px);
     transition: all 0.3s ease-in;
     overflow: hidden;

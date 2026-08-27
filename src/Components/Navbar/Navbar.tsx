@@ -2,7 +2,7 @@ import "./Navbar.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 
-import { useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 
 import navbarLogo from "../../assets/Main/logo.webp";
 import { links } from "../../utils/NavbarAndFooterLinks";
@@ -10,13 +10,26 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCartContext } from "../../providers/CartProvider";
 import { companyName } from "../../utils/HelpfulText";
+import { CartDrawer } from "../../Pages/Cart/CartDrawer";
 
 export const Navbar = () => {
   const { cartItems, announcement } = useCartContext();
   const [showNavbar, setShowNavbar] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const cartTriggerRef = useRef<HTMLButtonElement | null>(null);
   const { pathname } = useLocation();
   const isInitialMount = useRef(true);
+
+  const openCartDrawer = (event: MouseEvent<HTMLButtonElement>) => {
+    cartTriggerRef.current = event.currentTarget;
+    setIsCartOpen(true);
+  };
+
+  const closeCartDrawer = () => {
+    setIsCartOpen(false);
+    cartTriggerRef.current?.focus();
+  };
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -46,22 +59,15 @@ export const Navbar = () => {
 
   const CartLink = (
     <li id="cart-btn">
-      <NavLink
-        to="/cart"
-        className={({ isActive, isPending, isTransitioning }) =>
-          [
-            isPending ? "pending" : "",
-            isActive ? "active" : "",
-            isTransitioning ? "transitioning" : "",
-          ].join(" ")
-        }
-      >
+      {/* Opens the cart drawer rather than navigating -- the full /cart
+          page (see CartPage.tsx) stays registered as a fallback route. */}
+      <button type="button" className="cart-trigger" onClick={openCartDrawer}>
         <FontAwesomeIcon icon={faCartShopping} aria-hidden="true" />
         <span className="cart-label">Cart</span> <span aria-hidden="true">({cartCount})</span>
         <span className="visually-hidden">
           , {cartCount} item{cartCount === 1 ? "" : "s"} in cart
         </span>
-      </NavLink>
+      </button>
     </li>
   );
 
@@ -148,6 +154,7 @@ export const Navbar = () => {
       <main id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
+      <CartDrawer isOpen={isCartOpen} onClose={closeCartDrawer} />
     </div>
   );
 };

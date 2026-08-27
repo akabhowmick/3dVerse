@@ -1,11 +1,6 @@
 /* Cart Page */
 .cart-page {
-  color: black;
-}
-
-.cart-page h2 {
-  font-size: 2rem;
-  margin: 2rem;
+  color: var(--ink);
 }
 
 .cart-page-container {
@@ -38,8 +33,9 @@
 
 .cart-page .cart-bottom {
   display: flex;
-  background-color: var(--grad-1);
-  padding: 1rem;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  padding: 1.25rem;
   gap: 5px;
   margin: 0.5rem;
   border-radius: 8px;
@@ -47,59 +43,71 @@
   justify-content: flex-start;
 }
 
-.cart-items {
-  flex: 1;
+.cart-page .cart-bottom h4 {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  color: var(--ink);
 }
 
-.cart-page .cart-bottom div {
-  font-weight: 300;
+.cart-items {
+  flex: 1;
 }
 
 .cart-single-item {
   display: flex;
   align-items: center;
-  gap: 15px;
-  background-color: var(--grad-1);
-  color: black;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 0.5rem;
+  gap: 1.25rem;
+  color: var(--ink);
+  padding: 1.5rem 0.5rem;
+  border-bottom: 1px solid var(--line);
 }
 
-.cart-text-details-container,
-.cart-bottom h4 {
-  font-size: 1.15rem;
+.cart-text-details-container {
+  font-family: var(--font-body);
+  font-size: 1rem;
   font-weight: 500;
+  flex: 1;
+}
+
+.cart-text-details-container .product-name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
 }
 
 .cart-img-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .single-item-quantity-container {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   justify-content: flex-start;
-  margin: 10px;
+  margin: 10px 0;
+}
+
+.quantity-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.quantity-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .quantity-icon {
-  font-size: 1.5rem;
-}
-
-#product-options {
-  background: aliceblue;
-  padding: 5px;
-  color: black;
-  font-size: 1rem;
-}
-
-#product-options:focus-visible {
-  outline: none;
+  font-size: 1.35rem;
 }
 
 .quantity-icon.minus-icon {
@@ -110,43 +118,47 @@
   color: var(--success);
 }
 
-.cart-single-item button,
-#proceed-to-checkout-btn {
-  background-color: var(--primary);
-  margin: 0.25rem 0;
-  border: none;
-  border-radius: 10px;
-  color: white;
+.product-quantity {
+  font-family: var(--font-mono);
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.cart-customizations select,
+#product-options,
+#bulk-options {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.4rem 0.5rem;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+}
+
+.cart-remove-btn {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.product-price {
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+
+.product-price-total {
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .proceed-to-checkout-btn a {
   color: white;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid black;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 .cart-img {
-  width: 200px;
-  height: 200px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
-  padding-right: 10px;
 }
 
 .input-wrap {
@@ -157,15 +169,12 @@ button:focus-visible {
 }
 
 .input-wrap input {
-  background-color: var(--grad-1);
+  background-color: var(--base);
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--line);
   font-size: 1.15rem;
-  color: black;
-}
-
-.input-wrap input:focus-visible {
-  outline: none;
+  color: var(--ink);
+  padding: 0.35rem 0;
 }
 
 @media (max-width: 37.5em) {
@@ -174,10 +183,7 @@ button:focus-visible {
   }
   .cart-single-item {
     flex-direction: column;
-  }
-  .cart-text-details-container,
-  .cart-bottom h4 {
-    font-size: 1rem;
+    align-items: flex-start;
   }
   .cart-page .cart-bottom {
     padding: 0.5rem;
@@ -198,7 +204,7 @@ button:focus-visible {
   right: 20px;
   width: 100px;
   height: 30px;
-  background-color: var(--primary);
+  background-color: var(--accent);
   color: white;
   display: flex;
   align-items: center;
@@ -208,7 +214,9 @@ button:focus-visible {
   padding: 0.1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-decoration: none;
-  transition: transform 0.2s ease-in-out, background-color 0.3s;
+  transition:
+    transform 0.2s ease-in-out,
+    background-color 0.3s;
 }
 
 .floating-cart-btn:hover {

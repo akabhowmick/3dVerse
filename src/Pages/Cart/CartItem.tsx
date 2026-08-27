@@ -91,28 +91,41 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
               className="cart-img"
               src={images[0]}
               alt={name}
-              width={200}
-              height={200}
+              width={80}
+              height={80}
               loading="lazy"
             />
-            <button onClick={() => removeFromCart(id)}>Remove</button>
+            <button className="btn-secondary cart-remove-btn" onClick={() => removeFromCart(id)}>
+              Remove
+            </button>
           </div>
           <div className="cart-text-details-container">
             <div className="product-name">{name}</div>
-            <div className="single-item-quantity-container">
-              {quantity > 1 && (
-                <FontAwesomeIcon
-                  className="quantity-icon minus-icon"
-                  icon={faMinusCircle}
-                  onClick={() => changeItemQuantity(id, "minusOne")}
-                />
-              )}
-              <div className="product-quantity">{quantity}</div>
-              <FontAwesomeIcon
-                className="quantity-icon add-icon"
-                icon={faPlusCircle}
+            <div
+              className="single-item-quantity-container"
+              role="group"
+              aria-label={`Quantity for ${name}`}
+            >
+              <button
+                type="button"
+                className="quantity-btn quantity-btn-minus"
+                onClick={() => changeItemQuantity(id, "minusOne")}
+                disabled={quantity <= 1}
+                aria-label={`Decrease quantity of ${name}`}
+              >
+                <FontAwesomeIcon className="quantity-icon minus-icon" icon={faMinusCircle} aria-hidden="true" />
+              </button>
+              <div className="product-quantity" aria-live="polite">
+                {quantity}
+              </div>
+              <button
+                type="button"
+                className="quantity-btn quantity-btn-plus"
                 onClick={() => changeItemQuantity(id, "addOne")}
-              />
+                aria-label={`Increase quantity of ${name}`}
+              >
+                <FontAwesomeIcon className="quantity-icon add-icon" icon={faPlusCircle} aria-hidden="true" />
+              </button>
             </div>
             {itemOptions}
             {itemBulkOptions}
