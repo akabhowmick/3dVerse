@@ -13,7 +13,8 @@ export const SingleProduct = ({
   product: Product;
   displayType: string;
 }) => {
-  const { images, details, shortDetails, name, id, price, learnMoreLink } = product;
+  const { images, details, shortDetails, name, id, price, learnMoreLink, options, bulkOptions } =
+    product;
   const { addToCart, cartItems, removeFromCart } = useCartContext();
 
   const [showDetails, setShowDetails] = useState(false); // For showing `details`
@@ -74,7 +75,11 @@ export const SingleProduct = ({
 
   const learnLink =
     displayType !== "card" ? (
-      <button id="learn-more-btn" onClick={() => setShowFullDetails(!showFullDetails)}>
+      <button
+        id="learn-more-btn"
+        className="btn-secondary"
+        onClick={() => setShowFullDetails(!showFullDetails)}
+      >
         {showFullDetails ? "See Less" : "See How To Order!"}
       </button>
     ) : null;
@@ -82,19 +87,29 @@ export const SingleProduct = ({
   const redirectButton =
     displayType === "card" ? (
       <a id="redirect-btn" href={learnMoreLink} target="_top">
-        <button>Learn More!</button>
+        <button className="btn-secondary">Learn More!</button>
       </a>
     ) : (
       <a id="redirect-btn" href="/" target="_top">
-        <button>Back To Home!</button>
+        <button className="btn-secondary">Back To Home!</button>
       </a>
     );
 
   const cartBtn = (
-    <button id="card-cart-btn" onClick={toggleInCart}>
+    <button id="card-cart-btn" className="btn-primary" onClick={toggleInCart}>
       {cartItems.find((item) => item.id === id) ? "Remove from Cart" : "Add To Cart!"}
     </button>
   );
+
+  // Card view only: a quiet hint about how many variants a product has, so
+  // shoppers aren't surprised by a size/pack picker after they click through.
+  const variantHint =
+    displayType === "card" &&
+    (options && options.length > 0 ? (
+      <p className="variant-hint">{options.length} options</p>
+    ) : bulkOptions && bulkOptions.length > 0 ? (
+      <p className="variant-hint">{bulkOptions.length} pack sizes</p>
+    ) : null);
 
   const productImage =
     displayType !== "card" ? (
@@ -102,13 +117,9 @@ export const SingleProduct = ({
         <ImageCarousel images={images} alt={name} />
       </div>
     ) : (
-      <a href={learnMoreLink} target="_top">
-        <img
-          src={images[0]}
-          className="product-image"
-          alt={name}
-          loading="lazy"
-        />
+      <a href={learnMoreLink} target="_top" className="product-image-frame">
+        <img src={images[0]} className="product-image" alt={name} loading="lazy" />
+        <span className="layer-lines-hover" aria-hidden="true"></span>
       </a>
     );
 
@@ -123,6 +134,7 @@ export const SingleProduct = ({
             <div className="product-info-price">
               <h4 className="discount-price">Limited Time Price: ${price}</h4>
             </div>
+            {variantHint}
           </div>
 
           {displayType !== "card" && (
