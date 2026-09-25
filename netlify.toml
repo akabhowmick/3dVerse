@@ -5,6 +5,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # PAYPAL_ENV is just "sandbox"/"live" (not a credential) and appears in docs and
+  # source, which trips the secrets scan. The real secrets stay scanned.
+  SECRETS_SCAN_OMIT_KEYS = "PAYPAL_ENV"
 
 [dev]
   command = "npm run dev"
