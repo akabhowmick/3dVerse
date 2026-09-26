@@ -33,7 +33,7 @@ export default function Review({ orderSummary }: { orderSummary: CaptureSummary 
   ];
 
   const infoForSeller = [
-    { name: "_template_id", value: "table" },
+    { name: "_template", value: "table" },
     { name: "_subject", value: `Order Summary for Print#DVerse Order N. - ${order}!` },
     { name: "Email-Address", value: user?.email || "" },
     { name: "Phone-Number", value: user?.phone || "" },
