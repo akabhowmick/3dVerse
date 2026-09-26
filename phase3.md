@@ -4,18 +4,15 @@
 
 This is a React + TypeScript + Vite e-commerce site deployed on Netlify, using npm. It sells 3D printed products at fixed catalog prices stored as a hardcoded array/JSON module in the repo. Orders are currently emailed via FormSubmit only; there is no order database.
 
-Phases 1 and 2 of modernization are complete. Do not revisit accessibility,
-performance, or dependency work.
+Phases 1 and 2 of modernization are complete. Do not revisit accessibility, performance, or dependency work.
 
 ## The vulnerability being fixed
 
-PayPal order creation currently happens in the browser, and the order total originates client-side. Anyone can open devtools, modify the amount, and pay an arbitrary price for any order. The browser must never be the source of the
-amount charged.
+PayPal order creation currently happens in the browser, and the order total originates client-side. Anyone can open devtools, modify the amount, and pay an arbitrary price for any order. The browser must never be the source of the amount charged.
 
 ## Required outcome
 
-The browser sends only product IDs and quantities. A Netlify Function recomputes the total from the repo's own catalog, creates the PayPal order server-side, and
-returns only an order ID. A second function captures the payment and verifies the captured amount matches what the server calculated.
+The browser sends only product IDs and quantities. A Netlify Function recomputes the total from the repo's own catalog, creates the PayPal order server-side, and returns only an order ID. A second function captures the payment and verifies the captured amount matches what the server calculated.
 
 ## Step 1: Audit and report before changing anything
 
@@ -30,8 +27,7 @@ Do not start editing until you have reported this.
 
 ## Step 2: Extract a shared pricing module
 
-Create a framework-free, dependency-free module that both the frontend and the
-Netlify Functions import. It must contain:
+Create a framework-free, dependency-free module that both the frontend and the Netlify Functions import. It must contain:
 
 - The product catalog (id, name, unit price in cents, currency)
 - A pure `calculateOrderTotal(items)` function that takes `[{ id, quantity }]`

@@ -10,13 +10,13 @@ Tracks outstanding items across the modernization spec's phases. Update as items
 - **formsubmit.co token swap** (spec task 1.11): `contactFormId` / `imageUploadFormId` / `orderReviewFormId` in `src/utils/config.ts` still use the raw `print3dverse@gmail.com` address instead of a real form token. Getting the token requires manually submitting the contact form once and confirming via email — can't be done from an agent session.
 - **Production PayPal client ID**: now read from `import.meta.env.VITE_PAYPAL_CLIENT_ID` instead of being hardcoded, but the real value still needs to be added to Netlify's site environment-variable dashboard before the next deploy, and to a local untracked `.env` for local dev. No dashboard access from here.
 
-### Known bugs (found, not fixed — out of scope at the time)
-- `FloatingCartButton` (`src/Pages/Cart/FloatingCart.tsx`) shows `cartItems.length` (distinct products) while the nav badge shows summed quantity — the two cart counters can disagree.
-- Home page review-carousel "prev/next" faded preview cards (opacity 0.35) fail WCAG AA color-contrast. Fixing via opacity alone would need ~0.85, which erases the intended faded-peek effect — needs a design decision, not a silent change.
+### Known bugs — both resolved in Phase 4
+- ~~`FloatingCartButton` counted distinct products while the nav badge counted summed quantity.~~ Fixed in `7d34a63` (both now sum quantity).
+- ~~Review-carousel peek cards (opacity 0.35) failed WCAG AA contrast.~~ Fixed in `dc8f499` (peek cards no longer fade real text).
 
 ## Phase 2 — UI consolidation, responsiveness, assets, dependency upgrades
 
-**Status: complete, on branch `phase-2/consolidate-and-upgrade`, not yet pushed.** All 23 planned commits done, plus 3 follow-up fixes from the final Lighthouse pass:
+**Status: complete, merged into `main`** (PR #2, branch `phase-2/consolidate-and-upgrade`). All 23 planned commits done, plus 3 follow-up fixes from the final Lighthouse pass:
 
 - Logo converted to WebP (125KB → 13KB), import sites updated.
 - Product-page accessibility and CLS findings resolved (see below).
@@ -37,8 +37,50 @@ What got the product page from 68/93/100 to passing, for reference:
 
 Manual 360px/1440px flow check: all 8 routes (home, category, product detail, cart, checkout, contact, upload-image, thank-you) confirmed with zero horizontal overflow at both widths.
 
-### Remaining step
-Push the branch to origin. Per standing workflow, do **not** open the PR without explicit go-ahead.
+## Phase 3 — Server-side PayPal price authority
 
-## Not yet started
-Spec mentions further phases (full WCAG 2.1 AA, additional security hardening) beyond what Phase 2 covers — not scoped in detail yet.
+**Status: code complete, pushed to origin, no PR yet** (branch `phase-3/server-side-payments`, 5 commits; merges cleanly into current `main`). Not verified against real PayPal.
+
+- Shared framework-free pricing module (`shared/pricing.ts`): integer-cent catalog, `calculateOrderTotal()`, NY tax, shipping, per-item and per-order caps. Variants are flattened into per-SKU catalog IDs so the request shape stays `{ id, quantity }`.
+- `netlify/functions/create-paypal-order` (Zod `.strict()`, rejects any price/amount/total/currency field, returns only `{ orderId }`) and `capture-paypal-order` (re-reads the order from PayPal, recomputes, 409 on mismatch, idempotent `PayPal-Request-Id`, already-captured treated as success).
+- Frontend checkout wired to both functions; `.env.example` and README updated.
+- Verified: build, functions typecheck, eslint, `PAYPAL_SECRET` absent from `src/` and `dist/`, tamper tests A/B/C rejected locally.
+
+### Not verified (needs sandbox credentials)
+- Verification 4/8/9: a full sandbox purchase, captured amount matching the catalog price, and double-capture not double-charging.
+- The PayPal smart-buttons iframe failed to render in a Playwright smoke test (`net::ERR_ABORTED`); likely the placeholder `VITE_PAYPAL_CLIENT_ID`, unconfirmed.
+
+### Remaining steps
+- Add sandbox credentials to local `.env` and Netlify, scoped per deploy context (sandbox for previews, live for production only).
+- Run the sandbox checks above, then open the PR (explicit go-ahead only).
+- Go live: live client ID and secret, `PAYPAL_ENV=live` on production only.
+
+## Phase 4 — Premium storefront redesign
+
+**Status: implemented, pushed to origin, no PR yet** (branch `phase-4/premium-redesign`, stacked on Phase 3, 7 commits). Design brief: `3dverse-phase-4-design.md`.
+
+- New palette/type system (workshop precision), product cards, sticky-column product page with tactile variant buttons, slide-out cart drawer with focus trap, global restyle of footer/contact/404/thank-you/checkout.
+- Resolves both Phase 1 known bugs (see above).
+- Pricing and checkout data flow untouched (verified via diff).
+- Build and lint clean.
+
+### Not verified (no Lighthouse/Playwright in the agent environment)
+- Lighthouse 90+/95+ on Home and a product page.
+- Keyboard-only pass: cart drawer, variant buttons, carousel.
+- 360px / 1440px overflow check on all routes, `prefers-reduced-motion` check, screenshots.
+
+### Open questions
+- Real made-to-order turnaround for the product page copy (currently the brief's placeholder "3-5 business days"; TODO in `SingleProduct.tsx`).
+- Which two categories are best sellers for the cart-drawer empty state (currently Miscellaneous / Replica Houses, chosen arbitrarily; TODO in `CartDrawer.tsx`).
+
+### Remaining step
+Manual verification pass, then open the PR (explicit go-ahead only).
+
+## Not yet started / unscoped
+- 6 high-severity npm advisories (brace-expansion, js-yaml, nanoid, postcss, react-router), newly disclosed since Phase 2 — needs a dependency pass.
+- Server-side order persistence (orders currently exist only as FormSubmit emails and in the PayPal dashboard).
+- Full WCAG 2.1 AA pass beyond Phase 2 scope; further security hardening.
+- Final launch-checklist pass on the deployed site.
+
+## Merge order
+Phases 1 and 2 are on `main` (PRs #1, #2). Phase 4 is stacked on Phase 3, so Phase 3 must merge first.
