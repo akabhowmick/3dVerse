@@ -1,40 +1,39 @@
-import ProductCarousel from "../../Components/SingleProduct/ProductCarousel";
-import { Product, KeyValueStringPairs } from "../../Types/interfaces";
 import { useCartContext } from "../../providers/CartProvider";
 import "./Cart.css";
 
-export const CartBottom = ({ cartSuggestions }: { cartSuggestions: Product[] }) => {
+// Order summary panel for the full /cart page. Values come straight from
+// CartProvider (itself priced from the shared catalog); the server
+// recomputes everything again at checkout.
+export const CartBottom = () => {
   const { total, tax, shipping, finalTotal } = useCartContext();
 
-  const cartTotalDetails: KeyValueStringPairs[] = [
-    { key: "Cart Subtotal: $", value: total.toFixed(2) },
-    { key: "Shipping Cost: $", value: shipping.toFixed(2) },
-    { key: "Tax: $", value: tax.toFixed(2) },
-    { key: "Total Cost: $", value: finalTotal.toFixed(2) },
+  const rows = [
+    { label: "Subtotal", value: total },
+    { label: "Shipping", value: shipping },
+    { label: "NY tax", value: tax },
   ];
 
   return (
-    <div className="cart-bottom">
-      <h4>Your Purchase Estimates:</h4>
-      {cartTotalDetails.map(({ key, value }) => {
-        return (
-          <h4 key={key} className="total-details-text">
-            {key + value}
-          </h4>
-        );
-      })}
-
-      <a href="/checkout">
-        <button id="proceed-to-checkout-btn" className="btn-primary">
-          Proceed to Checkout
-        </button>
-      </a>
-      <div className="suggest-items">
-        <h4>More Items Like This:</h4>
-        <div className="cart-display-empty-products">
-          {cartSuggestions.length > 0 && <ProductCarousel cartSuggestedItems={cartSuggestions} />}
+    <aside className="cart-summary" aria-labelledby="cart-summary-title">
+      <h2 id="cart-summary-title" className="cart-summary-title">
+        Order summary
+      </h2>
+      <dl className="summary-list">
+        {rows.map(({ label, value }) => (
+          <div className="summary-row" key={label}>
+            <dt>{label}</dt>
+            <dd className="num">${value.toFixed(2)}</dd>
+          </div>
+        ))}
+        <div className="summary-row summary-total">
+          <dt>Total</dt>
+          <dd className="num">${finalTotal.toFixed(2)}</dd>
         </div>
-      </div>
-    </div>
+      </dl>
+      <a href="/checkout" id="proceed-to-checkout-btn" className="btn-primary btn-block">
+        Proceed to checkout
+      </a>
+      <p className="cart-summary-note">Estimated totals. Final amounts are confirmed at checkout.</p>
+    </aside>
   );
 };

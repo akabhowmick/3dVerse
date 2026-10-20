@@ -78,7 +78,9 @@ export const CartDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
         onClick={(e) => e.stopPropagation()}
       >
         <div className="cart-drawer-header">
-          <h2 id="cart-drawer-title">Your Cart ({cartCount})</h2>
+          <h2 id="cart-drawer-title">
+            Your cart <span className="num cart-drawer-count">({cartCount})</span>
+          </h2>
           <button
             type="button"
             className="cart-drawer-close"
@@ -92,23 +94,21 @@ export const CartDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 
         {cartItems.length === 0 ? (
           <div className="cart-drawer-empty">
-            <p>Your cart is empty.</p>
-            <p>
-              {/* TODO: "two best-selling categories" was requested by the
-                  design brief, but nothing in this codebase/session tracks
-                  sales data to actually rank categories -- these are just
-                  two of the site's existing nav categories, picked
-                  arbitrarily, not a data-backed "best-selling" claim. */}
-              Take a look at{" "}
-              <a href="/miscellaneous" onClick={onClose}>
-                Miscellaneous
-              </a>{" "}
-              or{" "}
-              <a href="/model-houses" onClick={onClose}>
+            <p className="cart-drawer-empty-title">Your cart is empty.</p>
+            {/* TODO: "two best-selling categories" was requested by the
+                design brief, but nothing in this codebase/session tracks
+                sales data to actually rank categories -- these are just
+                two of the site's existing nav categories, picked
+                arbitrarily, not a data-backed "best-selling" claim. */}
+            <p>Take a look at what we make:</p>
+            <div className="cart-drawer-empty-links">
+              <a href="/model-houses" className="btn-secondary btn-block" onClick={onClose}>
                 Replica Houses
               </a>
-              .
-            </p>
+              <a href="/miscellaneous" className="btn-secondary btn-block" onClick={onClose}>
+                Miscellaneous
+              </a>
+            </div>
           </div>
         ) : (
           <>
@@ -121,27 +121,27 @@ export const CartDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
             </ul>
 
             <div className="cart-drawer-summary">
-              <dl>
-                <div className="cart-drawer-summary-row">
+              <dl className="summary-list">
+                <div className="summary-row">
                   <dt>Subtotal</dt>
-                  <dd>${total.toFixed(2)}</dd>
+                  <dd className="num">${total.toFixed(2)}</dd>
                 </div>
-                <div className="cart-drawer-summary-row">
-                  <dt>NY Tax</dt>
-                  <dd>${tax.toFixed(2)}</dd>
-                </div>
-                <div className="cart-drawer-summary-row">
+                <div className="summary-row">
                   <dt>Shipping</dt>
-                  <dd>${shipping.toFixed(2)}</dd>
+                  <dd className="num">${shipping.toFixed(2)}</dd>
                 </div>
-                <div className="cart-drawer-summary-row cart-drawer-total">
+                <div className="summary-row">
+                  <dt>NY tax</dt>
+                  <dd className="num">${tax.toFixed(2)}</dd>
+                </div>
+                <div className="summary-row summary-total">
                   <dt>Total</dt>
-                  <dd>${finalTotal.toFixed(2)}</dd>
+                  <dd className="num">${finalTotal.toFixed(2)}</dd>
                 </div>
               </dl>
 
-              <a href="/checkout" className="btn-primary cart-drawer-checkout-btn" onClick={onClose}>
-                Proceed to Checkout
+              <a href="/checkout" className="btn-primary btn-block" onClick={onClose}>
+                Proceed to checkout
               </a>
               <a href="/cart" className="cart-drawer-view-full" onClick={onClose}>
                 View full cart page
