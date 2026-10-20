@@ -1,325 +1,174 @@
-/* HERO SECTION */
+/* ---------- Hero ---------- */
 
 .hero {
   position: relative;
-  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  min-height: clamp(520px, 80vh, 780px);
   overflow: hidden;
+  isolation: isolate;
 }
 
 .hero-video {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -2;
 }
 
-.container {
+/* Heavy scrim on the text side so the headline never depends on what
+   frame the video happens to be on. */
+.hero-scrim {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #fff;
-  width: 66.67%; /* 2/3 of available space on desktop */
-}
-
-/* Mobile layout */
-@media only screen and (max-width: 900px) {
-  .container {
-    width: 90%; /* 90% of available space on mobile */
-  }
-}
-.container span {
-  color: #fff;
-}
-
-.hero__lead {
-  z-index: 1;
-}
-
-.hero__lead h1 {
-  font-size: 3rem;
-  margin: 2rem 0;
-  text-transform: uppercase;
-  font-weight: 800;
-  color: white;
-  text-align: center;
-}
-
-.hero__lead h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.row {
-  padding: 1rem;
-}
-
-/* Add a background overlay to the container */
-.container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
   z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(14, 15, 18, 0.94) 0%, rgba(14, 15, 18, 0.78) 42%, rgba(14, 15, 18, 0.2) 100%),
+    linear-gradient(0deg, rgba(14, 15, 18, 0.7) 0%, rgba(14, 15, 18, 0) 45%);
 }
 
-.btn-primary:focus,
-.btn-primary:hover {
-  background-color: #2ea5dc;
+.hero-inner {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) var(--gutter) clamp(3rem, 7vw, 5.5rem);
 }
 
-.button__color__items {
-  margin-right: 8px;
-  margin-left: 8px;
-}
-.button__color__items .btn_change__color {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  border-radius: 100%;
-  opacity: 60%;
-  transition: all 0.5s ease-in-out;
-}
-@media (min-width: 900px) {
-  .btn_change__color {
-    width: 36px;
-    height: 36px;
-  }
+.hero-title {
+  /* em, not ch: "ch" is the width of the condensed "0", which made the
+     measure so narrow the tagline broke into five lines. */
+  max-width: 11.5em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.75rem, 6.5vw, 5.25rem);
+  line-height: 0.9;
+  letter-spacing: 0.002em;
+  text-transform: uppercase;
+  color: #ffffff;
 }
 
-.hero .button_right:hover {
-  opacity: 100%;
-  right: 8px;
+.hero-title-accent {
+  color: var(--red-bright);
 }
 
-.hero .button_right .btn__social {
-  color: #fff;
-  opacity: 60%;
-  margin-top: 8px;
-  font-size: 1.25rem;
-}
-.hero .button_right .btn__social:hover,
-.hero .button_right .btn__social:focus {
-  color: #fff;
-  opacity: 100%;
-}
-
-.hero__lead p {
-  font-family: var(--font-body);
-  letter-spacing: 2px;
-  color: var(--muted);
-  text-align: justify;
-  margin-bottom: 2rem;
-  opacity: 80%;
-}
-
-.button__color {
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   margin-top: 2rem;
-  margin-left: auto;
-  margin-right: auto;
-  flex-direction: row;
-  display: flex;
 }
 
-.button__color__items {
-  margin-right: 8px;
-  margin-left: 8px;
-}
-
-.btn_change__color {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  border-radius: 100%;
-  opacity: 60%;
-  transition: all 0.5s ease-in-out;
-}
-
-.btn_change__color.active {
-  opacity: 100%;
-  border: 4px solid var(--info) !important;
-}
-
-.btn_change__color:hover {
-  opacity: 100%;
-}
-
-.btn_change__color.tosca {
-  background-color: var(--accent);
-  border: 4px solid var(--accent);
-}
-
-.btn_change__color.gray {
-  background-color: var(--muted);
-  border: 4px solid var(--muted);
-}
-
-.btn_change__color.red {
-  background-color: var(--danger);
-  border: 4px solid var(--danger);
-}
-
-.button_right {
-  position: static;
-  flex-direction: row;
-  margin: 3rem auto;
-  justify-content: space-evenly;
-  display: flex;
-  background-color: var(--accent);
-  transition: all 0.5s ease-in-out;
-  padding: 5px;
-}
-
-.button_right a {
-  font-size: 1.5rem;
-  color: white;
-  padding: 5px;
-}
-
-.button_right a:hover {
-  color: var(--ink);
-}
-
-/* Word List transition */
-.scrolling-words-container {
-  display: flex;
+.hero-video-toggle {
+  position: absolute;
+  right: var(--gutter);
+  bottom: calc(1.25rem + 8px);
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 2rem 0;
-  color: var(--ink);
+  width: 44px;
+  height: 44px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  background: rgba(14, 15, 18, 0.5);
+  color: #ffffff;
+  cursor: pointer;
 }
 
-.scrolling-words-box {
-  height: 3rem;
-  overflow: hidden;
-  text-align: center;
-}
-.scrolling-words-box ul {
-  margin: 0 0.5rem;
-  padding: 0;
-  animation: scrollUp 7.5s infinite;
-}
-.scrolling-words-box ul li {
-  color: var(--accent);
-  height: 3rem;
-  list-style: none;
+.hero-video-toggle:hover {
+  border-color: #ffffff;
 }
 
-/* Dynamic animation timing based on the number of items */
-@keyframes scrollUp {
-  0% {
-    transform: translateY(0);
-  }
-  14.28% {
-    transform: translateY(-3rem);
-  }
-  28.56% {
-    transform: translateY(-6rem);
-  }
-  42.84% {
-    transform: translateY(-9rem);
-  }
-  57.12% {
-    transform: translateY(-12rem);
-  }
-  71.4% {
-    transform: translateY(-15rem);
-  }
-  85.68% {
-    transform: translateY(-18rem);
-  }
-  100% {
-    transform: translateY(0);
-  }
+.hero-stripe {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
-/* PRODUCT CARDS */
-.products-display {
+/* ---------- Benefit bar ---------- */
+
+/* Full-bleed white band; the side padding keeps its grid aligned to the
+   same content width as every other section. */
+.benefit-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0 max(var(--gutter), calc((100% - var(--content-max)) / 2 + var(--gutter)));
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.benefit {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin: 2rem auto 0;
-  align-items: stretch;
-  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.75rem 1.5rem 1.75rem 0;
 }
 
-/* Review carousel styling lives in ReviewCarousel/ReviewCarousels.css,
-   which this page also loads -- this file used to carry a full duplicate
-   of those rules (including the opacity-on-real-text contrast bug and
-   references to removed --logo-blue/--logo-orange/--dark vars). Removed
-   rather than fixed in place, since ReviewCarousels.css already fully
-   shadows it in the cascade. */
-
-/* Tablet Sizes */
-
-@media (min-width: 1200px) {
-  .hero__lead h1 {
-    font-size: 10rem;
-  }
+.benefit + .benefit {
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--line);
 }
 
-@media (max-width: 900px) {
-  .hero {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-
-  .hero.container {
-    position: relative;
-  }
-
-  .hero__lead {
-    margin: 0 auto;
-    padding-top: 3rem;
-  }
-
-  .hero__lead h1 {
-    font-size: 3.5rem;
-    text-align: center;
-  }
-
-  .hero__lead p {
-    text-align: left;
-  }
-
-  .hero__lead .btn-primary {
-    width: 200px;
-  }
+.benefit-icon {
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--red);
+  margin-top: 0.1rem;
 }
 
-/* Mobile Sizes */
+.benefit-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.benefit-text {
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 56.25em) {
+  .benefit-bar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .benefit,
+  .benefit + .benefit {
+    padding: 1.25rem 0;
+    border-left: none;
+  }
+
+  .benefit + .benefit {
+    border-top: 1px solid var(--line);
+  }
+}
 
 @media (max-width: 37.5em) {
-  .hero .row {
-    padding-top: 3rem;
+  .hero {
+    min-height: 560px;
   }
 
-  .hero__lead h1 {
-    font-size: 2rem;
+  .hero-scrim {
+    background: linear-gradient(
+      0deg,
+      rgba(14, 15, 18, 0.95) 0%,
+      rgba(14, 15, 18, 0.8) 55%,
+      rgba(14, 15, 18, 0.35) 100%
+    );
   }
 
-  .hero__lead h2 {
-    font-size: 1.5rem;
-    text-align: center;
+  .hero-inner {
+    padding-bottom: 5.5rem;
   }
 
-  .scrolling-words-container {
-    text-align: center;
-    width: 100%;
-  }
-
-  .button_right {
-    display: none;
-  }
-  .scrolling-words-box ul li {
-    font-size: 1.25rem;
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
