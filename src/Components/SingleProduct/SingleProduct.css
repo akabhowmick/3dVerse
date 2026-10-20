@@ -1,536 +1,50 @@
-/* .product-banner {
-  margin: 3rem;
-  padding: 1rem;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
+/* =================== Product card =================== */
 
 .product-card {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
-.product-banner .card {
-  display: flex;
-  align-items: center;
-}
-
-.product-banner .image-container,
-.product-banner .product-info-container {
-  width: 50%;
-  padding: 1rem;
-}
-
-.product-banner .product-info-buttons button {
-  text-transform: uppercase;
-}
-
-.product-banner .product-info-header {
-  color: black;
-}
-
-.product-banner .product-info-header h3 {
-  font-size: 2rem;
-  text-transform: uppercase;
-}
-
-.product-banner .product-info-price {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  flex-direction: column;
-  margin: 2rem 0;
-}
-
-.product-banner .product-info-price h4 {
-  font-size: 1.75rem;
-  color: var(--secondary);
-}
-
-.discount-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.product-banner .discount-container h5 {
-  font-size: 1.25rem;
-  text-decoration: line-through;
-}
-
-.product-banner .product-info-details {
-  color: black;
-  font-size: 1.25rem;
-}
-
-.product-banner .all-product-info-buttons {
-  display: flex;
-  flex-direction: column;
-}
-
-.product-banner .product-info-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-}
-
-.product-banner .product-info-buttons button {
-  margin: 1rem 0;
-}
-
-#learn-more-btn,
-#redirect-btn button,
-#card-cart-btn:hover {
-  background-color: var(--primary);
-  color: white;
-}
-
-#learn-more-btn:hover,
-#redirect-btn button:hover,
-#card-cart-btn {
-  background-color: var(--secondary);
-  color: white;
-  border: none;
-}
-
-.product-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 330px;
-  border: 1px solid lightgray;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-  background-color: white;
-  padding-bottom: 1%;
-}
-
-.product-card:hover {
-  background-color: #f5f5f5;
-  transform: scale(1.05);
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.product-card .card {
-  padding: 1rem;
-  color: black;
-  background-color: var(--grad-1);
-}
-
-.product-card .product-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.product-card .product-info-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.product-card .product-name {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin: 10px 0;
-  text-align: center;
-  color: black;
-}
-
-.product-card .product-description {
-  font-size: 0.875rem;
-  margin: 10px 0;
-  text-align: center;
-}
-
-.product-card .product-price {
-  font-size: 1.125rem;
-  font-weight: bold;
-  margin: 10px 0;
-  color: red;
-}
-
-.product-card .add-to-cart-button:hover {
-  background-color: var(--secondary);
-}
-
-.product-card .product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.product-card .original-price {
-  text-decoration: line-through;
-  color: red;
-  font-size: 0.875rem;
-}
-
-.product-card .discount-price {
-  color: var(--secondary);
-  font-size: 1.125rem;
-  font-weight: bold;
-}
-
-.product-card .all-product-info-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.carousels-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.carousels-buttons button:nth-child(1) {
-  background-color: var(--secondary);
-}
-
-.carousels-buttons button:nth-child(2) {
-  background-color: var(--primary);
-}
-
-@media only screen and (max-width: 37.5em) {
-}
-
-@media only screen and (max-width: 56.25em) {
-  .product-banner .card {
-    display: flex;
-    flex-direction: column;
-    margin: unset;
-  }
-  .product-banner .image-container,
-  .product-banner .product-info-container {
-    width: 100%;
-  }
-} */
-
-
-.product-banner {
-  margin: 2rem auto;
-  padding: 1rem 2rem;
-  max-width: 1400px;
-  box-shadow: none;
-}
-
-.product-card {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Desktop: gallery left, sticky info column right so the buy box never
-   scrolls out of view. */
-.product-banner .card {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 3rem;
-  align-items: start;
-}
-
-.product-banner .image-container,
-.product-banner .product-info-container {
-  width: 100%;
-  padding: 1rem;
-}
-
-.product-banner .product-info-container {
-  position: sticky;
-  top: 1.5rem;
-  align-self: start;
-}
-
-/* react-image-gallery's own bullet buttons default to ~8px, below the
-   24x24px minimum touch-target size; the extra class raises specificity
-   above the library's own (unscoped) selectors. */
-.product-banner .image-container .image-gallery-bullet {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin: 0 6px;
-}
-
-/* react-image-gallery's active slide has no reserved height (its CSS
-   leaves the image at height:auto), so the whole gallery collapses to
-   ~0 and then snaps to full size once the slide image decodes, causing
-   a large layout shift. Reserving a fixed ratio and letterboxing via
-   object-fit avoids that regardless of each photo's own aspect ratio. */
-.product-banner .image-container .image-gallery-slide {
-  aspect-ratio: 1 / 1;
-  background-color: #ece7de;
-}
-.product-banner .image-container .image-gallery-slide .image-gallery-image {
-  height: 100%;
-}
-
-/* Same collapse-before-load problem applies to the thumbnail strip. */
-.product-banner .image-container .image-gallery-thumbnail-image {
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-}
-
-.product-banner .product-info-buttons button {
-  text-transform: none;
-}
-
-.product-banner .product-info-header {
-  color: var(--ink);
-}
-
-/* The page's one large typographic moment -- distinctly larger than the
-   rest of the type scale. */
-.product-banner .product-info-header h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 2.75rem;
-  line-height: 1.1;
-  text-transform: none;
-  color: var(--ink);
-}
-
-.product-banner .product-info-price {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  flex-direction: column;
-  margin: 1rem 0;
-}
-
-.product-banner .product-info-price h4 {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 1.5rem;
-  color: var(--muted);
-}
-
-.discount-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.product-banner .discount-container h5 {
-  font-size: 1.25rem;
-  text-decoration: line-through;
-}
-
-.product-banner .product-info-details {
-  color: var(--ink);
-  font-size: 1rem;
-}
-
-/* Variant selector: tactile buttons, never a native select. Selected
-   state is carried by the check icon + aria-pressed + border together,
-   not by color alone. */
-.variant-selector {
-  margin: 1.25rem 0;
-}
-
-.variant-selector-label {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--ink);
-  margin-bottom: 0.5rem;
-}
-
-.variant-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.variant-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background-color: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 0.55rem 0.9rem;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--ink);
-  cursor: pointer;
-  transition:
-    border-color 0.15s ease,
-    background-color 0.15s ease;
-}
-
-.variant-btn:hover {
-  border-color: var(--accent);
-}
-
-.variant-btn.selected {
-  border-color: var(--accent);
-  border-width: 2px;
-  padding: calc(0.55rem - 1px) calc(0.9rem - 1px);
-  background-color: #eef0fc;
-  font-weight: 600;
-}
-
-.variant-btn-check {
-  display: inline-flex;
-  width: 0.9rem;
-  color: var(--accent);
-}
-
-.variant-btn-price {
-  font-family: var(--font-mono);
-  color: var(--muted);
-}
-
-.variant-btn.selected .variant-btn-price {
-  color: var(--accent);
-}
-
-/* Buy box: sits near the top of the sticky column so it's reachable on
-   mobile without scrolling past the specs/details below it. */
-.pdp-buy-box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin: 1.25rem 0;
-}
-
-.pdp-buy-box #card-cart-btn {
-  width: 100%;
-}
-
-.made-to-order-note {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin: 0;
-}
-
-/* Specs: a two-column definition list in the mono/data typeface, thin
-   line dividers, generous line height. No bullet lists. */
-.specs-list {
-  margin: 1.5rem 0;
-  border-top: 1px solid var(--line);
-}
-
-.specs-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-  gap: 1rem;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--line);
-  line-height: 1.8;
-}
-
-.specs-row dt {
-  font-family: var(--font-body);
-  font-weight: 500;
-  color: var(--muted);
-  margin: 0;
-}
-
-.specs-row dd {
-  font-family: var(--font-mono);
-  color: var(--ink);
-  margin: 0;
-}
-
-.product-banner .all-product-info-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.product-banner .product-info-buttons {
-  display: flex;
-  gap: 24px;
-  justify-content: space-between;
-}
-
-.product-banner .product-info-buttons button {
-  margin: 1rem 0;
-}
-
-/* Item details: full copy shown unconditionally on desktop/tablet; on
-   mobile it's collapsed behind the Show more/less toggle instead. Pure
-   CSS breakpoint switch -- no JS viewport check. */
-.details-always {
-  display: block;
-}
-
-.toggle-details-btn,
-.details-container {
-  display: none;
-}
-
-.product-card {
-  /* Whitespace is the separator: no border, no drop shadow. */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 300px;
-  margin: 20px;
-  background-color: transparent;
-  border: none;
-}
-
-.product-card .card {
-  padding: 0;
-  color: var(--ink);
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Fixed-aspect image area with a consistent warm-gray backdrop behind
-   every product photo, and the anchor for the hover treatment below. */
+/* Fixed-aspect white tile: the product photos are shot on white, so they
+   sit seamlessly in it. Also the anchor for the hover treatment. */
 .product-card .product-image-frame {
   position: relative;
   display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
-  background-color: #ece7de;
-  border-radius: 4px;
+  background-color: var(--surface);
+  border-radius: var(--radius);
 }
 
 .product-card .product-image {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  padding: 8%;
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
 .product-card:hover .product-image {
-  transform: scale(1.02);
+  transform: scale(1.04);
 }
 
-/* Layer-line motif: rises in from the bottom edge of the image on hover. */
-.product-card .layer-lines-hover {
+/* Kit-stripe trim sweeps in along the bottom edge on hover. */
+.product-card-stripe {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 28px;
-  background-color: var(--surface);
-  background-image: repeating-linear-gradient(
-    to bottom,
-    var(--line) 0,
-    var(--line) 1px,
-    transparent 1px,
-    transparent 4px
-  );
-  transform: translateY(100%);
+  transform: scaleX(0);
+  transform-origin: left;
   transition: transform 0.3s ease;
   pointer-events: none;
 }
 
-.product-card:hover .layer-lines-hover {
-  transform: translateY(0);
+.product-card:hover .product-card-stripe,
+.product-card:focus-within .product-card-stripe {
+  transform: scaleX(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -538,170 +52,554 @@
     transform: none;
   }
 
-  .product-card:hover .layer-lines-hover {
-    transform: translateY(100%);
+  .product-card:hover .product-card-stripe,
+  .product-card:focus-within .product-card-stripe {
+    transform: scaleX(0);
   }
 }
 
-.product-card .product-info-header {
+.product-card-body {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex: 1;
+  padding-top: 1rem;
 }
 
-.product-card .product-name {
+.product-card-category {
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 1.15rem;
-  margin: 12px 0 4px;
-  text-align: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.product-card-name {
+  margin-top: 0.35rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.4rem;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  /* Two lines reserved so prices and buttons line up across a row. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(2 * 1.05em);
+}
+
+.product-card-name a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.product-card-name a:hover {
+  color: var(--red);
+}
+
+.product-card-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+}
+
+.product-card-price {
+  font-size: 1.45rem;
   color: var(--ink);
 }
 
-.product-card .product-description {
-  font-size: 0.875rem;
-  margin: 10px 0;
-  text-align: center;
+.product-card-from {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
-.product-card .product-price {
-  font-family: var(--font-mono);
-  font-size: 1.125rem;
-  margin: 10px 0;
+.product-card-hint {
+  font-size: 0.9rem;
   color: var(--muted);
 }
 
-.product-card .product-grid {
+/* margin-top:auto pins the actions to the card bottom so every card in a
+   row lines its buttons up, whatever the name length. */
+.product-card-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.product-card-actions .btn-primary,
+.product-card-actions .btn-secondary {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* =================== Product detail page =================== */
+
+.pdp {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 1.25rem var(--gutter) 0;
+}
+
+.breadcrumb ol {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.product-card .original-price {
-  text-decoration: line-through;
+  gap: 0.25rem 0.5rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
 }
 
-/* Price: quieter than the name, set in the data/mono typeface. */
-.product-card .discount-price {
+.breadcrumb li + li::before {
+  content: "/";
+  margin-right: 0.5rem;
+  color: var(--field-border);
+}
+
+.breadcrumb a {
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 400;
-  text-align: center;
+  text-decoration: none;
 }
 
-.product-card .variant-hint {
-  color: var(--muted);
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  margin: 0.25rem 0 0;
-  text-align: center;
+.breadcrumb a:hover {
+  color: var(--ink);
+  text-decoration: underline;
 }
 
-.product-card .all-product-info-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 12px;
+.breadcrumb [aria-current="page"] {
+  color: var(--ink);
 }
 
-.carousels-buttons {
+/* Desktop: gallery left, sticky info column right so the buy box never
+   scrolls out of view. */
+.pdp-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+
+.pdp-gallery,
+.pdp-info {
+  min-width: 0;
+}
+
+.pdp-gallery {
+  position: sticky;
+  top: calc(var(--header-h) + 8px + 1.5rem);
+}
+
+/* The page's one large typographic moment. */
+.pdp-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 4.6vw, 3.75rem);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.pdp-price-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.pdp-price {
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.price-tag {
+  padding: 0.3rem 0.55rem;
+  border: 2px solid var(--red);
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  line-height: 1;
+}
+
+.pdp-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+
+/* Variant selector: tactile buttons, never a native select. Selected state
+   is carried by the check icon + aria-pressed + heavier ink border + red
+   underline together, not by color alone. */
+.variant-selector {
+  margin-top: 1.75rem;
+}
+
+.variant-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+  gap: 0.5rem;
+}
+
+.variant-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 52px;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--surface);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.variant-btn:hover {
+  border-color: var(--ink);
+}
+
+.variant-btn.selected {
+  border: 2px solid var(--ink);
+  padding: calc(0.65rem - 1px) calc(0.85rem - 1px);
+  box-shadow: inset 0 -3px 0 var(--red);
+  font-weight: 600;
+}
+
+.variant-btn-check {
+  display: inline-flex;
+  flex: none;
+  width: 0.9rem;
+  color: var(--ink);
+}
+
+.variant-btn-label {
+  flex: 1;
+}
+
+.variant-btn-price {
+  flex: none;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.variant-btn.selected .variant-btn-price {
+  color: var(--ink);
+}
+
+/* Buy box: right after the selectors, so it's reachable on mobile without
+   scrolling past the specs/details below it. */
+.pdp-buy-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.pdp-buy-box #card-cart-btn {
+  width: 100%;
+  min-height: 56px;
+  font-size: 1.2rem;
+}
+
+.made-to-order-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* Specs: two-column definition list, thin dividers, generous line height.
+   No bullet lists. */
+.specs-list {
+  margin: 2rem 0 0;
+  border-top: 2px solid var(--ink);
+}
+
+.specs-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+  line-height: 1.5;
+}
+
+.specs-row dt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 0.1rem;
+}
+
+.specs-row dd {
+  margin: 0;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.pdp-section {
+  margin-top: 2.25rem;
+}
+
+.pdp-copy {
+  color: var(--ink);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.pdp-details-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.pdp-disclosure {
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.pdp-disclosure-heading {
+  margin: 0;
+}
+
+.pdp-disclosure-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 56px;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
 }
 
 .full-details {
-  margin-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.full-details-group + .full-details-group {
+  margin-top: 1.25rem;
+}
+
+.full-details-group h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1rem;
-  transition: max-height 0.3s ease-in-out;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.full-details-group ol,
+.full-details-group ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  line-height: 1.6;
+}
+
+.full-details-group ul {
+  list-style: disc;
+}
+
+.full-details-group li + li {
+  margin-top: 0.3rem;
+}
+
+/* ---------- Gallery (react-image-gallery) overrides ----------
+   The extra .pdp-gallery class raises specificity above the library's
+   own (unscoped) selectors, including its media-query variants. */
+
+/* react-image-gallery's active slide has no reserved height (its CSS
+   leaves the image at height:auto), so the whole gallery collapses to ~0
+   and snaps to full size once the slide image decodes, causing a large
+   layout shift. Reserving a fixed ratio and letterboxing via object-fit
+   avoids that regardless of each photo's own aspect ratio. White, not a
+   tint, because the photos themselves are shot on white. */
+.pdp-gallery .image-gallery-content:not(.fullscreen) .image-gallery-slide {
+  aspect-ratio: 1 / 1;
+  background-color: var(--surface);
+}
+
+.pdp-gallery .image-gallery-content:not(.fullscreen) .image-gallery-slide .image-gallery-image {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+}
+
+/* Same collapse-before-load problem applies to the thumbnail strip. */
+.pdp-gallery .image-gallery-thumbnail-image {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background-color: var(--surface);
+}
+
+.pdp-gallery .image-gallery-thumbnails {
+  padding: 0.75rem 0 0;
+}
+
+.pdp-gallery .image-gallery-thumbnail {
+  width: 84px;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.pdp-gallery .image-gallery-thumbnail + .image-gallery-thumbnail {
+  margin-left: 0.5rem;
+}
+
+.pdp-gallery .image-gallery-thumbnail.active,
+.pdp-gallery .image-gallery-thumbnail:focus,
+.pdp-gallery .image-gallery-thumbnail:hover {
+  border: 2px solid var(--ink);
+}
+
+.pdp-gallery .image-gallery-thumbnail:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Prev/next/fullscreen: solid ink discs instead of the library's thin
+   white chevrons, which vanish against white product photos. */
+.pdp-gallery .image-gallery-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 999px;
+  background-color: var(--ink);
+  color: #ffffff;
+  filter: none;
+}
+
+.pdp-gallery .image-gallery-icon:hover {
+  background-color: var(--red);
+  color: #ffffff;
+}
+
+.pdp-gallery .image-gallery-icon:hover .image-gallery-svg {
+  transform: none;
+}
+
+.pdp-gallery .image-gallery-icon:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.pdp-gallery .image-gallery-left-nav,
+.pdp-gallery .image-gallery-right-nav {
+  margin: 0 0.75rem;
+}
+
+.pdp-gallery .image-gallery-left-nav .image-gallery-svg,
+.pdp-gallery .image-gallery-right-nav .image-gallery-svg,
+.pdp-gallery .image-gallery-fullscreen-button .image-gallery-svg {
+  width: 20px;
+  height: 20px;
+}
+
+.pdp-gallery .image-gallery-fullscreen-button {
+  right: 0.75rem;
+  bottom: 0.75rem;
+}
+
+.pdp-gallery .image-gallery-content.fullscreen .image-gallery-fullscreen-button {
+  right: 1rem;
+  bottom: 1rem;
+}
+
+/* Single column on tablet/mobile: the sticky columns become normal
+   stacked blocks, gallery first. */
+@media only screen and (max-width: 56.25em) {
+  .pdp-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .pdp-gallery {
+    position: static;
+  }
+
+  .pdp-details-toggle {
+    display: inline-block;
+  }
+
+  .pdp-details-body:not(.is-open) {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 37.5em) {
-  .product-card {
-    max-width: calc(100vw - 2rem);
+  /* Single-column cards on phones: a shorter tile keeps the grid from
+     turning into a long scroll of mostly-white squares. */
+  .product-card .product-image-frame {
+    aspect-ratio: 4 / 3;
   }
 
-  .product-banner {
-    margin: 0.5rem;
-    padding: 0.5rem;
-    font-size: 1rem;
+  .pdp {
+    padding-top: 1rem;
   }
 
-  .product-banner .product-info-header h3 {
+  .pdp-gallery .image-gallery-thumbnail {
+    width: 64px;
+  }
+
+  .pdp-price {
     font-size: 2rem;
-  }
-
-  .product-banner .product-info-header .discount-container {
-    display: none;
-  }
-
-  .product-banner .product-info-price h4 {
-    font-size: 1.15rem;
-  }
-
-  /* Side-by-side buttons have no width to spare for a 24px gap at this
-     breakpoint, and a width that's font-metric-dependent risks flapping
-     between wrapped/unwrapped as web fonts swap in, causing layout shift.
-     Stacking removes the width constraint entirely. */
-  .product-banner .product-info-buttons {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .toggle-details-btn {
-    display: block;
-    background-color: transparent;
-    border: none;
-    color: var(--accent);
-    font-size: 1rem;
-    cursor: pointer;
-    margin: 1rem 0;
-    text-decoration: underline;
-    padding: 0;
-  }
-}
-
-@media only screen and (max-width: 56.25em) {
-  /* Single column on mobile/tablet: the sticky right column becomes a
-     normal stacked block, gallery first. */
-  .product-banner .card {
-    display: flex;
-    flex-direction: column;
-    margin: unset;
-  }
-  .product-banner .image-container,
-  .product-banner .product-info-container {
-    width: 100%;
-    position: static;
-    top: auto;
-  }
-
-  .toggle-details-btn {
-    display: block;
-    background-color: transparent;
-    border: none;
-    color: var(--accent);
-    font-size: 1rem;
-    cursor: pointer;
-    margin: 1rem 0;
-    text-decoration: underline;
-    padding: 0;
-  }
-
-  /* Swap which "full details" rendering is visible: unconditional on
-     desktop, behind the toggle button here. */
-  .details-always {
-    display: none;
-  }
-
-  .details-container {
-    display: block;
   }
 }

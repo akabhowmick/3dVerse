@@ -1,5 +1,6 @@
 import { Product } from "../../Types/interfaces";
 import { products } from "../../utils/Products";
+import { PageHero } from "../../Components/PageHero/PageHero";
 import { ProductGrid } from "./ProductGrid";
 
 export const ProductPage = ({
@@ -9,13 +10,24 @@ export const ProductPage = ({
   pageHeader: string;
   pageContent: string;
 }) => {
-  
   const productList: Product[] = products.filter((product) => product.type === pageContent);
 
   return (
-    <div className="product-page">
-      <h2 className="page-header">{pageHeader}</h2>
-      <ProductGrid productList={productList} />
-    </div>
+    <>
+      <PageHero
+        kicker="Shop"
+        title={pageHeader}
+        lead={`${productList.length} ${productList.length === 1 ? "product" : "products"}, each one made to order.`}
+      />
+      <div className="section">
+        {productList.length > 0 ? (
+          <ProductGrid productList={productList} />
+        ) : (
+          <p className="section-lead">
+            Nothing here yet. <a href="/contact-us">Contact us</a> about a custom piece.
+          </p>
+        )}
+      </div>
+    </>
   );
 };

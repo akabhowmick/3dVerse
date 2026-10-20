@@ -18,9 +18,12 @@ export const ImageCarousel = ({ images, alt }: { images: string[]; alt: string }
       thumbnailAlt: `${alt} thumbnail ${index + 1}`,
     });
   });
+  // No bullets: with up to 14 photos they wrapped over the image on
+  // phones, and the thumbnail strip already shows position. No slideshow
+  // play button either -- auto-advancing photos fight the shopper.
   return (
     <div className="hero-images">
-      <ImageGallery items={imageArray} showBullets lazyLoad />
+      <ImageGallery items={imageArray} showPlayButton={false} lazyLoad />
     </div>
   );
 };
