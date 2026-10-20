@@ -1,3 +1,4 @@
+import "./fonts.css";
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";

@@ -1,37 +1,53 @@
 import { createTheme } from "@mui/material/styles";
 
 // This theme carries the app's *semantic* colors (used via MUI component
-// props like color="primary") and layout breakpoints, kept in sync with the
-// Phase 4 "workshop precision" palette defined in App.css's :root block.
-// Decorative CSS custom properties that don't map to a standard MUI palette
-// slot stay in App.css.
+// props like color="primary") and layout breakpoints, kept in sync with
+// the brand palette defined in App.css's :root block (colors pulled from
+// the Print3Dverse logo). Decorative CSS custom properties that don't map
+// to a standard MUI palette slot stay in App.css.
+const display = '"Barlow Condensed", "Barlow Condensed Fallback", "Arial Narrow", sans-serif'; // --font-display
+const body = '"Barlow", "Barlow Fallback", system-ui, -apple-system, "Segoe UI", sans-serif'; // --font-body
+
+const heading = (fontWeight: number) => ({
+  fontFamily: display,
+  fontWeight,
+  textTransform: "uppercase" as const,
+  letterSpacing: "0.01em",
+  lineHeight: 1,
+});
+
 const theme = createTheme({
   palette: {
-    primary: { main: "#2743e3" }, // --accent
-    secondary: { main: "#14161a" }, // --ink
-    warning: { main: "#ffcc00" }, // --warning
-    error: { main: "#d10202" }, // --danger
-    info: { main: "#2ea5dc" }, // --info
-    success: { main: "#1cca56" }, // --success
+    primary: { main: "#c4291f", dark: "#a3241c", contrastText: "#ffffff" }, // --red
+    secondary: { main: "#0e0f12" }, // --ink
+    info: { main: "#0249ab" }, // --blue
+    error: { main: "#b3261e" }, // --danger
+    success: { main: "#1b7a3d" }, // --success
     background: {
-      default: "#f6f6f3", // --base
+      default: "#f4f5f7", // --base
       paper: "#ffffff", // --surface
     },
     text: {
-      primary: "#14161a", // --ink
-      secondary: "#6b7075", // --muted
+      primary: "#0e0f12", // --ink
+      secondary: "#5b616b", // --muted
     },
-    divider: "#e3e3de", // --line
+    divider: "#dfe2e7", // --line
   },
   typography: {
-    fontFamily: '"Inter", system-ui, Avenir, Helvetica, Arial, sans-serif', // --font-body
-    h1: { fontFamily: '"Space Grotesk", sans-serif', fontWeight: 700 },
-    h2: { fontFamily: '"Space Grotesk", sans-serif', fontWeight: 700 },
-    h3: { fontFamily: '"Space Grotesk", sans-serif', fontWeight: 700 },
-    h4: { fontFamily: '"Space Grotesk", sans-serif', fontWeight: 700 },
-    h5: { fontFamily: '"Space Grotesk", sans-serif', fontWeight: 500 },
-    h6: { fontFamily: '"Space Grotesk", sans-serif', fontWeight: 500 },
-    button: { fontFamily: '"Inter", sans-serif', textTransform: "none", fontWeight: 600 },
+    fontFamily: body,
+    h1: heading(800),
+    h2: heading(800),
+    h3: heading(800),
+    h4: heading(800),
+    h5: heading(700),
+    h6: heading(700),
+    button: {
+      fontFamily: display,
+      fontWeight: 700,
+      fontSize: "1.05rem",
+      letterSpacing: "0.06em",
+      textTransform: "uppercase",
+    },
   },
   breakpoints: {
     values: {
@@ -43,18 +59,22 @@ const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 6,
+    borderRadius: 2,
   },
   components: {
     MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+      },
       styleOverrides: {
         root: {
-          textTransform: "none",
-          borderRadius: 6,
+          minHeight: 48,
+          borderRadius: 2,
         },
         outlined: {
-          borderColor: "#14161a",
-          color: "#14161a",
+          borderWidth: 2,
+          borderColor: "#0e0f12",
+          color: "#0e0f12",
         },
       },
     },
@@ -68,15 +88,25 @@ const theme = createTheme({
     MuiStepIcon: {
       styleOverrides: {
         root: {
-          "&.Mui-active": { color: "#2743e3" },
-          "&.Mui-completed": { color: "#2743e3" },
+          "&.Mui-active": { color: "#c4291f" },
+          "&.Mui-completed": { color: "#0e0f12" },
+        },
+      },
+    },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          fontFamily: display,
+          fontWeight: 700,
+          letterSpacing: "0.06em",
+          textTransform: "uppercase",
         },
       },
     },
     MuiInputBase: {
       styleOverrides: {
         root: {
-          fontFamily: '"Inter", sans-serif',
+          fontFamily: body,
         },
       },
     },

@@ -11,23 +11,12 @@
       content="Discover a wide selection of meticulously crafted 3D models of houses for architectural visualization and design projects. Explore our collection for detailed and realistic renderings, ranging from contemporary homes to traditional architecture styles. Find the perfect digital assets to bring your architectural visions to life."
     />
 
-    <!-- Google Fonts (loaded non-render-blocking: swap in once fetched).
-         Space Grotesk (display/headings), Inter (body), JetBrains Mono
-         (specs, prices) -- see 3dverse-phase-4-design.md. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
+    <!-- Self-hosted fonts (see src/fonts.css): preload the three weights
+         visible on first paint -- Barlow Condensed 800 (headings), 700 (nav,
+         buttons, labels) and Barlow 400 (body). The rest load on demand. -->
+    <link rel="preload" href="/fonts/barlow-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
@@ -35,7 +24,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon-180x180.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
     <link rel="manifest" href="/favicon/manifest.json" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#0e0f12" />
   </head>
   <body>
     <div id="root"></div>
