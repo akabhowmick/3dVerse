@@ -24,7 +24,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
           <Box component="form" onSubmit={(e) => handleNextClick(e)} className="shipping-form">
             <Grid container spacing={2}>
               <Grid size={12}>
-                <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>
+                <Typography variant="h6" component="h2">
                   Your details
                 </Typography>
               </Grid>
@@ -80,9 +80,10 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   slotProps={{ htmlInput: { inputMode: "tel" } }}
                 />
               </Grid>
-              <hr />
-              <Grid size={12}>
-                <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>Address</Typography>
+              <Grid size={12} sx={{ mt: 2 }}>
+                <Typography variant="h6" component="h2">
+                  Address
+                </Typography>
               </Grid>
               <Grid size={12}>
                 <TextField

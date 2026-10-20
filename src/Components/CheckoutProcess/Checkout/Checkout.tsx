@@ -11,6 +11,7 @@ import { Shipping } from "../Shipping/Shipping";
 import { Payment } from "../Payment/Payment";
 import Review from "../Review/Review";
 import type { CaptureSummary } from "../../../../shared/pricing";
+import { PageHero } from "../../PageHero/PageHero";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
@@ -40,45 +41,33 @@ export default function Checkout() {
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="sm"
-      sx={{ mb: 4, paddingTop: "5rem" }}
-      id="checkout-container"
-    >
-      <Paper
-        variant="outlined"
-        sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
-      >
-        <Typography component="h1" variant="h4" align="center">
-          Checkout
-        </Typography>
-        <Stepper
-          id="check-out-stepper"
-          activeStep={activeStep}
-          sx={{ pt: 3, pb: 5 }}
-        >
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+    <>
+      <PageHero kicker="Almost there" title="Checkout" />
+      <Container component="div" maxWidth="sm" sx={{ mb: 4 }} id="checkout-container">
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 5 }, p: { xs: 2, md: 4 } }}>
+          <Stepper id="check-out-stepper" activeStep={activeStep} sx={{ pt: 1, pb: 4 }}>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
 
-        {activeStep === steps.length ? (
-          <React.Fragment>
-            <Typography variant="h5" gutterBottom>
-              Thank you for your order.
-            </Typography>
-            <Typography variant="subtitle1">
-              We have emailed your order confirmation, and will send you an
-              update when your order has shipped.
-            </Typography>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
-        )}
-      </Paper>
-    </Container>
+          {activeStep === steps.length ? (
+            <React.Fragment>
+              <Typography variant="h5" gutterBottom>
+                Thank you for your order.
+              </Typography>
+              <Typography variant="subtitle1">
+                We have emailed your order confirmation, and will send you an update when your
+                order has shipped.
+              </Typography>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
+          )}
+        </Paper>
+      </Container>
+    </>
   );
 }

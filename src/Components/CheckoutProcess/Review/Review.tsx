@@ -95,7 +95,7 @@ export default function Review({ orderSummary }: { orderSummary: CaptureSummary 
                 }}
               />
               <ListItemText primary={cartItem.name} secondary={cartItem.desc} />
-              <Typography variant="body2" sx={{ fontFamily: "var(--font-mono)" }}>
+              <Typography variant="body2" className="num" sx={{ fontSize: "1.05rem" }}>
                 ${priceDisplay}
               </Typography>
             </ListItem>
@@ -104,7 +104,7 @@ export default function Review({ orderSummary }: { orderSummary: CaptureSummary 
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total (including shipping and taxes)" />
-          <Typography variant="subtitle1" sx={{ fontWeight: 700, fontFamily: "var(--font-mono)" }}>
+          <Typography variant="subtitle1" className="num" sx={{ fontSize: "1.35rem" }}>
             ${totalDisplay}
           </Typography>
         </ListItem>

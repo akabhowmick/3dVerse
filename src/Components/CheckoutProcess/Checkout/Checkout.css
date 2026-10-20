@@ -1,5 +1,5 @@
 #checkout-container {
-  max-width: 85%;
+  max-width: min(680px, 100%);
 }
 
 .paypal-buttons,
@@ -16,9 +16,11 @@
 }
 
 .payment-estimated-total {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
   color: var(--ink);
-  font-size: 1.15rem;
+  font-size: 1.35rem;
 }
 
 @media screen and (max-width: 37.5em) {

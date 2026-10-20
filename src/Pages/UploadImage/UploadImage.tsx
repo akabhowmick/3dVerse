@@ -1,23 +1,15 @@
-import "./UploadImage.css";
+import "../ContactUs/Contact.css";
 import { imageUploadFormId, thankYouPage } from "../../utils/config";
 import { useEffect } from "react";
 import { useCartContext } from "../../providers/CartProvider";
+import { PageHero } from "../../Components/PageHero/PageHero";
+import { fullDetailedDetails } from "../../utils/HelpfulText";
+
+const photoGuidelines =
+  fullDetailedDetails.find((group) => group.title === "Photo guidelines")?.items ?? [];
 
 export const UploadImageForm = () => {
   const { setCart } = useCartContext();
-
-  const uploadAndDisplayImage = (
-    <div className="contact-form-div">
-      <label htmlFor="Image-for-Customization">Image for Customization</label>
-      <input
-        id="Image-for-Customization"
-        type="file"
-        name="Image-for-Customization"
-        accept="image/png, image/jpeg"
-        required
-      />
-    </div>
-  );
 
   useEffect(() => {
     setCart([]);
@@ -45,67 +37,93 @@ export const UploadImageForm = () => {
 
   const contactFormInputs = contactFormInput.map(({ name, label, type, autoComplete, inputMode }) => {
     return (
-      <div key={name} className="contact-form-div">
+      <div key={name} className="field">
         <label htmlFor={label}>{name}</label>
         <input
-          className="contact-form-input"
+          className="field-input"
           id={label}
           name={label}
           type={type}
           autoComplete={autoComplete}
           inputMode={inputMode}
-          placeholder={`Your ${name}`}
+          placeholder={`Your ${name.toLowerCase()}`}
           required
         />
       </div>
     );
   });
 
-  const messageField = (
-    <div className="contact-message-div">
-      <label htmlFor="message">Message</label>
-      <textarea
-        className="contact-form-input"
-        id="message"
-        name="message"
-        placeholder="Your Message"
-        required
-      />
-    </div>
-  );
-
   return (
-    <form
-      className="formcontact"
-      action={imageUploadFormId}
-      method="POST"
-      encType="multipart/form-data"
-    >
-      <div className="contact__form-container">
-        <input type="hidden" name="_next" value={thankYouPage} />
-        <input
-          type="text"
-          name="_honey"
-          style={{ display: "none" }}
-          tabIndex={-1}
-          autoComplete="off"
-          aria-hidden="true"
-        />
-        <input
-          type="hidden"
-          name="_subject"
-          value="Customization for Print3dVerse order!"
-        />
-        <input type="hidden" name="_template" value="table" />
-        {contactFormInputs}
-        {messageField}
-        {uploadAndDisplayImage}
-        <div className="submit-btn-container">
-          <button id="contact-submit-btn" type="submit" className="btn btn-primary">
-            <span>Submit to our designers!</span>
+    <>
+      <PageHero
+        kicker="Customize your order"
+        title="Send us your photos"
+        lead="Upload a photo or logo and our designers will build a rendering for you to approve before anything is printed."
+      />
+      <div className="section form-layout">
+        <aside className="form-aside">
+          <h2 className="form-aside-title">Photo guidelines</h2>
+          <ul className="form-aside-list">
+            {photoGuidelines.map((guideline) => (
+              <li key={guideline}>{guideline}</li>
+            ))}
+          </ul>
+          <p className="form-aside-label">Prefer email?</p>
+          <p>
+            <a href="mailto:print3Dverse@gmail.com">print3Dverse@gmail.com</a>
+          </p>
+        </aside>
+
+        <form
+          className="form-card"
+          action={imageUploadFormId}
+          method="POST"
+          encType="multipart/form-data"
+        >
+          <input type="hidden" name="_next" value={thankYouPage} />
+          <input
+            type="text"
+            name="_honey"
+            style={{ display: "none" }}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
+          <input type="hidden" name="_subject" value="Customization for Print3dVerse order!" />
+          <input type="hidden" name="_template" value="table" />
+          <div className="form-grid">
+            {contactFormInputs}
+            <div className="field form-grid-full">
+              <label htmlFor="message">Message</label>
+              <textarea
+                className="field-input"
+                id="message"
+                name="message"
+                placeholder="Colors, lettering, anything we should know"
+                required
+              />
+            </div>
+            <div className="field form-grid-full">
+              <label htmlFor="Image-for-Customization">Image for customization</label>
+              <input
+                id="Image-for-Customization"
+                className="file-input"
+                type="file"
+                name="Image-for-Customization"
+                accept="image/png, image/jpeg"
+                aria-describedby="image-hint"
+                required
+              />
+              <p className="file-input-hint" id="image-hint">
+                PNG or JPEG.
+              </p>
+            </div>
+          </div>
+          <button id="contact-submit-btn" type="submit" className="btn-primary form-submit">
+            Submit to our designers
           </button>
-        </div>
+        </form>
       </div>
-    </form>
+    </>
   );
 };

@@ -1,70 +1,54 @@
-* {
-  box-sizing: border-box;
-}
-body {
-  background: var(--base);
-  height: 100%;
-  margin: 0;
-}
+/* Shared by the thank-you and 404 pages: one centered status card. */
 
-.wrapper-1 {
-  width: 100%;
-  height: 100vh;
+.status-page {
   display: flex;
-  flex-direction: column;
-}
-.wrapper-2 {
-  padding: 30px;
-  text-align: center;
-}
-h1 {
-  font-size: 3rem;
-  letter-spacing: 0;
-  color: var(--ink);
-  margin: 0;
-  margin-bottom: 20px;
-}
-.wrapper-2 p {
-  margin: 0;
-  font-size: 1.1rem;
-  color: var(--muted);
-  font-family: var(--font-body);
-  letter-spacing: 0.2px;
-}
-/* Layout only -- color/background/border come from .btn-primary. */
-.go-home {
-  margin: 30px 0 20px;
-}
-.footer-like {
-  margin-top: auto;
-  background-color: var(--surface);
-  border-top: 1px solid var(--line);
-  padding: 6px;
-  text-align: center;
-}
-.footer-like p {
-  margin: 0;
-  padding: 4px;
-  color: var(--muted);
-  font-family: var(--font-body);
-}
-.footer-like p a {
-  text-decoration: none;
-  color: var(--accent);
-  font-weight: 600;
+  justify-content: center;
 }
 
-@media (min-width: 600px) {
-  .content {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  .wrapper-1 {
-    height: initial;
-    max-width: 620px;
-    margin: 0 auto;
-    margin-top: 50px;
-    box-shadow: 0 8px 40px rgba(20, 22, 26, 0.08);
-    background-color: var(--surface);
+.status-card {
+  width: 100%;
+  max-width: 680px;
+  padding: clamp(2rem, 6vw, 3.5rem);
+  background-color: var(--surface);
+  border-top: 3px solid var(--red);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.status-card .kicker {
+  justify-content: center;
+}
+
+.status-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1.25rem;
+  border-radius: 999px;
+  background-color: var(--ink);
+  color: #ffffff;
+  font-size: 1.75rem;
+}
+
+.status-copy {
+  max-width: 48ch;
+  margin: 1rem auto 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 37.5em) {
+  .status-actions {
+    flex-direction: column;
   }
 }
