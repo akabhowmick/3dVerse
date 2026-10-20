@@ -36,12 +36,16 @@ Tracks outstanding work. Update as items land.
       cart counter mismatch (FloatingCartButton vs nav badge, both now sum
       quantity) and review carousel contrast failure (peek cards no longer
       fade real text)
-- [ ] Manual browser verification pass (no Lighthouse/Playwright available
-      in the agent's environment, so these are unconfirmed): Lighthouse
-      90+/95+ on Home and a product page, keyboard-only pass on the new
-      cart drawer + PDP variant buttons + carousel, 360px/1440px overflow
-      check on all routes, prefers-reduced-motion check, screenshots of
-      every redesigned view
+- [x] Rebrand revision (2026-10-19): typography and palette rebuilt to
+      match the logo's athletic look (Barlow Condensed + Barlow, logo
+      red/blue, kit-stripe motif), self-hosted fonts, layout fixes across
+      every page. See `MODERNIZATION_STATUS.md`.
+- [x] Browser verification pass: 360px/1440px overflow on all routes,
+      keyboard pass (drawer, variant buttons, reviews, mobile menu),
+      reduced-motion check, screenshots, both cart counters agree
+- [ ] Lighthouse performance 90+ on mobile: currently 88-89 (Home) and 85
+      (product page) locally, A11y/BP 100, CLS 0. Gap is JS-gated LCP;
+      try route-level code splitting
 - [ ] Confirm real made-to-order turnaround time for the product page copy
       (agent left a TODO comment in `SingleProduct.tsx`; "3-5 business
       days" is the design brief's placeholder, not sourced)

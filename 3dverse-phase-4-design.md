@@ -1,5 +1,13 @@
 # 3dVerse Phase 4: Premium storefront redesign
 
+> **Revised 2026-10-19:** the palette and typography below were replaced to
+> match the logo's athletic branding (black field, red "3", blue "D"):
+> Barlow Condensed + Barlow, logo red `#C4291F` for actions, logo blue
+> `#0249AB` for links/focus, and a red/blue "kit stripe" motif in place of
+> layer lines. Tokens live in `src/App.css` `:root` and `src/theme.ts`. The
+> structural requirements in this brief (cards, PDP, drawer, contrast,
+> focus, reduced motion) still apply. See `MODERNIZATION_STATUS.md`.
+
 ## Context
 React + TypeScript + Vite e-commerce site for a 3D printing shop, deployed on
 Netlify. Phases 1-3 complete (accessibility, performance, server-side payment

@@ -57,24 +57,44 @@ Manual 360px/1440px flow check: all 8 routes (home, category, product detail, ca
 
 ## Phase 4 — Premium storefront redesign
 
-**Status: implemented, pushed to origin, no PR yet** (branch `phase-4/premium-redesign`, stacked on Phase 3, 7 commits). Design brief: `3dverse-phase-4-design.md`.
+**Status: implemented, pushed to origin, no PR yet** (branch `phase-4/premium-redesign`, stacked on Phase 3). Design brief: `3dverse-phase-4-design.md`.
 
-- New palette/type system (workshop precision), product cards, sticky-column product page with tactile variant buttons, slide-out cart drawer with focus trap, global restyle of footer/contact/404/thank-you/checkout.
-- Resolves both Phase 1 known bugs (see above).
-- Pricing and checkout data flow untouched (verified via diff).
-- Build and lint clean.
+- First pass: "workshop precision" palette/type, product cards, sticky PDP, slide-out cart drawer with focus trap, global restyle. Resolves both Phase 1 known bugs (see above).
+- **Revision (2026-10-19): rebrand to match the logo.** The first pass's Space Grotesk / Inter / JetBrains Mono and cobalt-on-cream didn't match the logo's athletic, sporting-goods look. Replaced with:
+  - Type: Barlow Condensed (600/700/800, headings, prices, buttons, uppercase) + Barlow (400/500/600, body). Self-hosted latin subsets in `public/fonts/`, three first-paint weights preloaded, metric-matched Arial fallbacks (`src/fonts.css`) so the swap causes no layout shift. Google Fonts origins removed from the CSP in `public/_headers`.
+  - Palette sampled from the logo: ink `#0E0F12`, red `#C4291F` (actions, 5.7:1 with white text), blue `#0249AB` (links/focus, 8.3:1), brighter tints for accents on dark bands only. All pairs checked for AA.
+  - Motif: red/blue "kit stripe" (jersey trim) replaces layer lines.
+  - Dark sticky header (logo sits flush on its black field) with a colored wordmark; floating cart pill removed (header cart is always visible). Footer rebuilt and moved inside the router layout.
+  - Home: full-bleed hero with the tagline as the page's `<h1>`, video pause control (paused under reduced motion), benefit bar (claims sourced from existing copy), reviews as a scroll-snap track (no faded duplicates).
+  - Category pages now show a card grid instead of stacked full product layouts. PDP: breadcrumb, sticky gallery, restyled gallery controls (no bullets/play button), "How ordering works" disclosure.
+  - Every non-home page gets a `PageHero` band with a real `<h1>`.
+  - Fixes found along the way: cart variant `<select>` was uncontrolled (showed the first option even when a different variant was in the cart); duplicate element IDs in cart lines and social icons; leaked global CSS (`.card` color, `.btn-primary:hover` light-blue override, global `h1`/`body` rules in ThankYouPage.css); broken inline hero background URL; 404 page hotlinked third-party images (also blocked by the CSP); `#n` ID prefixes leaking into review text.
+- Pricing, cart state and checkout data flow untouched (`shared/`, `netlify/`, `CartProvider.tsx` not modified).
 
-### Not verified (no Lighthouse/Playwright in the agent environment)
-- Lighthouse 90+/95+ on Home and a product page.
-- Keyboard-only pass: cart drawer, variant buttons, carousel.
-- 360px / 1440px overflow check on all routes, `prefers-reduced-motion` check, screenshots.
+### Verified (2026-10-19, local, Playwright + Chrome)
+- Build, lint, functions typecheck clean.
+- 360px / 1440px: all routes, zero horizontal overflow, zero console errors.
+- Keyboard: cart drawer opens on Enter, focus lands on close, Tab stays trapped, Escape closes and returns focus to the trigger; mobile menu closes on Escape; variant buttons expose `aria-pressed`; review paging buttons disable at both ends.
+- Non-default PDP variant (Medium 10in) carries into the cart and the cart's select shows it; totals match the shared pricing math ($275 + $10 + 8.75% NY tax + $5 = $314.94); nav and drawer counters agree.
+- `prefers-reduced-motion`: no card image scale, no stripe motion, hero video starts paused.
+- Lighthouse mobile (local `vite preview`, 3 runs each):
+
+| Page | Perf | A11y | Best Practices | CLS |
+|---|---|---|---|---|
+| Home, before revision | 80-93 | 100 | 96 | 0.001 |
+| Home, after | 88-89 | 100 | 100 | 0 |
+| `/products/3`, before revision | 77-89 | 100 | 100 | 0 |
+| `/products/3`, after | 85 | 100 | 100 | 0 |
+
+  Performance is at or above the pre-revision baseline on the same machine but still under 90: LCP (~3.5s) is the video poster / first gallery image, which can't be discovered until the 800KB JS bundle runs. Route-level code splitting (lazy-load checkout/MUI/PayPal) is the likely fix; not attempted here.
 
 ### Open questions
 - Real made-to-order turnaround for the product page copy (currently the brief's placeholder "3-5 business days"; TODO in `SingleProduct.tsx`).
-- Which two categories are best sellers for the cart-drawer empty state (currently Miscellaneous / Replica Houses, chosen arbitrarily; TODO in `CartDrawer.tsx`).
+- Which two categories are best sellers for the cart-drawer empty state (currently Replica Houses / Miscellaneous, chosen arbitrarily; TODO in `CartDrawer.tsx`).
+- Variant label typo "Large Mode (12in)" comes from `shared/pricing.ts` (out of scope for a visual phase).
 
 ### Remaining step
-Manual verification pass, then open the PR (explicit go-ahead only).
+Review, then open the PR (explicit go-ahead only).
 
 ## Not yet started / unscoped
 - 6 high-severity npm advisories (brace-expansion, js-yaml, nanoid, postcss, react-router), newly disclosed since Phase 2 — needs a dependency pass.
