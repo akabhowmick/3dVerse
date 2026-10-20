@@ -1,6 +1,3 @@
-export const heroText =
-  "Discover a wide selection of meticulously crafted 3D models of houses for architectural visualization and design projects. Explore our collection for detailed and realistic renderings. Find the perfect digital assets to bring your architectural visions to life";
-
 const orderPlacement = [
   "1 Select the product variation that you are purchasing.",
   "2 Upload your photo through the provided link or email address. Please make sure to follow any photo guidelines to ensure the best quality print.",

@@ -27,7 +27,7 @@ export const socialButtons = fontAwesomeIcons
   .map(({ link, icon, name }) => {
     return (
       <a href={link} key={link} aria-label={name}>
-        <FontAwesomeIcon id="btn__social" className="icon" icon={icon} aria-hidden="true" />
+        <FontAwesomeIcon className="icon" icon={icon} aria-hidden="true" />
       </a>
     );
   });

@@ -4,51 +4,68 @@ import navbarLogo from "../../assets/Main/logo.webp";
 
 import { KeyValueStringPairs } from "../../Types/interfaces";
 import { socialButtons } from "../../utils/SocialMediaLink";
-import { companyName, heroText } from "../../utils/HelpfulText";
+import { companyName, companyTagline } from "../../utils/HelpfulText";
 import { links } from "../../utils/NavbarAndFooterLinks";
+import { Wordmark } from "../Navbar/Wordmark";
 
-const footerSiteLinks: KeyValueStringPairs[] = [{ key: "Home", value: "/" }, ...links];
+const contactLink = links.find((link) => link.value === "/contact-us");
+
+const footerColumns: { heading: string; items: KeyValueStringPairs[] }[] = [
+  {
+    heading: "Shop",
+    items: [
+      ...links.filter((link) => link !== contactLink),
+      { key: "Your Cart", value: "/cart" },
+    ],
+  },
+  {
+    heading: "Help",
+    items: [
+      ...(contactLink ? [contactLink] : []),
+      { key: "Email Us", value: "mailto:print3Dverse@gmail.com" },
+    ],
+  },
+];
 
 export const Footer = () => {
-  const logoFooterLink = (
-    <a href="/" id="logo-with-title">
-      <img
-        className="navbar-logo"
-        src={navbarLogo}
-        alt="Print3DVerse home"
-        width={474}
-        height={435}
-      />
-      <h3>{companyName}</h3>
-    </a>
-  );
   return (
-    <>
-      <footer className="footer">
-        <div className="footer-left col-md-4 col-sm-6">
-          <h4 className="about">{heroText}</h4>
-          <div id="social-links">{socialButtons}</div>
-          <p className="about">
-            For more tailor-made sites, please visit:
-            <br /> <a href="http://akashbhowmick.com/">AKA CODE</a>
-          </p>
+    <footer className="site-footer on-dark">
+      <span className="kit-stripe" aria-hidden="true" />
+      <div className="footer-inner">
+        <div className="footer-brand">
+          <a href="/" className="brand-link">
+            <img className="brand-logo" src={navbarLogo} alt="" width={474} height={435} />
+            <Wordmark />
+            <span className="visually-hidden"> home</span>
+          </a>
+          <p className="footer-tagline">{companyTagline}</p>
+          <div className="footer-social">{socialButtons}</div>
         </div>
-        <div className="footer-right col-md-4 col-sm-6">
-          {logoFooterLink}
 
-          <ul className="menu">
-            {footerSiteLinks.map((link) => {
-              return (
-                <li key={link.key} aria-label={`Link to ${link.key}`}>
-                  <a aria-label={`Link to ${link.key}`} href={link.value}>
-                    {link.key}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </footer>
-    </>
+        <nav className="footer-columns" aria-label="Footer">
+          {footerColumns.map(({ heading, items }) => (
+            <div className="footer-col" key={heading}>
+              <h2 className="footer-heading">{heading}</h2>
+              <ul>
+                {items.map((link) => (
+                  <li key={link.value}>
+                    <a href={link.value}>{link.key}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </div>
+
+      <div className="footer-bottom">
+        <p>
+          &copy; {new Date().getFullYear()} {companyName}
+        </p>
+        <p>
+          Site by <a href="http://akashbhowmick.com/">AKA CODE</a>
+        </p>
+      </div>
+    </footer>
   );
 };
