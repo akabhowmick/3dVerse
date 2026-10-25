@@ -96,6 +96,23 @@ Manual 360px/1440px flow check: all 8 routes (home, category, product detail, ca
 ### Remaining step
 Review, then open the PR (explicit go-ahead only).
 
+## Legal pages
+
+**Status: implemented, pushed to origin, no PR yet** (branch `feature/legal-pages`, stacked on `phase-4/premium-redesign`). Merge order: Phase 3 → Phase 4 → this.
+
+- `/privacy`, `/terms`, `/shipping-returns` (`src/Pages/Legal/`), sharing one layout with an "On this page" list. Linked from the footer (bottom bar; Shipping & Returns also under Help), under the contact and photo-upload forms, and on the checkout payment step ("By paying, you agree to...", including the no-returns policy).
+- Written from what the code actually does: the three FormSubmit forms, PayPal via Netlify Functions, the localStorage cart, Netlify hosting logs, no analytics/trackers. The shipping fee is read from `shared/pricing.ts`, so it can't drift. Lead times and the return/replacement policy come from the existing product copy.
+- Shared values (last-updated date, governing-law state, third-party policy links) live in `src/utils/legal.ts`.
+
+### Needs the owner before launch
+These are drafts, not legal advice; worth a lawyer's read. Decisions that had no source in the existing copy and need confirming:
+- Governing law: New York (inferred from the NY sales tax the checkout applies).
+- "We don't sell or rent your personal information."
+- Finished pieces may be shared on the site/social media unless the customer asks otherwise.
+- Pricing errors: we contact the customer first; they can cancel for a full refund.
+- Full refund if we can't make the order or decline the content.
+- Production times as written (houses: several days to a few weeks; card holders: 7–10 business days; keychains: as soon as possible). This contradicts the product page's placeholder "Ships in 3-5 business days" — one of them has to change.
+
 ## Not yet started / unscoped
 - 6 high-severity npm advisories (brace-expansion, js-yaml, nanoid, postcss, react-router), newly disclosed since Phase 2 — needs a dependency pass.
 - Server-side order persistence (orders currently exist only as FormSubmit emails and in the PayPal dashboard).
@@ -103,4 +120,4 @@ Review, then open the PR (explicit go-ahead only).
 - Final launch-checklist pass on the deployed site.
 
 ## Merge order
-Phases 1 and 2 are on `main` (PRs #1, #2). Phase 4 is stacked on Phase 3, so Phase 3 must merge first.
+Phases 1 and 2 are on `main` (PRs #1, #2). Phase 4 is stacked on Phase 3, and `feature/legal-pages` on Phase 4, so the order is Phase 3 → Phase 4 → legal pages.

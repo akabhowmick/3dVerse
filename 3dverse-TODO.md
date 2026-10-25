@@ -54,6 +54,17 @@ Tracks outstanding work. Update as items land.
       (TODO comment in `CartDrawer.tsx`, no sales data available to rank)
 - [ ] Open Phase 4 PR (explicit go-ahead only)
 
+## Legal pages
+- [x] Privacy Policy, Terms of Service, Shipping & Returns pages
+      (branch `feature/legal-pages`, stacked on Phase 4, pushed)
+- [ ] Owner confirms the drafted decisions listed in
+      `MODERNIZATION_STATUS.md` (governing law, no data selling,
+      portfolio use, pricing-error and refund terms, production times)
+- [ ] Optional: lawyer review before launch
+- [ ] Resolve the "Ships in 3-5 business days" product-page placeholder
+      vs. the production times on the Shipping & Returns page
+- [ ] Open PR after Phase 3 and Phase 4 merge (explicit go-ahead only)
+
 ## Later / unscoped
 - [ ] 6 high-severity npm advisories (brace-expansion, js-yaml, nanoid,
       postcss, react-router), deferred from Phase 3, batch into a
