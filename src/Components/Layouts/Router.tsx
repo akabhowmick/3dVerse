@@ -9,6 +9,9 @@ import { ProductPage } from "../../Pages/ProductPages/ProductPage";
 import { ProductDescriptionPage } from "../../Pages/ProductPages/ProductDescriptionPage";
 import { CartPage } from "../../Pages/Cart/CartPage";
 import { UploadImageForm } from "../../Pages/UploadImage/UploadImage";
+import { PrivacyPolicy } from "../../Pages/Legal/PrivacyPolicy";
+import { TermsOfService } from "../../Pages/Legal/TermsOfService";
+import { ShippingReturns } from "../../Pages/Legal/ShippingReturns";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +36,9 @@ export const router = createBrowserRouter(
       <Route path="checkout" element={<Checkout />} />
       <Route path="thanks" element={<ThankYouPage />} />
       <Route path="upload-image" element={<UploadImageForm />} />
+      <Route path="privacy" element={<PrivacyPolicy />} />
+      <Route path="terms" element={<TermsOfService />} />
+      <Route path="shipping-returns" element={<ShippingReturns />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
   )
