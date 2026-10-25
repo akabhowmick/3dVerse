@@ -1,27 +1,27 @@
+import "../ThankYouPage/ThankYouPage.css";
 import "./NotFoundPage.css";
 
 export const NotFoundPage = () => {
   return (
-    <div className="bl_page404">
-      <h1>Error 404. The page does not exist</h1>
-      <p>
-        Sorry! The page you are looking for can not be found. Perhaps the page you requested was
-        moved or deleted. It is also possible that you made a small typo when entering the address.
-        Go to the main page.
-      </p>
-      <div className="bl_page404__wrapper">
-        <img
-          src="https://github.com/BlackStar1991/Pictures-for-sharing-/blob/master/404/bigBoom/cloud_warmcasino.png?raw=true"
-          alt="Page not found illustration"
-          loading="lazy"
-        />
-        <div className="bl_page404__el1"></div>
-        <div className="bl_page404__el2"></div>
-        <div className="bl_page404__el3"></div>
+    <div className="section status-page">
+      <div className="status-card">
+        <p className="notfound-code" aria-hidden="true">
+          404
+        </p>
+        <h1 className="section-title">Page not found</h1>
+        <p className="status-copy">
+          Sorry! The page you are looking for can not be found. It may have been moved or
+          deleted, or there may be a small typo in the address.
+        </p>
+        <div className="status-actions">
+          <a className="btn-primary" href="/">
+            Back to home
+          </a>
+          <a className="btn-secondary" href="/model-houses">
+            Shop replica houses
+          </a>
+        </div>
       </div>
-      <a className="bl_page404__link" href="/">
-        go home
-      </a>
     </div>
   );
 };

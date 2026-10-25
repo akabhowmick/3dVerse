@@ -1,3 +1,4 @@
+import "./fonts.css";
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
@@ -9,9 +10,7 @@ import { CartProvider } from "./providers/CartProvider";
 import { UserProvider } from "./providers/UserProvider";
 
 // sections or components
-import { Footer } from "./Components/Footer/Footer";
 import { router } from "./Components/Layouts/Router";
-import FloatingCartButton from "./Pages/Cart/FloatingCart";
 
 function App() {
   return (
@@ -19,9 +18,9 @@ function App() {
       <CssBaseline />
       <UserProvider>
         <CartProvider>
+          {/* The footer renders inside the router's root layout (see
+              Navbar.tsx) so the sticky header holds for the whole page. */}
           <RouterProvider router={router} />
-          <FloatingCartButton />
-          <Footer />
         </CartProvider>
       </UserProvider>
     </ThemeProvider>

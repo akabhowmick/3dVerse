@@ -1,37 +1,85 @@
 :root {
-  /* branding colors */
-  --grad-1: #f4f6f8;
-  --grad-2: #9ee6ec;
-  --grad-3: #9fd3f6;
-  --grad-4: #7099d3;
-  --primary: #0d46b8;
-  --secondary: #c30707e6;
-  --logo-blue: var(--primary);
-  --logo-orange: #ff6b1a;
+  /* Brand palette, pulled straight from the Print3Dverse logo: a black
+     field, white athletic lettering, a red "3" and a blue "D". Every
+     text/background pair below clears WCAG AA (4.5:1; 3:1 for UI
+     borders) -- ratios noted where they're close to the line. */
+  --ink: #0e0f12; /* logo field: headings, primary text, dark bands */
+  --ink-2: #17191e; /* raised surfaces on dark bands */
+  --ink-3: #2a2d34; /* borders/dividers on dark bands */
+  --base: #f4f5f7; /* page background */
+  --surface: #ffffff; /* cards, panels */
+  --muted: #5b616b; /* secondary text (5.7:1 on --base) */
+  --line: #dfe2e7; /* decorative dividers */
+  --field-border: #8a909a; /* form control borders (3.2:1 on white) */
 
-  /* support colors */
-  --background: #414141;
-  --dark: #323234;
-  --light: #fff;
-  --warning: #ffcc00;
-  --danger: #d10202;
-  --info: #2ea5dc;
-  --success: #1cca56;
+  --red: #c4291f; /* logo red: primary actions (white text 5.7:1) */
+  --red-hover: #a3241c;
+  --blue: #0249ab; /* logo blue: links, focus rings (8.3:1 on white) */
+  --red-bright: #ff5a4e; /* red accents on dark bands only (6.2:1) */
+  --blue-bright: #6ea4ff; /* blue accents on dark bands only (7.7:1) */
+  --muted-on-dark: #a7adb7; /* secondary text on dark bands (7.8:1) */
 
-  /* font brands  */
-  --font: "Poppins", sans-serif;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* semantic aliases */
+  --accent: var(--red);
+  --link: var(--blue);
+  --focus: var(--blue);
+  --danger: #b3261e;
+  --success: #1b7a3d;
+
+  /* type system: heavy condensed caps for anything that should shout
+     (headings, product names, prices, buttons), a plain humanist sans
+     for reading. */
+  --font-display: "Barlow Condensed", "Barlow Condensed Fallback", "Arial Narrow", sans-serif;
+  --font-body: "Barlow", "Barlow Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius: 2px;
+  --content-max: 1280px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --header-h: 72px;
+
+  font-family: var(--font-body);
+  font-size: 100%;
+  line-height: 1.55;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: var(--grad-1);
+  color-scheme: light;
+  color: var(--ink);
+  background-color: var(--base);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Anchor jumps and focus-scrolls land below the sticky header, not
+   under it. */
+html {
+  scroll-padding-top: calc(var(--header-h) + 8px);
+}
+
+body {
+  margin: 0;
+  background-color: var(--base);
+  color: var(--ink);
+}
+
+/* <main> takes programmatic focus on route change (Navbar.tsx) so screen
+   readers start at the new page; it's a focus target, not a control, so
+   it gets no ring -- a 3px outline around the entire page reads as a
+   rendering glitch. */
+#main-content:focus {
+  outline: none;
+}
+
+#root {
+  background-color: var(--base);
 }
 
 h1,
@@ -42,6 +90,14 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.05;
+  color: inherit;
+}
+
+p {
+  margin: 0;
 }
 
 ul {
@@ -53,45 +109,358 @@ li {
   color: inherit;
 }
 
-#root {
-  background-color: white;
+img {
+  max-width: 100%;
 }
 
-body {
-  transition: all 0.5s ease-in-out;
-  background-color: var(--grad-1);
+a {
+  color: var(--link);
 }
 
-.page-header,
-.page-subheader {
-  color: white;
-  font-size: 3rem;
-  padding: 2rem;
-  background-color: var(--background);
+/* ---------- Type helpers ---------- */
 
+/* Small, widely tracked caps label -- echoes the logo's spaced-out
+   wordmark. Always paired with the kit-stripe tick. */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.75rem;
 }
 
-
-.page-subheader {
-  color: var(--dark);
-  font-size: 2rem;
+.on-dark .kicker {
+  color: var(--red-bright);
 }
 
-@media (max-width: 37.5em) {
-  #root {
-    padding-top: 4rem;
-  }
-  .page-header,
-  .page-subheader {
-    text-align: center;
-  }
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
 
-  .page-header {
-    font-size: 2rem;
-    padding: 1rem 0;
-  }
-  .page-subheader {
-    font-size: 1.5rem;
-    padding: 1rem;
+.section-lead {
+  color: var(--muted);
+  font-size: 1.1rem;
+  max-width: 46ch;
+  margin-top: 0.75rem;
+}
+
+.on-dark .section-lead {
+  color: var(--muted-on-dark);
+}
+
+/* Prices, totals, quantities: condensed with tabular figures so columns
+   of numbers line up like a scoreboard. */
+.num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Kit stripe: the site's one decorative motif ----------
+   Jersey-style trim in the logo's red and blue -- a red band, a gap, a
+   blue band. Used under the header, atop the footer, as the tick in
+   front of every kicker, and as the product-card hover accent. */
+.kit-stripe {
+  display: block;
+  height: 8px;
+  background: linear-gradient(
+    to bottom,
+    var(--red) 0 3px,
+    transparent 3px 5px,
+    var(--blue) 5px 8px
+  );
+}
+
+.kicker::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 8px;
+  background: linear-gradient(
+    to bottom,
+    var(--red) 0 3px,
+    transparent 3px 5px,
+    var(--blue) 5px 8px
+  );
+}
+
+/* ---------- Buttons ----------
+   Exactly one primary style (red fill) and one secondary style (ink
+   outline, inverted to white on dark bands) used everywhere. */
+button {
+  font-family: var(--font-body);
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.btn-primary {
+  background-color: var(--red);
+  color: #ffffff;
+  border: 2px solid var(--red);
+}
+
+.btn-primary:hover {
+  background-color: var(--red-hover);
+  border-color: var(--red-hover);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+
+.btn-secondary:hover {
+  background-color: var(--ink);
+  color: #ffffff;
+}
+
+.on-dark .btn-secondary {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.on-dark .btn-secondary:hover {
+  background-color: #ffffff;
+  color: var(--ink);
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* Inline text link with an arrow, for "shop all"-style actions. */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 2px;
+}
+
+.text-link:hover {
+  color: var(--red);
+}
+
+.on-dark .text-link {
+  color: #ffffff;
+  border-bottom-color: var(--red-bright);
+}
+
+/* Visible focus rings everywhere, in the logo blue (a brighter tint on
+   dark bands). Never remove outline without supplying this replacement. */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.on-dark :focus-visible {
+  outline-color: var(--blue-bright);
+}
+
+/* ---------- Layout scaffolding ---------- */
+
+.section {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5.5rem) var(--gutter);
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.25rem;
+}
+
+/* Dark band used for page heroes, the review section and the footer. */
+.on-dark {
+  background-color: var(--ink);
+  color: #ffffff;
+}
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--gutter) clamp(2rem, 5vw, 3.5rem);
+}
+
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 7vw, 4.75rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.page-hero .section-lead {
+  font-size: 1.15rem;
+}
+
+/* Product grid shared by Home, category pages and cart suggestions. */
+.products-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+/* ---------- Form controls (contact, upload, cart customizations) ---- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.field-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.7rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background-color: var(--surface);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius);
+  transition: border-color 0.15s ease;
+}
+
+.field-input::placeholder {
+  color: var(--muted);
+}
+
+.field-input:hover {
+  border-color: var(--ink);
+}
+
+textarea.field-input {
+  min-height: 160px;
+  resize: vertical;
+}
+
+select.field-input {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+    linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) 50%,
+    calc(100% - 14px) 50%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* Short line linking to the policies, under forms and at checkout. */
+.policy-note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 30000;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Global reduced-motion guard: collapses every animation/transition to
+   effectively instant. Component-level rules still additionally cancel
+   hover transforms outright (see SingleProduct.css) for cases where the
+   design calls for "no movement at all", not just a non-animated one. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

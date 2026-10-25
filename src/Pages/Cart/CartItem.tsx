@@ -1,91 +1,91 @@
+import "./Cart.css";
+import { useId } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCartContext } from "../../providers/CartProvider";
-import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Product } from "../../Types/interfaces";
 
 export const CartItem = ({ cartItem }: { cartItem: Product }) => {
+  const { removeFromCart, changeItemQuantity, changeItemCustomization, changeItemVariant } =
+    useCartContext();
   const {
-    removeFromCart,
-    changeItemQuantity,
-    changeItemCustomization,
-    changeItemOption,
-    updateItemCustomization,
-  } = useCartContext();
-  const { images, price, name, id, quantity, requiredCustomizations, options, bulkOptions } =
-    cartItem;
+    images,
+    price,
+    name,
+    id,
+    quantity,
+    requiredCustomizations,
+    options,
+    bulkOptions,
+    skuId,
+  } = cartItem;
+  // The same line can render in the drawer and on the /cart page at once,
+  // so control ids come from useId() rather than the product name/key.
+  const uid = useId();
 
-  const itemCustomizations = requiredCustomizations && (
-    <div className="cart-customizations">
-      <h3>Customizations</h3>
-      {requiredCustomizations &&
-        requiredCustomizations.length > 0 &&
-        requiredCustomizations?.map(({ key, value }) => {
-          return (
-            <div key={key}>
-              {
-                <div className="input-wrap">
-                  <label htmlFor={key}>{key}:</label>
-                  <input
-                    placeholder="Enter any values here"
-                    value={value}
-                    type="text"
-                    onChange={(e: { target: { value: string } }) => {
-                      changeItemCustomization(id, key, e.target.value);
-                    }}
-                    id={key}
-                  />
-                </div>
-              }
-            </div>
-          );
-        })}
-    </div>
+  const itemCustomizations = requiredCustomizations && requiredCustomizations.length > 0 && (
+    <fieldset className="cart-line-customizations">
+      <legend>Customizations</legend>
+      {requiredCustomizations.map(({ key, value }, index) => (
+        <div className="field" key={key}>
+          <label htmlFor={`${uid}-custom-${index}`}>{key}</label>
+          <input
+            id={`${uid}-custom-${index}`}
+            className="field-input"
+            placeholder="Enter any values here"
+            value={value}
+            type="text"
+            onChange={(e: { target: { value: string } }) => {
+              changeItemCustomization(id, key, e.target.value);
+            }}
+          />
+        </div>
+      ))}
+    </fieldset>
   );
 
-  const itemOptions = options && (
-    <div className="cart-customizations">
-      <h4>Model Type</h4>
+  // Controlled by the line's skuId so the select always shows the variant
+  // actually in the cart (including one picked on the product page), not
+  // just the first option.
+  const itemOptions = options && options.length > 0 && (
+    <div className="field cart-line-variant">
+      <label htmlFor={`${uid}-options`}>Model type</label>
       <select
+        id={`${uid}-options`}
         name="product-options"
-        id="product-options"
+        className="field-input"
+        value={skuId ?? options[0].skuId}
         onChange={(event) => {
-          const selectedValue = event.target.value;
-          updateItemCustomization(id, [
-            { name: `Model Type- ${event.target.name} `, value: selectedValue },
-          ]);
-          changeItemOption(id, selectedValue);
+          const selectedSkuId = event.target.value;
+          const selected = options.find((opt) => opt.skuId === selectedSkuId);
+          changeItemVariant(id, selectedSkuId, `Model Type - ${selected?.option ?? ""}`);
         }}
       >
-        {options.map(({ option, price }) => {
-          return (
-            <option key={option} value={price}>
-              {option}
-            </option>
-          );
-        })}
+        {options.map(({ option, skuId: optionSkuId }) => (
+          <option key={optionSkuId} value={optionSkuId}>
+            {option}
+          </option>
+        ))}
       </select>
     </div>
   );
 
-  // {/* Bulk Options Selection */}
   const itemBulkOptions = bulkOptions && bulkOptions.length > 0 && (
-    <div>
-      <h4>Bulk Options</h4>
+    <div className="field cart-line-variant">
+      <label htmlFor={`${uid}-bulk`}>Pack size</label>
       <select
+        id={`${uid}-bulk`}
         name="bulk-options"
-        id="bulk-options"
+        className="field-input"
+        value={skuId ?? bulkOptions[0].skuId}
         onChange={(event) => {
-          updateItemCustomization(id, [
-            {
-              name: `Bulk Option - ${event.target.selectedOptions[0].id}`,
-              value: event.target.value,
-            },
-          ]);
-          changeItemOption(id, event.target.value);
+          const selectedSkuId = event.target.value;
+          const selected = bulkOptions.find((opt) => opt.skuId === selectedSkuId);
+          changeItemVariant(id, selectedSkuId, `Bulk Option - Pack of ${selected?.option ?? ""}`);
         }}
       >
-        {bulkOptions.map(({ option, price }) => (
-          <option id={`Pack of ${option}`} key={option} value={price}>
+        {bulkOptions.map(({ option, price, skuId: optionSkuId }) => (
+          <option key={optionSkuId} value={optionSkuId}>
             {option} Pack - ${price}
           </option>
         ))}
@@ -93,51 +93,60 @@ export const CartItem = ({ cartItem }: { cartItem: Product }) => {
     </div>
   );
 
+  if (quantity <= 0) return null;
+
   return (
-    <div>
-      {quantity > 0 && (
-        <div className="cart-single-item">
-          <div className="cart-img-container">
-            <img
-              className="cart-img"
-              src={images[0]}
-              alt={name}
-              width={200}
-              height={200}
-              loading="lazy"
-            />
-            <button onClick={() => removeFromCart(id)}>Remove</button>
-          </div>
-          <div className="cart-text-details-container">
-            <div className="product-name">{name}</div>
-            <div className="single-item-quantity-container">
-              {quantity > 1 && (
-                <FontAwesomeIcon
-                  className="quantity-icon minus-icon"
-                  icon={faMinusCircle}
-                  onClick={() => changeItemQuantity(id, "minusOne")}
-                />
-              )}
-              <div className="product-quantity">{quantity}</div>
-              <FontAwesomeIcon
-                className="quantity-icon add-icon"
-                icon={faPlusCircle}
-                onClick={() => changeItemQuantity(id, "addOne")}
-              />
-            </div>
-            {itemOptions}
-            {itemBulkOptions}
-            <div className="product-price">Unit Price: ${price.toFixed(2)}</div>
-            <div className="product-price">
-              <span className="text-black">
-                <b>Total Cost: </b>
-              </span>{" "}
-              <span className="product-price-total">${(quantity * price).toFixed(2)}</span>
-            </div>
-          </div>
-          {itemCustomizations}
+    <div className="cart-line">
+      <img
+        className="cart-line-img"
+        src={images[0]}
+        alt=""
+        width={80}
+        height={80}
+        loading="lazy"
+      />
+      <div className="cart-line-body">
+        <div className="cart-line-top">
+          <p className="cart-line-name">{name}</p>
+          <p className="cart-line-total num">${(quantity * price).toFixed(2)}</p>
         </div>
-      )}
+        <p className="cart-line-unit">
+          <span className="num">${price.toFixed(2)}</span> each
+        </p>
+
+        {itemOptions}
+        {itemBulkOptions}
+
+        <div className="cart-line-controls">
+          <div className="qty-stepper" role="group" aria-label={`Quantity for ${name}`}>
+            <button
+              type="button"
+              className="qty-btn"
+              onClick={() => changeItemQuantity(id, "minusOne")}
+              disabled={quantity <= 1}
+              aria-label={`Decrease quantity of ${name}`}
+            >
+              <FontAwesomeIcon icon={faMinus} aria-hidden="true" />
+            </button>
+            <span className="qty-value num" aria-live="polite">
+              {quantity}
+            </span>
+            <button
+              type="button"
+              className="qty-btn"
+              onClick={() => changeItemQuantity(id, "addOne")}
+              aria-label={`Increase quantity of ${name}`}
+            >
+              <FontAwesomeIcon icon={faPlus} aria-hidden="true" />
+            </button>
+          </div>
+          <button type="button" className="cart-line-remove" onClick={() => removeFromCart(id)}>
+            Remove<span className="visually-hidden"> {name}</span>
+          </button>
+        </div>
+
+        {itemCustomizations}
+      </div>
     </div>
   );
 };

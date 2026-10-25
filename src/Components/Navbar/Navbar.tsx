@@ -1,22 +1,38 @@
 import "./Navbar.css";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 
-import { useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 
 import navbarLogo from "../../assets/Main/logo.webp";
 import { links } from "../../utils/NavbarAndFooterLinks";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCartContext } from "../../providers/CartProvider";
-import { companyName } from "../../utils/HelpfulText";
+import { CartDrawer } from "../../Pages/Cart/CartDrawer";
+import { Footer } from "../Footer/Footer";
+import { Wordmark } from "./Wordmark";
 
 export const Navbar = () => {
   const { cartItems, announcement } = useCartContext();
   const [showNavbar, setShowNavbar] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const cartTriggerRef = useRef<HTMLButtonElement | null>(null);
   const { pathname } = useLocation();
   const isInitialMount = useRef(true);
+
+  const openCartDrawer = (event: MouseEvent<HTMLButtonElement>) => {
+    cartTriggerRef.current = event.currentTarget;
+    setShowNavbar(false);
+    setIsCartOpen(true);
+  };
+
+  const closeCartDrawer = () => {
+    setIsCartOpen(false);
+    cartTriggerRef.current?.focus();
+  };
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -42,71 +58,29 @@ export const Navbar = () => {
     document.getElementById("main-content")?.focus();
   }, [pathname]);
 
+  // Summed quantity, not distinct line count -- the drawer header uses the
+  // same sum, so every cart counter on the site agrees.
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  const CartLink = (
-    <li id="cart-btn">
+  const navLinkItems = links.map((link) => (
+    <li key={link.value}>
+      {/* NavLink renders a real <a href> at runtime (native keyboard
+          support already verified); jsx-a11y's click-events-have-key-events
+          and no-static-element-interactions only recognize a literal
+          `href` prop name, not react-router's `to`, so they false-positive
+          here. */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <NavLink
-        to="/cart"
-        className={({ isActive, isPending, isTransitioning }) =>
-          [
-            isPending ? "pending" : "",
-            isActive ? "active" : "",
-            isTransitioning ? "transitioning" : "",
-          ].join(" ")
+        onClick={() => setShowNavbar(false)}
+        to={link.value}
+        className={({ isActive, isPending }) =>
+          ["nav-link", isPending ? "pending" : "", isActive ? "active" : ""].join(" ")
         }
       >
-        <FontAwesomeIcon icon={faCartShopping} aria-hidden="true" />
-        <span className="cart-label">Cart</span> <span aria-hidden="true">({cartCount})</span>
-        <span className="visually-hidden">
-          , {cartCount} item{cartCount === 1 ? "" : "s"} in cart
-        </span>
+        {link.key}
       </NavLink>
     </li>
-  );
-
-  const navLinkItems = (
-    <>
-      {links.map((link, index) => (
-        <li key={index}>
-          {/* NavLink renders a real <a href> at runtime (native keyboard
-              support already verified); jsx-a11y's click-events-have-key-events
-              and no-static-element-interactions only recognize a literal
-              `href` prop name, not react-router's `to`, so they false-positive
-              here. */}
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-          <NavLink
-            onClick={() => setShowNavbar(false)}
-            to={link.value}
-            className={({ isActive, isPending, isTransitioning }) =>
-              [
-                isPending ? "pending" : "",
-                isActive ? "active" : "",
-                isTransitioning ? "transitioning" : "",
-              ].join(" ")
-            }
-          >
-            {link.key}
-          </NavLink>
-        </li>
-      ))}
-      {CartLink}
-    </>
-  );
-
-  const logoHeaderLink = (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- see comment above navLinkItems
-    <NavLink onClick={() => setShowNavbar(false)} to="/" id="logo-with-title">
-      <img
-        className="navbar-logo"
-        src={navbarLogo}
-        alt="Print3DVerse home"
-        width={474}
-        height={435}
-      />
-      <h2>{companyName}</h2>
-    </NavLink>
-  );
+  ));
 
   return (
     <div className="root-layout">
@@ -116,40 +90,57 @@ export const Navbar = () => {
       <div aria-live="polite" className="visually-hidden">
         {announcement}
       </div>
-      <header className="nav-bar">
-        <nav>
-          <div
-            aria-label="Larger viewport navigation menu with links"
-            className="main-navbar-ul"
-          >
-            <ul className="main-regular-links">{navLinkItems}</ul>
+      <header className="site-header on-dark">
+        <nav className="site-nav" aria-label="Main">
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- see comment in navLinkItems */}
+          <NavLink onClick={() => setShowNavbar(false)} to="/" className="brand-link">
+            <img className="brand-logo" src={navbarLogo} alt="" width={474} height={435} />
+            <Wordmark />
+            <span className="visually-hidden"> home</span>
+          </NavLink>
+
+          <ul className="nav-links">{navLinkItems}</ul>
+
+          <div className="nav-actions">
+            {/* Opens the cart drawer rather than navigating -- the full /cart
+                page (see CartPage.tsx) stays registered as a fallback route. */}
+            <button type="button" className="cart-trigger" onClick={openCartDrawer}>
+              <FontAwesomeIcon icon={faCartShopping} aria-hidden="true" />
+              <span className="cart-label">Cart</span>
+              <span className="cart-count num" aria-hidden="true">
+                {cartCount}
+              </span>
+              <span className="visually-hidden">
+                , {cartCount} item{cartCount === 1 ? "" : "s"} in cart
+              </span>
+            </button>
 
             <button
               type="button"
-              className="menu-icon"
+              className="menu-toggle"
               onClick={handleShowNavbar}
               aria-expanded={showNavbar}
               aria-controls="mobile-nav-menu"
               aria-label={showNavbar ? "Close navigation menu" : "Open navigation menu"}
               ref={menuButtonRef}
             >
-              <MenuIcon aria-hidden="true" />
+              {showNavbar ? <CloseIcon aria-hidden="true" /> : <MenuIcon aria-hidden="true" />}
             </button>
-            <ul className="cart-small-screen">{CartLink}</ul>
-            {showNavbar && (
-              <div className="nav-elements" id="mobile-nav-menu">
-                <ul>{navLinkItems}</ul>
-              </div>
-            )}
-            {logoHeaderLink}
           </div>
         </nav>
+
+        {showNavbar && (
+          <div className="mobile-menu" id="mobile-nav-menu">
+            <ul>{navLinkItems}</ul>
+          </div>
+        )}
+        <span className="kit-stripe" aria-hidden="true" />
       </header>
       <main id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
+      <Footer />
+      <CartDrawer isOpen={isCartOpen} onClose={closeCartDrawer} />
     </div>
   );
 };
-
-// display the cart icon only when small screen
