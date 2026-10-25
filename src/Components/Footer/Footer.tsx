@@ -6,6 +6,7 @@ import { KeyValueStringPairs } from "../../Types/interfaces";
 import { socialButtons } from "../../utils/SocialMediaLink";
 import { companyName, companyTagline } from "../../utils/HelpfulText";
 import { links } from "../../utils/NavbarAndFooterLinks";
+import { legalLinks } from "../../utils/legal";
 import { Wordmark } from "../Navbar/Wordmark";
 
 const contactLink = links.find((link) => link.value === "/contact-us");
@@ -23,6 +24,7 @@ const footerColumns: { heading: string; items: KeyValueStringPairs[] }[] = [
     items: [
       ...(contactLink ? [contactLink] : []),
       { key: "Email Us", value: "mailto:print3Dverse@gmail.com" },
+      ...legalLinks.filter((link) => link.value === "/shipping-returns"),
     ],
   },
 ];
@@ -62,6 +64,13 @@ export const Footer = () => {
         <p>
           &copy; {new Date().getFullYear()} {companyName}
         </p>
+        <ul className="footer-legal" aria-label="Policies">
+          {legalLinks.map((link) => (
+            <li key={link.value}>
+              <a href={link.value}>{link.key}</a>
+            </li>
+          ))}
+        </ul>
         <p>
           Site by <a href="http://akashbhowmick.com/">AKA CODE</a>
         </p>

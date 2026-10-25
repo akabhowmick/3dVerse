@@ -122,6 +122,10 @@ export const UploadImageForm = () => {
           <button id="contact-submit-btn" type="submit" className="btn-primary form-submit">
             Submit to our designers
           </button>
+          <p className="policy-note">
+            We&rsquo;ll only use these details and your photos to work on your order. See our{" "}
+            <a href="/privacy">Privacy Policy</a>.
+          </p>
         </form>
       </div>
     </>

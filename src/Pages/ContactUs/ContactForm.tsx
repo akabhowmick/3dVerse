@@ -84,6 +84,10 @@ export const ContactForm = () => {
       <button id="contact-submit-btn" type="submit" className="btn-primary form-submit">
         Send message
       </button>
+      <p className="policy-note">
+        We&rsquo;ll only use these details to reply to you. See our{" "}
+        <a href="/privacy">Privacy Policy</a>.
+      </p>
     </form>
   );
 };

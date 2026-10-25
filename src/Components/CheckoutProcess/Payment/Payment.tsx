@@ -39,6 +39,12 @@ export const Payment = ({
         <p className="payment-estimated-total">Estimated total: ${finalTotal.toFixed(2)}</p>
         <div className="paypal-buttons">
           <h3>Complete the payment!</h3>
+          <p className="policy-note">
+            By paying, you agree to our <a href="/terms">Terms of Service</a> and{" "}
+            <a href="/shipping-returns">Shipping &amp; Returns</a> policy. Custom pieces can&rsquo;t
+            be returned, but production defects are replaced free. See our{" "}
+            <a href="/privacy">Privacy Policy</a> for how we use your information.
+          </p>
           <PayPalScriptProvider
             options={{
               clientId: paypalClientId,

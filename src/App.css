@@ -414,6 +414,14 @@ select.field-input {
   background-repeat: no-repeat;
 }
 
+/* Short line linking to the policies, under forms and at checkout. */
+.policy-note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 .skip-link {
   position: absolute;
   left: -9999px;

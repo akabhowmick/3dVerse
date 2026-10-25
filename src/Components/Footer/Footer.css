@@ -113,6 +113,20 @@
   color: #ffffff;
 }
 
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Pushes "Site by" to the far end; the policy links sit beside the
+   copyright line. */
+.footer-legal + p {
+  margin-left: auto;
+}
+
 @media (max-width: 48em) {
   .footer-inner {
     grid-template-columns: minmax(0, 1fr);
